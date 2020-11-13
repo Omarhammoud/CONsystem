@@ -1,4 +1,4 @@
-<?php include '../header.php'; ?>
+<?php include './header.php'; ?>
 
 <main>
     <div class="wrapper-main">
@@ -21,4 +21,4 @@
 </main>
 
 
-<?php include '../footer.php'; ?>
+<?php include './footer.php'; ?>
