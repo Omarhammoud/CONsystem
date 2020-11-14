@@ -1,9 +1,8 @@
 <?php
     session_start();
-    if(isset($_POST['CreateGroup'])){
-        
+    if(isset($_POST['CreateGroup']) && !empty($_POST['GroupName'])){   
         require "dbh.inc.php";
-        $groupID = 2;
+        $groupID = 1;
         $groupName = $_POST['GroupName'];
         $owner = $_SESSION["MemberID"];
         $currentDate = date('Y-m-d');
@@ -21,7 +20,7 @@
                 mysqli_stmt_store_result($stmt);
                 mysqli_stmt_close($stmt);
                 mysqli_close($conn);
-                header("Location: ./GroupPage.php?error=GroupNotCreated");
+                header("Location: ./GroupPage.php?success=GroupCreated");
               }
         
         
