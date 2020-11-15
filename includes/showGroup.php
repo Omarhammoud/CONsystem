@@ -24,7 +24,7 @@
         $stmt =  mysqli_stmt_init($conn);
 
         if(!mysqli_stmt_prepare($stmt,$sql)){
-            header("Location: ./includes/GroupPage.php?error=sqlerror1 line25");
+            header("Location: ./GroupPage.php?error=sqlerror1");
             exit();
          }
          
@@ -39,7 +39,8 @@
     }
 ?>
 <div class="container">
-    <div class="card" style="width: 18rem;">
+    <a  class="btn btn-outline-primary" href="./GroupPage.php" >Back</a>
+    <div class="card">
         <h1 class="card-header">
             <?php echo $groupInfo['GroupName']?>
         </h1>
@@ -47,7 +48,12 @@
             <p>Date Created: <?php echo $groupInfo['Date']?></p>
             <p>Owner Name: <?php echo $ownerInfo['Name']?></p>
             <p>Owner Email: <?php echo $ownerInfo['Email']?></p>
-            <a  class="btn btn-outline-primary" href="./GroupPage.php" >Back</a>
+            <?php if($groupInfo['Owner']==$_SESSION['MemberID']){ ?>
+                <form class="pull-right" method="POST" action="./DeleteGroup.inc.php">
+                    <input type="hidden" name="delete_id" value="<?php echo $groupID; ?>">
+                    <input type="submit" name="delete" value="Delete" class="btn btn-outline-danger">
+                </form>
+            <?php }?>
         </div>
     </div>
 </div>
