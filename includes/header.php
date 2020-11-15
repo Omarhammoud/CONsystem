@@ -30,9 +30,10 @@ session_start();
                 </form>";
                 }
                 ?>
-
+            <a href="./GroupPage.php"> Groups</a>
 
 
             </div>
+
         </nav>
     </header>

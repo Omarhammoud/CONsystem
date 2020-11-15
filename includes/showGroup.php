@@ -38,12 +38,17 @@
 
     }
 ?>
-
-<h1>
-    <?php echo $groupInfo['GroupName']?>
-</h1>
-<p>Date Created: <?php echo $groupInfo['Date']?></p>
-<p>Owner Name: <?php echo $ownerInfo['Name']?></p>
-<p>Owner Email: <?php echo $ownerInfo['Email']?></p>
-
+<div class="container">
+    <div class="card" style="width: 18rem;">
+        <h1 class="card-header">
+            <?php echo $groupInfo['GroupName']?>
+        </h1>
+        <div class="card-body">
+            <p>Date Created: <?php echo $groupInfo['Date']?></p>
+            <p>Owner Name: <?php echo $ownerInfo['Name']?></p>
+            <p>Owner Email: <?php echo $ownerInfo['Email']?></p>
+            <a  class="btn btn-outline-primary" href="./GroupPage.php" >Back</a>
+        </div>
+    </div>
+</div>
 <?php include 'footer.php'; ?>
