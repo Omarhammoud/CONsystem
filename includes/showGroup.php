@@ -2,14 +2,14 @@
 <?php
     if(isset($_SESSION['MemberID'])){
         require "dbh.inc.php";
-        
+
         //Fetch Group Information 
         $groupID = $_GET["id"];
         $sql = "SELECT * FROM `group` WHERE `GroupID`=?";
         $stmt =  mysqli_stmt_init($conn);
 
         if(!mysqli_stmt_prepare($stmt,$sql)){
-            header("Location: ./includes/GroupPage.php?error=sqlerror1");
+            header("Location: ./GroupPage.php?error=sqlerror1");
             exit();
         }
         
@@ -24,7 +24,7 @@
         $stmt =  mysqli_stmt_init($conn);
 
         if(!mysqli_stmt_prepare($stmt,$sql)){
-            header("Location: ./GroupPage.php?error=sqlerror1");
+            header("Location: ./GroupPage.php?error=sqlerror2");
             exit();
          }
          
@@ -34,27 +34,83 @@
         $ownerInfo = mysqli_fetch_assoc($result);
         mysqli_stmt_close($stmt);
 
+
+        //Fetch Members Information 
+        $sql = "SELECT `MemberID` FROM `part_of` WHERE `GroupID`=?";
+        $stmt =  mysqli_stmt_init($conn);
+
+        if(!mysqli_stmt_prepare($stmt,$sql)){
+            header("Location: ./GroupPage.php?error=sqlerror3");
+            exit();
+        }
+
+        mysqli_stmt_bind_param($stmt, "i",$groupID);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $member_ids = array();
+        while($id = mysqli_fetch_assoc($result)){
+            array_push($member_ids, $id);
+        }
+        mysqli_stmt_close($stmt);
+
+        $memberInfo = array();
+        $sql = "SELECT `MemberID`,  `Email`, `Name` FROM `member` WHERE `MemberID`=?";
+        $stmt =  mysqli_stmt_init($conn);
+
+        if(!mysqli_stmt_prepare($stmt,$sql)){
+            header("Location: ./GroupPage.php?error=sqlerror4");
+            exit();
+        }
+
+        foreach($member_ids as $id){           
+            mysqli_stmt_bind_param($stmt, "i", $id['MemberID']);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+            array_push($memberInfo, mysqli_fetch_assoc($result));
+        }
+
+        mysqli_stmt_close($stmt);
         mysqli_close($conn);
 
+    }else{
+        header("Location: ./index.php");
     }
 ?>
+
+<!-- Html to display the information of the group  -->
 <div class="container">
-    <a  class="btn btn-outline-primary" href="./GroupPage.php" >Back</a>
+    <a  class="btn btn-outline-primary m-2" href="./GroupPage.php" >Back</a>
     <div class="card">
         <h1 class="card-header">
             <?php echo $groupInfo['GroupName']?>
         </h1>
         <div class="card-body">
-            <p>Date Created: <?php echo $groupInfo['Date']?></p>
-            <p>Owner Name: <?php echo $ownerInfo['Name']?></p>
-            <p>Owner Email: <?php echo $ownerInfo['Email']?></p>
+            <p>Created By: <?php echo $ownerInfo['Name']?></p>
+            <p>Email: <?php echo $ownerInfo['Email']?></p>
             <?php if($groupInfo['Owner']==$_SESSION['MemberID']){ ?>
-                <form class="pull-right" method="POST" action="./DeleteGroup.inc.php">
-                    <input type="hidden" name="delete_id" value="<?php echo $groupID; ?>">
-                    <input type="submit" name="delete" value="Delete" class="btn btn-outline-danger">
-                </form>
+                <div class="d-flex justify-content-between">
+                    <a class="btn btn-outline-warning" href="./EditGroup.php?id=<?php echo $groupID; ?>">Edit</a>
+                    <form class="float-right" method="POST" action="./DeleteGroup.inc.php">
+                        <input type="hidden" name="delete_id" value="<?php echo $groupID; ?>">
+                        <input type="submit" name="delete" value="Delete" class="btn btn-outline-danger">
+                    </form>
+                </div>
             <?php }?>
         </div>
     </div>
+
+    <div class="card mt-5">
+        <h1 class="card-header">
+            List of Members
+        </h1>
+        <ul class="list-group list-group-flush">
+            <?php foreach($memberInfo as $member){?>
+                <p>Name: <?php echo $member['Name']?></p>
+                <p>Email: <?php echo $member['Email']?></p>
+            <?php }?>
+        </ul>
+    </div>
+
 </div>
+
 <?php include 'footer.php'; ?>

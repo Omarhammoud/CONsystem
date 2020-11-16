@@ -27,20 +27,19 @@
     <table class="table">
         <tr>
             <th scope="col">Group Name</th>
-            <th scope="col">Date Created</th>
+            <th scope="col"></th>
         </tr>
         <?php while($group = mysqli_fetch_assoc($groups)){ ?>
         <tr>
             <td><?php echo $group['GroupName'] ;?></td>
-            <td><?php echo $group['Date'] ;?></td>
             <td> <a class="btn btn-outline-info" href="./showGroup.php?id=<?php echo $group['GroupID']; ?>">Read More</a></td>			
         </tr>
         <?php }?>
     </table>
 
-    <form action="./createGroup.inc.php" method="post">
-        <input type="text" name="GroupName" require="required" placeholder="Group Name" />
-        <input type="submit" name="CreateGroup" value="Create Group">
+    <form class="form-inline" action="./createGroup.inc.php" method="post">
+        <input type="text"  class="form-control" name="GroupName" require="required" placeholder="Group Name" />
+        <input class="btn btn-outline-primary m-3" type="submit" name="CreateGroup" value="Create Group">
     </form>
 
 </div>

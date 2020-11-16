@@ -9,7 +9,7 @@
         $stmt =  mysqli_stmt_init($conn);
 
         if(!mysqli_stmt_prepare($stmt,$sql)){
-            header("Location: ./includes/GroupPage.php?error=sqlerror1");
+            header("Location: ./GroupPage.php?error=sqlerror1");
             exit();
         }
         
