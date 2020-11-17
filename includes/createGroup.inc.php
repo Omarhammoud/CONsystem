@@ -43,5 +43,7 @@
         mysqli_close($conn);
         header("Location: ./GroupPage.php?success=GroupCreated");    
         
+    }else{
+        header("Location: ./GroupPage.php?error="); 
     }
 ?>
