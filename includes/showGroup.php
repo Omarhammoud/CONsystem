@@ -1,4 +1,5 @@
 <?php include 'header.php'; ?>
+<?php include 'functions.inc.php'; ?>
 <?php
     if(isset($_SESSION['MemberID'])){
         require "dbh.inc.php";
@@ -79,7 +80,18 @@
 
 <!-- Html to display the information of the group  -->
 <div class="container">
-    <a  class="btn btn-outline-primary m-2" href="./GroupPage.php" >Back</a>
+    
+    <div class="d-flex justify-content-between">
+        <a  class="btn btn-outline-primary m-2" href="./GroupPage.php" >Back</a>
+        <?php if(!isPartOfGroup($member_ids,$_SESSION['MemberID'])) {?>
+            <form method="POST" action="./JoinGroup.inc.php">
+                <input type="hidden" name="group_id" value="<?php echo $groupID; ?>">
+                <input type="hidden" name="member_id" value="<?php echo $_SESSION['MemberID']; ?>">
+                <input type="submit" name="JoinGroup" value="Join Group" class="btn btn-outline-success m-2">
+            </form>
+        <?php }?>
+    </div>
+
     <div class="card">
         <h1 class="card-header">
             <?php echo $groupInfo['GroupName']?>
@@ -90,7 +102,7 @@
             <?php if($groupInfo['Owner']==$_SESSION['MemberID']){ ?>
                 <div class="d-flex justify-content-between">
                     <a class="btn btn-outline-warning" href="./EditGroup.php?id=<?php echo $groupID; ?>">Edit</a>
-                    <form class="float-right" method="POST" action="./DeleteGroup.inc.php">
+                    <form method="POST" action="./DeleteGroup.inc.php">
                         <input type="hidden" name="delete_id" value="<?php echo $groupID; ?>">
                         <input type="submit" name="delete" value="Delete" class="btn btn-outline-danger">
                     </form>
@@ -104,10 +116,13 @@
             List of Members
         </h1>
         <ul class="list-group list-group-flush">
-            <?php foreach($memberInfo as $member){?>
+            <?php foreach($memberInfo as $member){
+                if($groupInfo['Owner'] !=$member['MemberID']){
+                ?>
                 <p>Name: <?php echo $member['Name']?></p>
                 <p>Email: <?php echo $member['Email']?></p>
-            <?php }?>
+            <?php }
+                }?>
         </ul>
     </div>
 
