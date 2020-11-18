@@ -1,0 +1,16 @@
+#divID
+{
+	border: solid;
+	border-radius: 20px 20px 0px 0px;
+	background: lightblue;
+	margin-bottom: 20px;
+}
+#pID
+{width: fit-content;font-size: 30px;}
+#h1ID
+{
+	/* background-color: Red; */
+	padding-left: 10px;
+}
+#imageID
+{max-width: -webkit-fill-available;}
