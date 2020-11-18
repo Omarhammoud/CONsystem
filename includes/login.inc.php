@@ -2,7 +2,7 @@
 if(isset($_POST['login-submit'])) {
     require "dbh.inc.php";
 
-    $username = $_POST['memberid'];
+    $username = $_POST['email'];
     $password = $_POST['pwd'];
 
     if(empty($username) || empty($password)){
@@ -10,7 +10,7 @@ if(isset($_POST['login-submit'])) {
         exit();
     }
     else {
-        $sql = "SELECT MemberID FROM Member WHERE MemberID =? ";
+        $sql = "SELECT Email, MemberID, Name FROM member WHERE Email =? ";
 
         $stmt = mysqli_stmt_init($conn);
         if(!mysqli_stmt_prepare($stmt,$sql)){
@@ -18,7 +18,7 @@ if(isset($_POST['login-submit'])) {
             exit();
          }
         else{
-            mysqli_stmt_bind_param($stmt, "i",$username);
+            mysqli_stmt_bind_param($stmt, "s",$username);
             mysqli_stmt_execute($stmt);
             $resultcheck = mysqli_stmt_get_result($stmt);
             if($row = mysqli_fetch_assoc($resultcheck)){
@@ -29,9 +29,10 @@ if(isset($_POST['login-submit'])) {
             }
             else if($pwdcheck = true){
                 session_start();
-                $_SESSION['MemberID'] = $row['MemberID'];
+                $_SESSION['memberid'] = $row['MemberID'];
+                $_SESSION['email'] = $row['Email'];
                 $_SESSION['Name'] = $row['Name'];
-                header("Location: ./index.php?success=LoggedIn");
+                header("Location: ./index.php?success=LoggedIn".$_SESSION['Name']);
                 exit();
 
             }
