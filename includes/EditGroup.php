@@ -6,7 +6,7 @@
 
         //Fetch Group Name  
         $groupID = $_GET["id"];
-        $sql = "SELECT `GroupName` FROM `group` WHERE `GroupID`=?";
+        $sql = "SELECT `GroupName`, `Owner` FROM `group` WHERE `GroupID`=?";
         $stmt =  mysqli_stmt_init($conn);
 
         if(!mysqli_stmt_prepare($stmt,$sql)){
@@ -62,37 +62,43 @@
         header("Location: ./index.php");
     }
 ?>
+<div class="container">
+    <h1>Edit Page</h1>
+    <a class="btn btn-outline-primary" href="./showGroup.php?id=<?php echo $groupID; ?>">Finish</a>
+    <form action="./EditGroup.inc.php" method="post" class="form-inline mb-4">
+        <div class="form-group">
+        <input class="form-control mr-2" type="text" name="GroupName" value="<?php echo $groupInfo['GroupName']?>" />
+        <input type="hidden" name="edit_id" value="<?php echo $groupID; ?>">
+        <input type="submit" name="EditGroup" value="Save Group Name" class="btn btn-outline-success m-2">
+        </div>
+    </form>
 
-<h1>Edit Page</h1>
-<form action="./EditGroup.inc.php" method="post">
-    <label for="GroupName">Group Name</label>
-    <input type="text" name="GroupName" value="<?php echo $groupInfo['GroupName']?>" />
-    <input type="hidden" name="edit_id" value="<?php echo $groupID; ?>">
-    <input type="submit" name="EditGroup" value="Save">
-</form>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Email</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody>
-  <?php foreach($memberInfo as $member){?>
+    <table class="table table-hover">
+    <thead>
         <tr>
-            <td><?php echo $member['Name'];?></td>
-            <td><?php echo $member['Email'];?></td>
-            <td>                    
-                <form method="" action="">
-                    <input type="hidden" name="delete_id" value="<?php echo $member["MemberID"]; ?>">
-                    <input type="submit" name="delete" value="Delete" class="btn btn-outline-danger">
-                </form>
-            </td>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col"></th>
         </tr>
-  <?php }?>
-  </tbody>
-</table>
-
+    </thead>
+    <tbody>
+    <?php foreach($memberInfo as $member){
+            if($groupInfo['Owner'] !=$member['MemberID']){
+        ?>
+            <tr>
+                <td><?php echo $member['Name'];?></td>
+                <td><?php echo $member['Email'];?></td>
+                <td>                    
+                    <form method="post" action="./LeaveGroup.inc.php">
+                        <input type="hidden" name="group_id" value="<?php echo $groupID ; ?>">
+                        <input type="hidden" name="member_id" value="<?php echo $member['MemberID']; ?>">
+                        <input type="submit" name="DeleteMember" value="Delete" class="btn btn-outline-danger m-2">
+                    </form>
+                </td>
+            </tr>
+            <?php }
+            }?>
+    </tbody>
+    </table>
+</div>
 <?php include "./footer.php" ?>

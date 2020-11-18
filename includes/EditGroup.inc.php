@@ -1,5 +1,6 @@
 <?php
-    if(isset($_POST['EditGroup'])){
+    session_start();
+    if(isset($_POST['EditGroup']) && isset($_POST['AcceptRequest'])){
         require "dbh.inc.php";
 
         $groupID = $_POST['edit_id'];
@@ -17,7 +18,7 @@
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
         mysqli_close($conn);
-        header("Location: ./showGroup.php?id=$groupID");
+        header("Location: ./EditGroup.php?id=$groupID");
 
     }else{
         header("Location: ./GroupPage.php?error=sqlerror1");

@@ -5,7 +5,7 @@
         require "dbh.inc.php";
         date_default_timezone_set("America/Montreal");
 
-        $groupID = 7;
+        $groupID = 1;
         $groupName = $_POST['GroupName'];
         $owner = $_SESSION["MemberID"];
         $currentDate = date('Y-m-d');
