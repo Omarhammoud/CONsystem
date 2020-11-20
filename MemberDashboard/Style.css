@@ -11,6 +11,31 @@
 {
 	/* background-color: Red; */
 	padding-left: 10px;
+	padding-right: 10px;
 }
 #imageID
-{max-width: -webkit-fill-available;}
+{	
+	max-width: -webkit-fill-available;
+}
+
+.commentName
+{
+	font-size: 24px;
+	margin-left: 10px;
+	margin-bottom: 10px;
+}
+
+.commentTextArea
+{
+	width: 95%;
+    left: 10px;
+    position: relative;
+}
+
+.comment{
+    border: groove;
+    border-radius: 20px;
+    font-size: 16px;
+    padding: 10px;
+    background-color: #82b0bf;
+}
