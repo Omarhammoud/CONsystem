@@ -1,26 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="Style.css">
-    <meta charset="UTF-8">
-    <title>New Post</title>
-</head>
-	<body>
+<html>
+   <head>
+      <meta charset="UTF-8">
+		<title>New Post</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link rel="stylesheet" href="Style.css">
+   </head>
+   <body style="background-color:#DDDFEB">
+   	<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+	  	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<form class="form-inline my-2 my-lg-0" action="MemberDashboard.php">
+			  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Dashboard</button>
+			</form>
+		</div>
+	</nav>
 		<form id="post_form" action="" METHOD="post" enctype="multipart/form-data">
-			<table style="width: 80%;padding-left: 20%;padding-top: 20px">
-				<tbody>
-				<tr style="">
-					<td>
-						<textarea type="text" class="newPostText" id="textPost"></textarea>
-					</td>
-				</tr>
-				</tbody>
-			</table>
-
+			<textarea type="text" id="textPost" onkeyup="textAreaAdjust(this)">
+			</textarea>
 			<div class="center">
 				<input type="file" id="files" class="newPostImg">
 				<input type="submit" id="postBtn" value="Post">
 			</div>
 		</form>
+	  <script>
+	  function VisibilityMethod() 
+	  { 
+		  alert(this); 
+		  if (this.style.display === "none") 
+		  { this.style.display = "block"; } 
+		  else { this.style.display = "none"; } 
+	  } 
+	  function textAreaAdjust(element) 
+	  { 
+		  element.style.height = "1px"; 
+		  element.style.height = (25+element.scrollHeight)+"px"; 
+	  }
+	  </script>
 	</body>
 </html>
+
+

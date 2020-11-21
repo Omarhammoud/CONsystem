@@ -18,6 +18,27 @@
 	max-width: -webkit-fill-available;
 }
 
+#post_form
+{
+}
+
+#textPost
+{
+	width: 75%;
+    min-height: 270px;
+    margin-left: 3%;
+    margin-top: 20px;
+    padding: 10px;
+    border: darkslateblue;
+    border-radius: 20px;
+}
+
+#files
+{margin-left: 150px;margin-top: 15px;}
+
+#postBtn
+{width: 120px;}
+
 .commentName
 {
 	font-size: 24px;
@@ -39,3 +60,4 @@
     padding: 10px;
     background-color: #82b0bf;
 }
+

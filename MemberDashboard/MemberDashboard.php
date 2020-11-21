@@ -9,11 +9,10 @@
 	<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
 	  <a class="navbar-brand">Dashboard</a>
 	  	<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<form class="form-inline my-2 my-lg-0">
+			<form class="form-inline my-2 my-lg-0" action="NewPost.html">
 			  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Create Post</button>
 			</form>
 		</div>
-
 	</nav>
       <div class="container" style="width: 50em;">
          <div id="divID">
@@ -91,7 +90,19 @@
             </form>
          </div>
       </div>
-      <script>
-	  function VisibilityMethod() { alert(this); if (this.style.display === "none") { this.style.display = "block"; } else { this.style.display = "none"; } } function textAreaAdjust(element) { element.style.height = "1px"; element.style.height = (25+element.scrollHeight)+"px"; }</script>
+	  <script>
+	  function VisibilityMethod() 
+	  { 
+		  alert(this); 
+		  if (this.style.display === "none") 
+		  { this.style.display = "block"; } 
+		  else { this.style.display = "none"; } 
+	  } 
+	  function textAreaAdjust(element) 
+	  { 
+		  element.style.height = "1px"; 
+		  element.style.height = (25+element.scrollHeight)+"px"; 
+	  }
+	  </script>
    </body>
 </html>
