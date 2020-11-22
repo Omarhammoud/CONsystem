@@ -6,7 +6,10 @@
 	margin-bottom: 20px;
 }
 #pID
-{width: fit-content;font-size: 30px;}
+{
+	width: fit-content;
+	font-size: 30px;
+}
 #h1ID
 {
 	/* background-color: Red; */
@@ -34,10 +37,20 @@
 }
 
 #files
-{margin-left: 150px;margin-top: 15px;}
+{margin-left: 30px;margin-top: 15px;}
 
 #postBtn
-{width: 120px;}
+{width: 120px;position: fixed;bottom: 10px;left: 40%;}
+
+#btnVote
+{
+	margin-left: 30px;
+}
+
+#PollDivID
+{
+	margin-left: 30px;
+}
 
 .commentName
 {
@@ -60,4 +73,17 @@
     padding: 10px;
     background-color: #82b0bf;
 }
+
+.PollTitle
+{
+	background-color:red;
+}
+
+.PollOption
+{
+	background-color:green;
+}
+
+
+
 

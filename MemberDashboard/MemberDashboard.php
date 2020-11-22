@@ -88,6 +88,20 @@
             <form action="commentNameForm.php" name="commentNameForm" method="post">
                <textarea placeholder="Write a comment..." class="commentTextArea" name="commentTextArea" onkeyup="textAreaAdjust(this)"></textarea>
             </form>
+			
+			<br><br>
+			
+			<div id="poll">
+				<h3>
+					general meetings, agenda or resolution to be voted
+				</h3>
+				<form>
+					yes <input type="radio" name="vote" value="0" onclick="getVote(this.value)"><br>
+					no <input type="radio" name="vote" value="1" onclick="getVote(this.value)"><br>
+				</form>
+			</div>
+			
+			
          </div>
       </div>
 	  <script>
@@ -103,6 +117,20 @@
 		  element.style.height = "1px"; 
 		  element.style.height = (25+element.scrollHeight)+"px"; 
 	  }
+	  
+	  function getVote(int) 
+	  {
+		  var xmlhttp=new XMLHttpRequest();
+		  xmlhttp.onreadystatechange=function() 
+		  {
+			if (this.readyState==4 && this.status==200) 
+			{
+			  document.getElementById("poll").innerHTML=this.responseText;
+			}
+		  }
+		  xmlhttp.open("GET","poll_vote.php?vote="+int,true);
+		  xmlhttp.send();
+	   }
 	  </script>
    </body>
 </html>
