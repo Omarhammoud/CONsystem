@@ -14,48 +14,91 @@
 			</form>
 		</div>
 	</nav>
+		
 		<form id="post_form" action="" METHOD="post" enctype="multipart/form-data">
 			<textarea type="text" id="textPost" onkeyup="textAreaAdjust(this)">
 			</textarea>
 			<div class="center">
 				<input type="file" id="files" class="newPostImg" accept="image/x-png,image/gif,image/jpeg">
 				<br/><br/>
-				<button id="btnVote" onclick="Toggle()"> Create an poll </button>
-				general meetings, agenda or resolution to be voted <br/><br/>
-				<div id="PollDivID">
+				<div id="PollDivID" style = 'display: none'>
 					<input type="text" class="PollTitle" placeholder="Enter Poll Title">
-					<br><br>
-					<input type="text" class="PollOption" placeholder="Enter Poll Option 1">
-					<br><br>
-					<input type="text" class="PollOption" placeholder="Enter Poll Option 2">
+					<input type="text" class="PollOption" placeholder="Enter Poll Option 1" id="1">
+					<input type="text" class="PollOption" placeholder="Enter Poll Option 2" id="2">	
 				</div>
 				
 				<input type="submit" id="postBtn" value="Post">
 			</div>
 		</form>
+		<div>
+			<button id="btnVote" onclick="Toggle()"> Create a poll </button>
+			<button id="addOption" class="addOptionClass" onclick="AddOption()" style = 'display: none'> Add option </button>
+			<button id="removeOption" class="removeOptionClass" onclick="removeOption()" style = 'display: none'> Remove option </button>
+		</div>
 	  <script>
-	  function VisibilityMethod() 
-	  { 
-		  alert(this); 
-		  if (this.style.display === "none") 
-		  { this.style.display = "block"; } 
-		  else { this.style.display = "none"; } 
-	  } 
-	  function textAreaAdjust(element) 
-	  { 
-		  element.style.height = "1px"; 
-		  element.style.height = (25+element.scrollHeight)+"px"; 
-	  }
-	  function Toggle() 
+	var numberOfOptions = 3; 
+	function textAreaAdjust(element) 
+	{ 
+	  element.style.height = "1px"; 
+	  element.style.height = (25+element.scrollHeight)+"px"; 
+	}
+	function Toggle() 
+	{
+	  var addOption = document.getElementById("addOption");
+	  var div = document.getElementById("PollDivID");
+	  var removeOption = document.getElementById("removeOption");
+	  if (div.style.display === "none") 
 	  {
-		  var x = document.getElementById("PollDivID");
-		  if (x.style.display === "none") {
-			x.style.display = "block";
-		  } 
-		  else {
-			x.style.display = "none";
-		  }
+		div.style.display = "block";
+	  } 
+	  else 
+	  {
+		div.style.display = "none";
+	  }
+	  if (addOption.style.display === "none") 
+	  {
+		addOption.style.display = "block";
+	  } 
+	  else 
+	  {
+		addOption.style.display = "none";
+	  }
+	  if (removeOption.style.display === "none") 
+	  {
+		removeOption.style.display = "block";
+	  } 
+	  else 
+	  {
+		removeOption.style.display = "none";
+	  }
+	}
+	function AddOption()
+	{
+		if(numberOfOptions <= 5){
+		var container = document.getElementById("PollDivID");
+		var pollTitleEle = document.createElement("input");
+		pollTitleEle.className = "PollOption";
+		pollTitleEle.type = "text";
+		pollTitleEle.placeholder = "Enter Poll Option" +(numberOfOptions);
+		pollTitleEle.id = numberOfOptions;
+		container.appendChild(pollTitleEle);
+		var offset = 42;
+		document.getElementById("btnVote").top = document.getElementById("btnVote").top - offset;
+		numberOfOptions++;
 		}
+	}
+	function removeOption()
+	{
+		if(numberOfOptions >= 2){
+		removeElement( document.getElementById(numberOfOptions-1) );
+		numberOfOptions--;
+		}
+	}
+	function removeElement(element) 
+	{
+    element && element.parentNode && element.parentNode.removeChild(element);
+	}
+
 	  </script>
 	</body>
 </html>

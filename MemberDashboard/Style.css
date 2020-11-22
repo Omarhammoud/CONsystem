@@ -44,12 +44,16 @@
 
 #btnVote
 {
-	margin-left: 30px;
+margin-left: 30px;
+    position: absolute;
+    top: 443px;
 }
 
 #PollDivID
 {
-	margin-left: 30px;
+	margin-left: 160px;
+	position: relative;
+	top: 25px;
 }
 
 .commentName
@@ -77,11 +81,32 @@
 .PollTitle
 {
 	background-color:red;
+	display: block;
+    margin-bottom: 10px;
+	
 }
 
 .PollOption
 {
 	background-color:green;
+	display: block;
+    margin-bottom: 10px;
+}
+
+.addOptionClass
+{
+	display: block;
+    position: absolute;
+    top: 485px;
+    margin-left: 30px;
+}
+
+.removeOptionClass
+{
+	display: block;
+    position: absolute;
+    top: 530px;
+    margin-left: 30px;
 }
 
 
