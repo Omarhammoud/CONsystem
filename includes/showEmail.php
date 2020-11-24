@@ -29,12 +29,16 @@
     <div class="d-flex justify-content-between">
     <table class="table">
         <tr>
+            <td>Date: </td>
             <td><?php echo $emaiInfo['Date'] ;?></td>
-            <td><?php echo $emaiInfo['Subject'] ;?></td>		
-            <td><?php echo $emaiInfo['EmailBody'] ;?></td>	
+            <td>Subject: </td>
+            <td><?php echo $emaiInfo['Subject'] ;?></td>
+            <td>Sender ID: </td>
+            <td><?php echo $emaiInfo['MemberID'] ;?></td>	
         </tr>
     </table>
     </div>
+    <p><?php echo $emaiInfo['EmailBody'] ;?></p>
 </div>
 
 <?php include 'footer.php'; ?>
