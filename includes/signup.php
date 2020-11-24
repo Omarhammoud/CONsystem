@@ -5,7 +5,6 @@
         <section class="section-default">
             <h1>Create new member</h1>
             <form action="signup.inc.php" method="post">
-                <input type="text" name="memberid" placeholder="Member ID">
                 <input type="text" name="name" placeholder="Name">
                 <input type="text" name="email" placeholder="Email">
                 <input type="text" name="address" placeholder="Address">

@@ -3,7 +3,7 @@
 <?php include_once '../config/init.php'; ?>
 <main>
     <?php
-    if(isset($_SESSION['MemberID'])){
+    if(isset($_SESSION['email'])){
     echo " <p>Logged in</p>";
     }
     else{
