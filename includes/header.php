@@ -16,7 +16,7 @@ session_start();
         <a href="./index.php"> ConSystem</a>
             <div>
                 <?php
-                if(isset($_SESSION['email'])){
+                if(isset($_SESSION['Email'])){
                    echo "  <a href=\"./isadmin.inc.php\">Create User</a>
                         <form action=\"./logout.inc.php\" method=\"post\">
                     <button type=\"submit\" name=\"logout-submit\">Logout</button>

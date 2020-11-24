@@ -29,8 +29,8 @@ if(isset($_POST['login-submit'])) {
             }
             else if($pwdcheck = true){
                 session_start();
-                $_SESSION['memberid'] = $row['MemberID'];
-                $_SESSION['email'] = $row['Email'];
+                $_SESSION['MemberID'] = $row['MemberID'];
+                $_SESSION['Email'] = $row['Email'];
                 $_SESSION['Name'] = $row['Name'];
                 header("Location: ./index.php?success=LoggedIn".$_SESSION['Name']);
                 exit();
