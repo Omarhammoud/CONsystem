@@ -16,7 +16,7 @@ session_start();
         <a href="./index.php"> ConSystem</a>
             <div>
                 <?php
-                if(isset($_SESSION['MemberID'])){
+                if(isset($_SESSION['Email'])){
                    echo "  <a href=\"./isadmin.inc.php\">Create User</a>
                         <form action=\"./logout.inc.php\" method=\"post\">
                     <button type=\"submit\" name=\"logout-submit\">Logout</button>
@@ -24,7 +24,7 @@ session_start();
                 }
                 else{
                    echo "<form action=\"./login.inc.php\" method=\"post\">
-                    <input type=\"text\" name=\"memberid\" placeholder=\"Username\">
+                    <input type=\"text\" name=\"email\" placeholder=\"Email\">
                     <input type=\"password\" name=\"pwd\" placeholder=\"Password\">
                     <button type=\"submit\" name=\"login-submit\">Login</button>
                 </form>";
