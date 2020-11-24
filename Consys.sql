@@ -17,6 +17,9 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
+
+--
+
 --
 -- Database: `consys`
 --
@@ -232,8 +235,10 @@ CREATE TABLE `part_entourage` (
 CREATE TABLE `part_of` (
   `MemberID` int(11) NOT NULL,
   `GroupID` int(11) NOT NULL,
-  `Status` varchar(15) NOT NULL DEFAULT 'In Progress',
-  `RequestDate` date NOT NULL DEFAULT current_timestamp()
+
+  `Status` varchar(15) NOT NULL DEFAULT 'In progress',
+  `RequestDate` date NOT NULL
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -264,7 +269,7 @@ CREATE TABLE `permission` (
 
 CREATE TABLE `place` (
   `Address` varchar(25) NOT NULL,
-  `Contentid` int(11) NOT NULL,
+  `ContentID` int(11) NOT NULL,
   `PlaceName` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -327,7 +332,10 @@ ALTER TABLE `date`
 -- Indexes for table `email`
 --
 ALTER TABLE `email`
-  ADD PRIMARY KEY (`EmailID`);
+
+  ADD PRIMARY KEY (`EmailID`),
+  ADD KEY `MemberID` (`MemberID`);
+
 
 --
 -- Indexes for table `event_poll`
@@ -339,7 +347,10 @@ ALTER TABLE `event_poll`
 -- Indexes for table `group`
 --
 ALTER TABLE `group`
-  ADD PRIMARY KEY (`GroupID`);
+
+  ADD PRIMARY KEY (`GroupID`),
+  ADD KEY `Owner` (`Owner`);
+
 
 --
 -- Indexes for table `image`
@@ -387,8 +398,10 @@ ALTER TABLE `part_entourage`
 -- Indexes for table `part_of`
 --
 ALTER TABLE `part_of`
-  ADD PRIMARY KEY (`MemberID`,`GroupID`),
-  ADD KEY `Groupid` (`GroupID`);
+
+  ADD PRIMARY KEY (`MemberID`),
+  ADD KEY `GroupID` (`GroupID`);
+
 
 --
 -- Indexes for table `permission`
@@ -402,7 +415,7 @@ ALTER TABLE `permission`
 --
 ALTER TABLE `place`
   ADD PRIMARY KEY (`Address`),
-  ADD KEY `place_ibfk_1` (`Contentid`);
+  ADD KEY `place_ibfk_1` (`ContentID`);
 
 --
 -- Indexes for table `send_to`
@@ -419,15 +432,62 @@ ALTER TABLE `time`
   ADD KEY `time_ibfk_1` (`ContentID`);
 
 --
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `comment`
+--
+ALTER TABLE `comment`
+  MODIFY `CommentID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `content`
+--
+ALTER TABLE `content`
+  MODIFY `ContentID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `email`
+--
+ALTER TABLE `email`
+  MODIFY `EmailID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `group`
+--
+ALTER TABLE `group`
+  MODIFY `GroupID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `image`
+--
+ALTER TABLE `image`
+  MODIFY `ImageID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `member`
+--
+ALTER TABLE `member`
+  MODIFY `MemberID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `membervote`
+--
+ALTER TABLE `membervote`
+  MODIFY `VoteID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- Constraints for dumped tables
 --
 
 --
 -- Constraints for table `comment`
+
 --
 ALTER TABLE `comment`
-  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`MemberID`) REFERENCES `member` (`MemberID`),
-  ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`ContentID`) REFERENCES `content` (`ContentID`);
+  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`ContentID`) REFERENCES `content` (`ContentID`),
+  ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`MemberID`) REFERENCES `member` (`MemberID`);
 
 --
 -- Constraints for table `condoadmin`
@@ -448,10 +508,23 @@ ALTER TABLE `date`
   ADD CONSTRAINT `date_ibfk_1` FOREIGN KEY (`ContentID`) REFERENCES `content` (`ContentID`);
 
 --
+-- Constraints for table `email`
+--
+ALTER TABLE `email`
+  ADD CONSTRAINT `email_ibfk_1` FOREIGN KEY (`MemberID`) REFERENCES `member` (`MemberID`);
+
+--
 -- Constraints for table `event_poll`
 --
 ALTER TABLE `event_poll`
   ADD CONSTRAINT `event_poll_ibfk_1` FOREIGN KEY (`ContentID`) REFERENCES `content` (`ContentID`);
+
+--
+-- Constraints for table `group`
+--
+ALTER TABLE `group`
+  ADD CONSTRAINT `group_ibfk_1` FOREIGN KEY (`Owner`) REFERENCES `member` (`MemberID`);
+
 
 --
 -- Constraints for table `image`
@@ -470,29 +543,36 @@ ALTER TABLE `manage_group`
 -- Constraints for table `manage_user`
 --
 ALTER TABLE `manage_user`
-  ADD CONSTRAINT `manage_user_ibfk_1` FOREIGN KEY (`MemberID`) REFERENCES `member` (`MemberID`),
-  ADD CONSTRAINT `manage_user_ibfk_2` FOREIGN KEY (`CondoAdminID`) REFERENCES `condoadmin` (`MemberID`);
+
+  ADD CONSTRAINT `manage_user_ibfk_1` FOREIGN KEY (`CondoAdminID`) REFERENCES `condoadmin` (`MemberID`),
+  ADD CONSTRAINT `manage_user_ibfk_2` FOREIGN KEY (`MemberID`) REFERENCES `member` (`MemberID`);
+
 
 --
 -- Constraints for table `membervote`
 --
 ALTER TABLE `membervote`
-  ADD CONSTRAINT `membervote_ibfk_1` FOREIGN KEY (`MemberID`) REFERENCES `member` (`MemberID`),
-  ADD CONSTRAINT `membervote_ibfk_2` FOREIGN KEY (`ContentID`) REFERENCES `content` (`ContentID`);
+
+  ADD CONSTRAINT `membervote_ibfk_1` FOREIGN KEY (`ContentID`) REFERENCES `content` (`ContentID`),
+  ADD CONSTRAINT `membervote_ibfk_2` FOREIGN KEY (`MemberID`) REFERENCES `member` (`MemberID`);
+
 
 --
 -- Constraints for table `part_entourage`
 --
 ALTER TABLE `part_entourage`
-  ADD CONSTRAINT `part_entourage_ibfk_1` FOREIGN KEY (`EntourageID`) REFERENCES `member` (`MemberID`),
-  ADD CONSTRAINT `part_entourage_ibfk_2` FOREIGN KEY (`MemberID`) REFERENCES `member` (`MemberID`);
+
+  ADD CONSTRAINT `part_entourage_ibfk_1` FOREIGN KEY (`MemberID`) REFERENCES `member` (`MemberID`),
+  ADD CONSTRAINT `part_entourage_ibfk_2` FOREIGN KEY (`EntourageID`) REFERENCES `member` (`MemberID`);
 
 --
 -- Constraints for table `part_of`
 --
 ALTER TABLE `part_of`
-  ADD CONSTRAINT `part_of_ibfk_1` FOREIGN KEY (`MemberID`) REFERENCES `member` (`MemberID`) ON DELETE CASCADE,
-  ADD CONSTRAINT `part_of_ibfk_2` FOREIGN KEY (`GroupID`) REFERENCES `group` (`GroupID`) ON DELETE CASCADE;
+
+  ADD CONSTRAINT `part_of_ibfk_1` FOREIGN KEY (`MemberID`) REFERENCES `member` (`MemberID`),
+  ADD CONSTRAINT `part_of_ibfk_2` FOREIGN KEY (`GroupID`) REFERENCES `group` (`GroupID`);
+
 
 --
 -- Constraints for table `permission`
@@ -505,7 +585,9 @@ ALTER TABLE `permission`
 -- Constraints for table `place`
 --
 ALTER TABLE `place`
-  ADD CONSTRAINT `place_ibfk_1` FOREIGN KEY (`Contentid`) REFERENCES `event_poll` (`ContentID`);
+
+  ADD CONSTRAINT `place_ibfk_1` FOREIGN KEY (`ContentID`) REFERENCES `content` (`ContentID`);
+
 
 --
 -- Constraints for table `send_to`
@@ -518,9 +600,6 @@ ALTER TABLE `send_to`
 -- Constraints for table `time`
 --
 ALTER TABLE `time`
-  ADD CONSTRAINT `time_ibfk_1` FOREIGN KEY (`ContentID`) REFERENCES `event_poll` (`ContentID`);
-COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+  ADD CONSTRAINT `time_ibfk_1` FOREIGN KEY (`ContentID`) REFERENCES `content` (`ContentID`);
+
