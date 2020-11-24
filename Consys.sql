@@ -21,7 +21,7 @@ SET time_zone = "+00:00";
 --
 
 --
--- Database: `consys`
+-- Database: `Consys`
 --
 
 -- --------------------------------------------------------
@@ -95,7 +95,7 @@ CREATE TABLE `email` (
   `EmailID` int(11) NOT NULL,
   `MemberID` int(11) NOT NULL,
   `Subject` varchar(25) NOT NULL,
-  `EmailBody` varchar(25) NOT NULL,
+  `EmailBody` varchar(100) NOT NULL,
   `Date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -196,7 +196,8 @@ INSERT INTO `member` (`MemberID`, `Password`, `Email`, `Name`, `Address`, `Statu
 (2, '123', 'admin@a.com', 'admin', 'address', 'owner', 'owner'),
 (3, '1', 'a@a.com', 'a', '1', '1', '1'),
 (5, '123', 'q@q.com', 'a', 'a', 'a', 'a'),
-(8, 'pass', 'user@consystem.com', 'New User', '12 guy', 'active', 'administrator');
+(8, 'pass', 'user@consystem.com', 'New User', '12 guy', 'active', 'administrator'),
+(9, '12', 'a@q.com', 'a', '12', '12', '12');
 
 -- --------------------------------------------------------
 
@@ -235,10 +236,8 @@ CREATE TABLE `part_entourage` (
 CREATE TABLE `part_of` (
   `MemberID` int(11) NOT NULL,
   `GroupID` int(11) NOT NULL,
-
   `Status` varchar(15) NOT NULL DEFAULT 'In progress',
   `RequestDate` date NOT NULL
-
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -246,8 +245,7 @@ CREATE TABLE `part_of` (
 --
 
 INSERT INTO `part_of` (`MemberID`, `GroupID`, `Status`, `RequestDate`) VALUES
-(2, 6, 'In Progress', '2020-11-16'),
-(2, 7, 'Accepted', '2020-11-16');
+(1, 7, 'In Progress', '2020-11-22');
 
 -- --------------------------------------------------------
 
@@ -281,7 +279,7 @@ CREATE TABLE `place` (
 
 CREATE TABLE `send_to` (
   `EmailID` int(11) NOT NULL,
-  `MemberID` int(11) NOT NULL
+  `GroupID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -305,6 +303,7 @@ CREATE TABLE `time` (
 --
 ALTER TABLE `comment`
   ADD PRIMARY KEY (`CommentID`),
+  ADD UNIQUE KEY `CommentID` (`CommentID`),
   ADD KEY `MemberID` (`MemberID`),
   ADD KEY `ContentID` (`ContentID`);
 
@@ -319,6 +318,7 @@ ALTER TABLE `condoadmin`
 --
 ALTER TABLE `content`
   ADD PRIMARY KEY (`ContentID`),
+  ADD UNIQUE KEY `ContentID` (`ContentID`),
   ADD KEY `Memberid` (`MemberID`);
 
 --
@@ -332,10 +332,9 @@ ALTER TABLE `date`
 -- Indexes for table `email`
 --
 ALTER TABLE `email`
-
   ADD PRIMARY KEY (`EmailID`),
+  ADD UNIQUE KEY `EmailID` (`EmailID`),
   ADD KEY `MemberID` (`MemberID`);
-
 
 --
 -- Indexes for table `event_poll`
@@ -347,16 +346,16 @@ ALTER TABLE `event_poll`
 -- Indexes for table `group`
 --
 ALTER TABLE `group`
-
   ADD PRIMARY KEY (`GroupID`),
+  ADD UNIQUE KEY `GroupID` (`GroupID`),
   ADD KEY `Owner` (`Owner`);
-
 
 --
 -- Indexes for table `image`
 --
 ALTER TABLE `image`
   ADD PRIMARY KEY (`ImageID`),
+  ADD UNIQUE KEY `ImageID` (`ImageID`),
   ADD KEY `Contentid` (`ContentID`);
 
 --
@@ -377,13 +376,15 @@ ALTER TABLE `manage_user`
 -- Indexes for table `member`
 --
 ALTER TABLE `member`
-  ADD PRIMARY KEY (`MemberID`);
+  ADD PRIMARY KEY (`MemberID`),
+  ADD UNIQUE KEY `MemberID` (`MemberID`,`Email`);
 
 --
 -- Indexes for table `membervote`
 --
 ALTER TABLE `membervote`
   ADD PRIMARY KEY (`VoteID`),
+  ADD UNIQUE KEY `VoteID` (`VoteID`),
   ADD KEY `Memberid` (`MemberID`),
   ADD KEY `Contentid` (`ContentID`);
 
@@ -392,16 +393,15 @@ ALTER TABLE `membervote`
 --
 ALTER TABLE `part_entourage`
   ADD PRIMARY KEY (`MemberID`,`EntourageID`),
+  ADD UNIQUE KEY `EntourageID_2` (`EntourageID`),
   ADD KEY `EntourageID` (`EntourageID`);
 
 --
 -- Indexes for table `part_of`
 --
 ALTER TABLE `part_of`
-
   ADD PRIMARY KEY (`MemberID`),
   ADD KEY `GroupID` (`GroupID`);
-
 
 --
 -- Indexes for table `permission`
@@ -421,8 +421,8 @@ ALTER TABLE `place`
 -- Indexes for table `send_to`
 --
 ALTER TABLE `send_to`
-  ADD PRIMARY KEY (`EmailID`,`MemberID`),
-  ADD KEY `MemberID` (`MemberID`);
+  ADD PRIMARY KEY (`EmailID`,`GroupID`),
+  ADD KEY `MemberID` (`GroupID`);
 
 --
 -- Indexes for table `time`
@@ -469,7 +469,7 @@ ALTER TABLE `image`
 -- AUTO_INCREMENT for table `member`
 --
 ALTER TABLE `member`
-  MODIFY `MemberID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `MemberID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `membervote`
@@ -483,7 +483,6 @@ ALTER TABLE `membervote`
 
 --
 -- Constraints for table `comment`
-
 --
 ALTER TABLE `comment`
   ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`ContentID`) REFERENCES `content` (`ContentID`),
@@ -525,7 +524,6 @@ ALTER TABLE `event_poll`
 ALTER TABLE `group`
   ADD CONSTRAINT `group_ibfk_1` FOREIGN KEY (`Owner`) REFERENCES `member` (`MemberID`);
 
-
 --
 -- Constraints for table `image`
 --
@@ -543,25 +541,20 @@ ALTER TABLE `manage_group`
 -- Constraints for table `manage_user`
 --
 ALTER TABLE `manage_user`
-
   ADD CONSTRAINT `manage_user_ibfk_1` FOREIGN KEY (`CondoAdminID`) REFERENCES `condoadmin` (`MemberID`),
   ADD CONSTRAINT `manage_user_ibfk_2` FOREIGN KEY (`MemberID`) REFERENCES `member` (`MemberID`);
-
 
 --
 -- Constraints for table `membervote`
 --
 ALTER TABLE `membervote`
-
   ADD CONSTRAINT `membervote_ibfk_1` FOREIGN KEY (`ContentID`) REFERENCES `content` (`ContentID`),
   ADD CONSTRAINT `membervote_ibfk_2` FOREIGN KEY (`MemberID`) REFERENCES `member` (`MemberID`);
-
 
 --
 -- Constraints for table `part_entourage`
 --
 ALTER TABLE `part_entourage`
-
   ADD CONSTRAINT `part_entourage_ibfk_1` FOREIGN KEY (`MemberID`) REFERENCES `member` (`MemberID`),
   ADD CONSTRAINT `part_entourage_ibfk_2` FOREIGN KEY (`EntourageID`) REFERENCES `member` (`MemberID`);
 
@@ -569,10 +562,8 @@ ALTER TABLE `part_entourage`
 -- Constraints for table `part_of`
 --
 ALTER TABLE `part_of`
-
   ADD CONSTRAINT `part_of_ibfk_1` FOREIGN KEY (`MemberID`) REFERENCES `member` (`MemberID`),
   ADD CONSTRAINT `part_of_ibfk_2` FOREIGN KEY (`GroupID`) REFERENCES `group` (`GroupID`);
-
 
 --
 -- Constraints for table `permission`
@@ -585,21 +576,19 @@ ALTER TABLE `permission`
 -- Constraints for table `place`
 --
 ALTER TABLE `place`
-
   ADD CONSTRAINT `place_ibfk_1` FOREIGN KEY (`ContentID`) REFERENCES `content` (`ContentID`);
-
 
 --
 -- Constraints for table `send_to`
 --
 ALTER TABLE `send_to`
   ADD CONSTRAINT `send_to_ibfk_1` FOREIGN KEY (`EmailID`) REFERENCES `email` (`EmailID`),
-  ADD CONSTRAINT `send_to_ibfk_2` FOREIGN KEY (`MemberID`) REFERENCES `member` (`MemberID`);
+  ADD CONSTRAINT `send_to_ibfk_2` FOREIGN KEY (`GroupID`) REFERENCES `group` (`GroupID`);
 
 --
 -- Constraints for table `time`
 --
 ALTER TABLE `time`
-
   ADD CONSTRAINT `time_ibfk_1` FOREIGN KEY (`ContentID`) REFERENCES `content` (`ContentID`);
+
 
