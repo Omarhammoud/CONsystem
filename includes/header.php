@@ -34,6 +34,7 @@ session_start();
 
 
             </div>
+            <a href="./EmailPage.php">Emails</a>
 
         </nav>
     </header>
