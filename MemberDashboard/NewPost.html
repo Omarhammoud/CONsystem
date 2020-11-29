@@ -15,16 +15,16 @@
 		</div>
 	</nav>
 		
-		<form id="post_form" action="" METHOD="post" enctype="multipart/form-data">
-			<textarea type="text" id="textPost" onkeyup="textAreaAdjust(this)">
+		<form id="post_form" action="./insertPost.php" METHOD="post" enctype="multipart/form-data">
+			<textarea type="text" id="textPost" name="text" onkeyup="textAreaAdjust(this)">
 			</textarea>
 			<div class="center">
-				<input type="file" id="files" class="newPostImg" accept="image/x-png,image/gif,image/jpeg">
+				<input type="file" id="files" class="newPostImg"  name="img" accept="image/x-png,image/gif,image/jpeg">
 				<br/><br/>
 				<div id="PollDivID" style = 'display: none'>
-					<input type="text" class="PollTitle" placeholder="Enter Poll Title">
-					<input type="text" class="PollOption" placeholder="Enter Poll Option 1" id="1">
-					<input type="text" class="PollOption" placeholder="Enter Poll Option 2" id="2">	
+					<input type="text" class="PollTitle"  name="pollTitle"  placeholder="Enter Poll Title">
+					<input type="text" class="PollOption"  name="pollOpt" placeholder="Enter Poll Option 1" id="1">
+					<input type="text" class="PollOption"  name="pollOpt" placeholder="Enter Poll Option 2" id="2">	
 				</div>
 				
 				<input type="submit" id="postBtn" value="Post">
@@ -79,6 +79,7 @@
 		var pollTitleEle = document.createElement("input");
 		pollTitleEle.className = "PollOption";
 		pollTitleEle.type = "text";
+		pollTitleEle.name = "pollOpt";
 		pollTitleEle.placeholder = "Enter Poll Option" +(numberOfOptions);
 		pollTitleEle.id = numberOfOptions;
 		container.appendChild(pollTitleEle);
