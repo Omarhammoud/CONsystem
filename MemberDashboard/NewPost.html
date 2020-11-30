@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="UTF-8">
+		<title>New Post</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link rel="stylesheet" href="Style.css">
+   </head>
+   <body style="background-color:#DDDFEB">
+   	<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+	  	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<form class="form-inline my-2 my-lg-0" action="MemberDashboard.php">
+			  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Dashboard</button>
+			</form>
+		</div>
+	</nav>
+		
+		<form id="post_form" action="./insertPost.php" METHOD="post" enctype="multipart/form-data">
+			<textarea type="text" id="textPost" name="text" onkeyup="textAreaAdjust(this)">
+			</textarea>
+			<div class="center">
+				<input type="file" id="files" class="newPostImg"  name="img" accept="image/x-png,image/gif,image/jpeg">
+				<br/><br/>
+				<div id="PollDivID" style = 'display: none'>
+					<input type="text" class="PollTitle"  name="pollTitle"  placeholder="Enter Poll Title">
+					<input type="text" class="PollOption"  name="pollOpt" placeholder="Enter Poll Option 1" id="1">
+					<input type="text" class="PollOption"  name="pollOpt" placeholder="Enter Poll Option 2" id="2">	
+				</div>
+				
+				<input type="submit" id="postBtn" value="Post">
+			</div>
+		</form>
+		<div>
+			<button id="btnVote" onclick="Toggle()"> Create a poll </button>
+			<button id="addOption" class="addOptionClass" onclick="AddOption()" style = 'display: none'> Add option </button>
+			<button id="removeOption" class="removeOptionClass" onclick="removeOption()" style = 'display: none'> Remove option </button>
+		</div>
+	  <script>
+	var numberOfOptions = 3; 
+	function textAreaAdjust(element) 
+	{ 
+	  element.style.height = "1px"; 
+	  element.style.height = (25+element.scrollHeight)+"px"; 
+	}
+	function Toggle() 
+	{
+	  var addOption = document.getElementById("addOption");
+	  var div = document.getElementById("PollDivID");
+	  var removeOption = document.getElementById("removeOption");
+	  if (div.style.display === "none") 
+	  {
+		div.style.display = "block";
+	  } 
+	  else 
+	  {
+		div.style.display = "none";
+	  }
+	  if (addOption.style.display === "none") 
+	  {
+		addOption.style.display = "block";
+	  } 
+	  else 
+	  {
+		addOption.style.display = "none";
+	  }
+	  if (removeOption.style.display === "none") 
+	  {
+		removeOption.style.display = "block";
+	  } 
+	  else 
+	  {
+		removeOption.style.display = "none";
+	  }
+	}
+	function AddOption()
+	{
+		if(numberOfOptions <= 5){
+		var container = document.getElementById("PollDivID");
+		var pollTitleEle = document.createElement("input");
+		pollTitleEle.className = "PollOption";
+		pollTitleEle.type = "text";
+		pollTitleEle.name = "pollOpt";
+		pollTitleEle.placeholder = "Enter Poll Option" +(numberOfOptions);
+		pollTitleEle.id = numberOfOptions;
+		container.appendChild(pollTitleEle);
+		var offset = 42;
+		document.getElementById("btnVote").top = document.getElementById("btnVote").top - offset;
+		numberOfOptions++;
+		}
+	}
+	function removeOption()
+	{
+		if(numberOfOptions >= 2){
+		removeElement( document.getElementById(numberOfOptions-1) );
+		numberOfOptions--;
+		}
+	}
+	function removeElement(element) 
+	{
+    element && element.parentNode && element.parentNode.removeChild(element);
+	}
+
+	  </script>
+	</body>
+</html>

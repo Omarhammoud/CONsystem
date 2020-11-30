@@ -1,0 +1,114 @@
+#divID
+{
+	border: solid;
+	border-radius: 20px 20px 0px 0px;
+	background: lightblue;
+	margin-bottom: 20px;
+}
+#pID
+{
+	width: fit-content;
+	font-size: 30px;
+}
+#h1ID
+{
+	/* background-color: Red; */
+	padding-left: 10px;
+	padding-right: 10px;
+}
+#imageID
+{	
+	max-width: -webkit-fill-available;
+}
+
+#post_form
+{
+}
+
+#textPost
+{
+	width: 75%;
+    min-height: 270px;
+    margin-left: 3%;
+    margin-top: 20px;
+    padding: 10px;
+    border: darkslateblue;
+    border-radius: 20px;
+}
+
+#files
+{margin-left: 30px;margin-top: 15px;}
+
+#postBtn
+{width: 120px;position: fixed;bottom: 10px;left: 40%;}
+
+#btnVote
+{
+margin-left: 30px;
+    position: absolute;
+    top: 443px;
+}
+
+#PollDivID
+{
+	margin-left: 160px;
+	position: relative;
+	top: 25px;
+}
+
+.commentName
+{
+	font-size: 24px;
+	margin-left: 10px;
+	margin-bottom: 10px;
+}
+
+.commentTextArea
+{
+	width: 95%;
+    left: 10px;
+    position: relative;
+}
+
+.comment{
+    border: groove;
+    border-radius: 20px;
+    font-size: 16px;
+    padding: 10px;
+    background-color: #82b0bf;
+}
+
+.PollTitle
+{
+	background-color:red;
+	display: block;
+    margin-bottom: 10px;
+	
+}
+
+.PollOption
+{
+	background-color:green;
+	display: block;
+    margin-bottom: 10px;
+}
+
+.addOptionClass
+{
+	display: block;
+    position: absolute;
+    top: 485px;
+    margin-left: 30px;
+}
+
+.removeOptionClass
+{
+	display: block;
+    position: absolute;
+    top: 530px;
+    margin-left: 30px;
+}
+
+
+
+
