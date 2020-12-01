@@ -27,21 +27,21 @@
 			</div>
 
 			<div class="center">
-				<textarea placeholder="Insert text content here..." type="text" id="textPost" name="text" onkeyup="textAreaAdjust(this)"></textarea>
+				<textarea placeholder="Insert text content here..." type="text" id="textPost" name="content" onkeyup="textAreaAdjust(this)"></textarea>
 				<br/><br/>
-				<input type="file" id="files" class="newPostImg"  name="img" accept="image/x-png,image/gif,image/jpeg">
+				<input type="file" id="files" class="newPostImg"  name="img" accept="image/x-png,image/gif,image/jpeg" />
 				<br/><br/>
 				<div id="PollDivID" style = 'display: none'>
 					<input type="text" class="PollTitle"  name="pollTitle"  placeholder="Enter Poll Title">
-					<input type="text" class="PollOption"  name="pollOpt" placeholder="Enter place option 1" id="1">
-					<input type="text" class="PollOption"  name="pollOpt" placeholder="Enter place option 2" id="2">	
+					<input type="text" class="PollOption"  name="pollOptPlace[1]" placeholder="Enter place option 1" id="1">
+					<input type="text" class="PollOption"  name="pollOptPlace[2]" placeholder="Enter place option 2" id="2">	
 					<div id="optDate">
-						<input type="date" id="1 date" class="PollOptionDate" name="PollOptionDate">
-						<input type="date" id="2 date" class="PollOptionDate" name="PollOptionDate">					
+						<input type="date" id="1 date" class="PollOptionDate" name="pollOptDate[1]">
+						<input type="date" id="2 date" class="PollOptionDate" name="pollOptDate[2]">					
 					</div>
 					<div id="optTime">
-						<input type="time" id="1 time" class="PollOptionTime" name="PollOptionTime">
-						<input type="time" id="2 time" class="PollOptionTime" name="PollOptionTime">
+						<input type="time" id="1 time" class="PollOptionTime" name="pollOptTime[1]">
+						<input type="time" id="2 time" class="PollOptionTime" name="pollOptTime[2]">
 					</div>
 				</div>
 				<div>
@@ -105,19 +105,19 @@
 		var pollTitleEle = document.createElement("input");
 		pollTitleEle.className = "PollOption";
 		pollTitleEle.type = "text";
-		pollTitleEle.name = "pollOpt";
+		pollTitleEle.name = "pollOptPlace[" + numberOfOptions + "]";
 		pollTitleEle.placeholder = "Enter place option " +(numberOfOptions);
 		pollTitleEle.id = numberOfOptions;
 		container.appendChild(pollTitleEle);
 		var offset = 42;
 		document.getElementById("btnVote").top = document.getElementById("btnVote").top - offset;
-		numberOfOptions++;
+		
 		var containerDate = document.getElementById("optDate");
 		var pollTitleEleDate = document.createElement("input");
 		pollTitleEleDate.className = "PollOptionDate";
 		pollTitleEleDate.type = "date";
-		pollTitleEleDate.name = "pollOptDate";
-		pollTitleEleDate.id = (numberOfOptions-1) + " date";
+		pollTitleEleDate.name = "pollOptDate[" + numberOfOptions + "]";
+		pollTitleEleDate.id = numberOfOptions + " date";
 		containerDate.appendChild(pollTitleEleDate);
 		var offset = 42;
 		document.getElementById("optDate").top = document.getElementById("optDate").top - offset;
@@ -125,10 +125,11 @@
 		var pollTitleEleTime = document.createElement("input");
 		pollTitleEleTime.className = "PollOptionTime";
 		pollTitleEleTime.type = "time";
-		pollTitleEleTime.name = "pollOptTime";
-		pollTitleEleTime.id = (numberOfOptions-1) + " time";
+		pollTitleEleTime.name = "pollOptTime[" + numberOfOptions + "]";
+		pollTitleEleTime.id = numberOfOptions + " time";
 		containerTime.appendChild(pollTitleEleTime);
 		var offset = 42;
+		numberOfOptions++;
 		document.getElementById("optTime").top = document.getElementById("optTime").top - offset;		
 		}
 	}
