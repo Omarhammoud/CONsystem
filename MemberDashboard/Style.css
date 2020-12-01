@@ -28,32 +28,29 @@
 #textPost
 {
 	width: 75%;
-    min-height: 270px;
-    margin-left: 3%;
-    margin-top: 20px;
-    padding: 10px;
-    border: darkslateblue;
-    border-radius: 20px;
+	/* min-height: 270px; */
+	margin-left: 3%;
+	margin-top: 20px;
+	padding: 10px;
+	border: darkslateblue;
+	border-radius: 20px;
+	max-height: 200px;
 }
 
 #files
-{margin-left: 30px;margin-top: 15px;}
+{margin-left: 30px;margin-top: 8px;}
 
 #postBtn
 {width: 120px;position: fixed;bottom: 10px;left: 40%;}
 
 #btnVote
-{
-margin-left: 30px;
-    position: absolute;
-    top: 443px;
-}
+{margin-left: 30px;position: absolute;top: 64%;}
 
 #PollDivID
 {
 	margin-left: 160px;
-	position: relative;
-	top: 25px;
+	position: absolute;
+	top: 64%;
 }
 
 .commentName
@@ -96,19 +93,49 @@ margin-left: 30px;
 .addOptionClass
 {
 	display: block;
-    position: absolute;
-    top: 485px;
-    margin-left: 30px;
+	position: absolute;
+	top: 69%;
+	margin-left: 30px;
 }
 
 .removeOptionClass
 {
 	display: block;
-    position: absolute;
-    top: 530px;
-    margin-left: 30px;
+	position: absolute;
+	top: 74%;
+	margin-left: 30px;
 }
 
+#privacyOption
+{
+	margin-left: 30px;
+}
+	
+#optDate
+{
+    max-inline-size: min-content;
+    margin-left: 206px;
+    position: absolute;
+    top: 41px;
+}
+
+#optTime
+{
+    max-inline-size: min-content;
+    margin-left: 389px;
+    position: absolute;
+    top: 42px;
+}
+
+.PollOptionDate
+{
+margin-bottom: 9px;
+}
+
+.PollOptionTime
+{
+margin-bottom: 9px;
+}
 
 
 

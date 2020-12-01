@@ -3,6 +3,7 @@
    <head>
       <meta charset="UTF-8">
 		<title>New Post</title>
+		<script src="jquery-3.5.1.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 		<link rel="stylesheet" href="Style.css">
    </head>
@@ -16,25 +17,41 @@
 	</nav>
 		
 		<form id="post_form" action="./insertPost.php" METHOD="post" enctype="multipart/form-data">
-			<textarea type="text" id="textPost" name="text" onkeyup="textAreaAdjust(this)">
-			</textarea>
+		
+			<div id="privacyOption">
+			  <p>Select Post Privacy:</p>
+			  <input type="radio" id="publicPost" name="postPrivacy" value="public">
+			  <label for="public">public</label><br>
+			  <input type="radio" id="privatePost" name="postPrivacy" value="private">
+			  <label for="private">private</label><br>
+			</div>
+
 			<div class="center">
+				<textarea placeholder="Insert text content here..." type="text" id="textPost" name="text" onkeyup="textAreaAdjust(this)"></textarea>
+				<br/><br/>
 				<input type="file" id="files" class="newPostImg"  name="img" accept="image/x-png,image/gif,image/jpeg">
 				<br/><br/>
 				<div id="PollDivID" style = 'display: none'>
 					<input type="text" class="PollTitle"  name="pollTitle"  placeholder="Enter Poll Title">
-					<input type="text" class="PollOption"  name="pollOpt" placeholder="Enter Poll Option 1" id="1">
-					<input type="text" class="PollOption"  name="pollOpt" placeholder="Enter Poll Option 2" id="2">	
+					<input type="text" class="PollOption"  name="pollOpt" placeholder="Enter place option 1" id="1">
+					<input type="text" class="PollOption"  name="pollOpt" placeholder="Enter place option 2" id="2">	
+					<div id="optDate">
+						<input type="date" id="1 date" class="PollOptionDate" name="PollOptionDate">
+						<input type="date" id="2 date" class="PollOptionDate" name="PollOptionDate">					
+					</div>
+					<div id="optTime">
+						<input type="time" id="1 time" class="PollOptionTime" name="PollOptionTime">
+						<input type="time" id="2 time" class="PollOptionTime" name="PollOptionTime">
+					</div>
 				</div>
-				
+				<div>
+				</div>
 				<input type="submit" id="postBtn" value="Post">
 			</div>
 		</form>
-		<div>
-			<button id="btnVote" onclick="Toggle()"> Create a poll </button>
-			<button id="addOption" class="addOptionClass" onclick="AddOption()" style = 'display: none'> Add option </button>
-			<button id="removeOption" class="removeOptionClass" onclick="removeOption()" style = 'display: none'> Remove option </button>
-		</div>
+					<button id="btnVote" onclick="Toggle(this)"> Create a poll</button>
+					<button id="removeOption" class="removeOptionClass" onclick="removeOption()" style = 'display: none'> Remove option </button>
+					<button id="addOption" class="addOptionClass" onclick="AddOption()" style = 'display: none'> Add option </button>
 	  <script>
 	var numberOfOptions = 3; 
 	function textAreaAdjust(element) 
@@ -42,7 +59,7 @@
 	  element.style.height = "1px"; 
 	  element.style.height = (25+element.scrollHeight)+"px"; 
 	}
-	function Toggle() 
+	function Toggle(e) 
 	{
 	  var addOption = document.getElementById("addOption");
 	  var div = document.getElementById("PollDivID");
@@ -72,6 +89,15 @@
 		removeOption.style.display = "none";
 	  }
 	}
+	function removeOption()
+	{
+		if(numberOfOptions >= 2){
+		removeElement( document.getElementById(numberOfOptions-1) );
+		removeElement(document.getElementById(numberOfOptions -1 +" time"));
+		removeElement(document.getElementById(numberOfOptions -1 +" date"));
+		numberOfOptions--;
+		}
+	}
 	function AddOption()
 	{
 		if(numberOfOptions <= 5){
@@ -80,19 +106,30 @@
 		pollTitleEle.className = "PollOption";
 		pollTitleEle.type = "text";
 		pollTitleEle.name = "pollOpt";
-		pollTitleEle.placeholder = "Enter Poll Option" +(numberOfOptions);
+		pollTitleEle.placeholder = "Enter place option " +(numberOfOptions);
 		pollTitleEle.id = numberOfOptions;
 		container.appendChild(pollTitleEle);
 		var offset = 42;
 		document.getElementById("btnVote").top = document.getElementById("btnVote").top - offset;
 		numberOfOptions++;
-		}
-	}
-	function removeOption()
-	{
-		if(numberOfOptions >= 2){
-		removeElement( document.getElementById(numberOfOptions-1) );
-		numberOfOptions--;
+		var containerDate = document.getElementById("optDate");
+		var pollTitleEleDate = document.createElement("input");
+		pollTitleEleDate.className = "PollOptionDate";
+		pollTitleEleDate.type = "date";
+		pollTitleEleDate.name = "pollOptDate";
+		pollTitleEleDate.id = (numberOfOptions-1) + " date";
+		containerDate.appendChild(pollTitleEleDate);
+		var offset = 42;
+		document.getElementById("optDate").top = document.getElementById("optDate").top - offset;
+		var containerTime = document.getElementById("optTime");
+		var pollTitleEleTime = document.createElement("input");
+		pollTitleEleTime.className = "PollOptionTime";
+		pollTitleEleTime.type = "time";
+		pollTitleEleTime.name = "pollOptTime";
+		pollTitleEleTime.id = (numberOfOptions-1) + " time";
+		containerTime.appendChild(pollTitleEleTime);
+		var offset = 42;
+		document.getElementById("optTime").top = document.getElementById("optTime").top - offset;		
 		}
 	}
 	function removeElement(element) 
