@@ -68,12 +68,6 @@
             <td scope="col">Subject</td>
             <td scope="col">View Button</td>
         </tr>
-        <tr>
-            <td scope="col">Date</td>
-            <td scope="col">Sender ID</td>
-            <td scope="col">Subject</td>
-            <td scope="col"></td>
-        </tr>
         <?php while($email = mysqli_fetch_assoc($result)){ ?>
         <tr>
             <td><?php echo $email['Date'] ;?></td>

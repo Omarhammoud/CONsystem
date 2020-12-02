@@ -2,7 +2,7 @@
 //Database Handler
 $servername = "localhost";
 $dBUsername = "root";
-$dBPassword = "fi96!rjXz";
+$dBPassword = "";
 $dBName = "Consys";
 
 $conn = mysqli_connect($servername, $dBUsername, $dBPassword,$dBName );
