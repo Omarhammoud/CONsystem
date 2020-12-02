@@ -17,16 +17,7 @@ $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
     $pollTitle = $_POST["pollTitle"];
     $pollOptPlace = $_POST["pollOptPlace"];
 	$pollOptDate = $_POST["pollOptDate"];
-	$pollOptTime = $_POST["pollOptTime"];
-	
-	if(count($pollOptPlace) > 0)
-	{
-		echo count($pollOptPlace);
-		$numOfPollOpts = count($pollOptPlace);
-	}
-		
-    
-    
+	$pollOptTime = $_POST["pollOptTime"];    
 	
     $sql = "INSERT INTO content (MemberID, ContentBody, Type, Date, Image)  
 			VALUES (3, '$content', '$postPrivacy', $currDate, '$img')";
@@ -45,10 +36,8 @@ $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
 	
 	foreach ($pollOptPlace as $key => $res)
 	{
-	
 		$sql .= "INSERT INTO event_option (ContentID, date, time, place)  
             VALUES ('$ContentID' , '$pollOptDate[$key]', '$pollOptTime[$key]', '$pollOptPlace[$key]');";
-			
 	}
 	
 	mysqli_multi_query($conn, $sql);
@@ -56,10 +45,7 @@ $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
 	mysqli_close($conn);
 	
 	
-	
-    //mysqli_query($conn, $sql);
-	
-    //header("Location: ./NewPost.html");
+    header("Location: ./NewPost.html");
 
 
 ?>
