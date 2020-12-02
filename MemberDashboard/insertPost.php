@@ -12,15 +12,10 @@ $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
 	$postPrivacy = $_POST["postPrivacy"];
     $content = $_POST["content"];
     $img = $_FILES['img']['name'];
-	$currDate = date("Y-m-d");
+	$hasPoll = $_POST["hasPoll"];
 	
-    $pollTitle = $_POST["pollTitle"];
-    $pollOptPlace = $_POST["pollOptPlace"];
-	$pollOptDate = $_POST["pollOptDate"];
-	$pollOptTime = $_POST["pollOptTime"];    
-	
-    $sql = "INSERT INTO content (MemberID, ContentBody, Type, Date, Image)  
-			VALUES (3, '$content', '$postPrivacy', $currDate, '$img')";
+    $sql = "INSERT INTO content (MemberID, ContentBody, Type, Image)  
+			VALUES (3, '$content', '$postPrivacy', '$img')";
 			
 	if ($conn->query($sql) === TRUE) 
 	{
@@ -31,16 +26,27 @@ $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
 	  echo "Error: " . $sql . "<br>" . $conn->error;
 	}
 	
-	$sql = "INSERT INTO event_poll (ContentID, title) 
-					VALUES ('$ContentID', '$pollTitle');";
-	
-	foreach ($pollOptPlace as $key => $res)
+	if($hasPoll == "true")
 	{
-		$sql .= "INSERT INTO event_option (ContentID, date, time, place)  
-            VALUES ('$ContentID' , '$pollOptDate[$key]', '$pollOptTime[$key]', '$pollOptPlace[$key]');";
+		$pollTitle = $_POST["pollTitle"];
+		$pollOptPlace = $_POST["pollOptPlace"];
+		$pollOptDate = $_POST["pollOptDate"];
+		$pollOptTime = $_POST["pollOptTime"];  
+		
+		$sql = "INSERT INTO event_poll (ContentID, title) 
+						VALUES ('$ContentID', '$pollTitle');";
+		
+		foreach ($pollOptPlace as $key => $res)
+		{
+			$sql .= "INSERT INTO event_option (ContentID, date, time, place)  
+				VALUES ('$ContentID' , '$pollOptDate[$key]', '$pollOptTime[$key]', '$pollOptPlace[$key]');";
+		}
+		
+		mysqli_multi_query($conn, $sql);
 	}
+
 	
-	mysqli_multi_query($conn, $sql);
+	
 	
 	mysqli_close($conn);
 	
