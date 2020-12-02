@@ -13,7 +13,7 @@ session_start();
 
     <header>
         <nav>
-        <a href="./index.php"> ConSystem</a>
+            <a href="./index.php"> ConSystem</a>
             <div>
                 <?php
                 if(isset($_SESSION['Email'])){
@@ -30,11 +30,9 @@ session_start();
                 </form>";
                 }
                 ?>
-            <a href="./GroupPage.php"> Groups</a>
-
-
+                <a href="./GroupPage.php"> Groups</a>
             </div>
             <a href="./EmailPage.php">Emails</a>
-
+	        <a href="./MemberDashboard.php">Home</a>
         </nav>
     </header>

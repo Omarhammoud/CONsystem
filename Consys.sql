@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 17, 2020 at 03:58 AM
+-- Generation Time: Dec 02, 2020 at 12:40 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.2.34
 
@@ -17,15 +17,11 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> feature4-5
 --
-
+-- Database: `consys`
 --
--- Database: `Consys`
---
+CREATE DATABASE IF NOT EXISTS `gzc353_2` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `gzc353_2` ;
 
 -- --------------------------------------------------------
 
@@ -75,18 +71,14 @@ CREATE TABLE `content` (
   `Date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `date`
+-- Dumping data for table `content`
 --
 
-CREATE TABLE `date` (
-  `Day` int(11) NOT NULL,
-  `Month` int(11) NOT NULL,
-  `Year` int(11) NOT NULL,
-  `ContentID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO `content` (`ContentID`, `MemberID`, `Title`, `ContentBody`, `Type`, `Date`) VALUES
+(1, 1, 'post1', 'body 1', 'public', '2020-11-30'),
+(2, 1, 'post2', 'body 2', 'public', '2020-11-30'),
+(3, 2, 'post3', 'body 3', 'public', '2020-11-30');
 
 -- --------------------------------------------------------
 
@@ -98,7 +90,7 @@ CREATE TABLE `email` (
   `EmailID` int(11) NOT NULL,
   `MemberID` int(11) NOT NULL,
   `Subject` varchar(25) NOT NULL,
-  `EmailBody` varchar(100) NOT NULL,
+  `EmailBody` varchar(25) NOT NULL,
   `Date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -110,9 +102,38 @@ CREATE TABLE `email` (
 
 CREATE TABLE `event_poll` (
   `ContentID` int(11) NOT NULL,
-  `StartTime` date NOT NULL,
-  `EndTime` date NOT NULL
+  `Title` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `event_poll`
+--
+
+INSERT INTO `event_poll` (`ContentID`, `Title`) VALUES
+(1, 'Event 1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `event_poll_option`
+--
+
+CREATE TABLE `event_poll_option` (
+  `event_poll_optionID` int(11) NOT NULL,
+  `ContentID` int(11) NOT NULL,
+  `Place` varchar(100) DEFAULT NULL,
+  `Date` date DEFAULT NULL,
+  `Time` time DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `event_poll_option`
+--
+
+INSERT INTO `event_poll_option` (`event_poll_optionID`, `ContentID`, `Place`, `Date`, `Time`) VALUES
+(1, 1, 'Montreal', '2020-11-30', '11:00:00'),
+(2, 1, 'Concordia', '2020-12-30', '10:00:00'),
+(3, 2, 'New Palce', '2020-12-01', '13:00:00');
 
 -- --------------------------------------------------------
 
@@ -199,24 +220,7 @@ INSERT INTO `member` (`MemberID`, `Password`, `Email`, `Name`, `Address`, `Statu
 (2, '123', 'admin@a.com', 'admin', 'address', 'owner', 'owner'),
 (3, '1', 'a@a.com', 'a', '1', '1', '1'),
 (5, '123', 'q@q.com', 'a', 'a', 'a', 'a'),
-(8, 'pass', 'user@consystem.com', 'New User', '12 guy', 'active', 'administrator'),
-(9, '12', 'a@q.com', 'a', '12', '12', '12');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `membervote`
---
-
-CREATE TABLE `membervote` (
-  `VoteID` int(11) NOT NULL,
-  `Date` date NOT NULL,
-  `Hour` int(11) NOT NULL,
-  `Minute` int(11) NOT NULL,
-  `Place` varchar(25) NOT NULL,
-  `MemberID` int(25) NOT NULL,
-  `ContentID` int(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+(8, 'pass', 'user@consystem.com', 'New User', '12 guy', 'active', 'administrator');
 
 -- --------------------------------------------------------
 
@@ -240,7 +244,7 @@ CREATE TABLE `part_of` (
   `MemberID` int(11) NOT NULL,
   `GroupID` int(11) NOT NULL,
   `Status` varchar(15) NOT NULL DEFAULT 'In Progress',
-  `RequestDate` date NOT NULL DEFAULT current_timestamp()
+  `RequestDate` date NOT NULL 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -248,7 +252,8 @@ CREATE TABLE `part_of` (
 --
 
 INSERT INTO `part_of` (`MemberID`, `GroupID`, `Status`, `RequestDate`) VALUES
-(1, 7, 'In Progress', '2020-11-22');
+(2, 6, 'In Progress', '2020-11-16'),
+(2, 7, 'Accepted', '2020-11-16');
 
 -- --------------------------------------------------------
 
@@ -265,37 +270,35 @@ CREATE TABLE `permission` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `place`
---
-
-CREATE TABLE `place` (
-  `Address` varchar(25) NOT NULL,
-  `ContentID` int(11) NOT NULL,
-  `PlaceName` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `send_to`
 --
 
 CREATE TABLE `send_to` (
   `EmailID` int(11) NOT NULL,
-  `GroupID` int(11) NOT NULL
+  `MemberID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `time`
+-- Table structure for table `vote`
 --
 
-CREATE TABLE `time` (
-  `Hour` int(11) NOT NULL,
-  `Minutes` int(11) NOT NULL,
-  `ContentID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `vote` (
+  `event_poll_optionID` int(11) NOT NULL,
+  `ContentID` int(11) NOT NULL,
+  `MemberID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `vote`
+--
+
+INSERT INTO `vote` (`event_poll_optionID`, `ContentID`, `MemberID`) VALUES
+(1, 1, 2),
+(2, 1, 3),
+(2, 1, 5),
+(2, 1, 8);
 
 --
 -- Indexes for dumped tables
@@ -306,7 +309,6 @@ CREATE TABLE `time` (
 --
 ALTER TABLE `comment`
   ADD PRIMARY KEY (`CommentID`),
-  ADD UNIQUE KEY `CommentID` (`CommentID`),
   ADD KEY `MemberID` (`MemberID`),
   ADD KEY `ContentID` (`ContentID`);
 
@@ -321,22 +323,13 @@ ALTER TABLE `condoadmin`
 --
 ALTER TABLE `content`
   ADD PRIMARY KEY (`ContentID`),
-  ADD UNIQUE KEY `ContentID` (`ContentID`),
   ADD KEY `Memberid` (`MemberID`);
-
---
--- Indexes for table `date`
---
-ALTER TABLE `date`
-  ADD PRIMARY KEY (`Day`,`Month`,`Year`,`ContentID`),
-  ADD KEY `Contentid` (`ContentID`);
 
 --
 -- Indexes for table `email`
 --
 ALTER TABLE `email`
   ADD PRIMARY KEY (`EmailID`),
-  ADD UNIQUE KEY `EmailID` (`EmailID`),
   ADD KEY `MemberID` (`MemberID`);
 
 --
@@ -346,11 +339,17 @@ ALTER TABLE `event_poll`
   ADD PRIMARY KEY (`ContentID`);
 
 --
+-- Indexes for table `event_poll_option`
+--
+ALTER TABLE `event_poll_option`
+  ADD PRIMARY KEY (`event_poll_optionID`),
+  ADD KEY `ContentID` (`ContentID`);
+
+--
 -- Indexes for table `group`
 --
 ALTER TABLE `group`
   ADD PRIMARY KEY (`GroupID`),
-  ADD UNIQUE KEY `GroupID` (`GroupID`),
   ADD KEY `Owner` (`Owner`);
 
 --
@@ -358,7 +357,6 @@ ALTER TABLE `group`
 --
 ALTER TABLE `image`
   ADD PRIMARY KEY (`ImageID`),
-  ADD UNIQUE KEY `ImageID` (`ImageID`),
   ADD KEY `Contentid` (`ContentID`);
 
 --
@@ -379,24 +377,13 @@ ALTER TABLE `manage_user`
 -- Indexes for table `member`
 --
 ALTER TABLE `member`
-  ADD PRIMARY KEY (`MemberID`),
-  ADD UNIQUE KEY `MemberID` (`MemberID`,`Email`);
-
---
--- Indexes for table `membervote`
---
-ALTER TABLE `membervote`
-  ADD PRIMARY KEY (`VoteID`),
-  ADD UNIQUE KEY `VoteID` (`VoteID`),
-  ADD KEY `Memberid` (`MemberID`),
-  ADD KEY `Contentid` (`ContentID`);
+  ADD PRIMARY KEY (`MemberID`);
 
 --
 -- Indexes for table `part_entourage`
 --
 ALTER TABLE `part_entourage`
   ADD PRIMARY KEY (`MemberID`,`EntourageID`),
-  ADD UNIQUE KEY `EntourageID_2` (`EntourageID`),
   ADD KEY `EntourageID` (`EntourageID`);
 
 --
@@ -414,25 +401,19 @@ ALTER TABLE `permission`
   ADD KEY `Contentid` (`ContentID`);
 
 --
--- Indexes for table `place`
---
-ALTER TABLE `place`
-  ADD PRIMARY KEY (`Address`),
-  ADD KEY `place_ibfk_1` (`ContentID`);
-
---
 -- Indexes for table `send_to`
 --
 ALTER TABLE `send_to`
-  ADD PRIMARY KEY (`EmailID`,`GroupID`),
-  ADD KEY `MemberID` (`GroupID`);
+  ADD PRIMARY KEY (`EmailID`,`MemberID`),
+  ADD KEY `MemberID` (`MemberID`);
 
 --
--- Indexes for table `time`
+-- Indexes for table `vote`
 --
-ALTER TABLE `time`
-  ADD PRIMARY KEY (`Hour`,`Minutes`,`ContentID`),
-  ADD KEY `time_ibfk_1` (`ContentID`);
+ALTER TABLE `vote`
+  ADD PRIMARY KEY (`ContentID`,`MemberID`),
+  ADD KEY `event_option_fk` (`event_poll_optionID`),
+  ADD KEY `MemberID_fk` (`MemberID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -448,13 +429,19 @@ ALTER TABLE `comment`
 -- AUTO_INCREMENT for table `content`
 --
 ALTER TABLE `content`
-  MODIFY `ContentID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ContentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `email`
 --
 ALTER TABLE `email`
   MODIFY `EmailID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `event_poll_option`
+--
+ALTER TABLE `event_poll_option`
+  MODIFY `event_poll_optionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `group`
@@ -472,13 +459,7 @@ ALTER TABLE `image`
 -- AUTO_INCREMENT for table `member`
 --
 ALTER TABLE `member`
-  MODIFY `MemberID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT for table `membervote`
---
-ALTER TABLE `membervote`
-  MODIFY `VoteID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `MemberID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
@@ -504,12 +485,6 @@ ALTER TABLE `content`
   ADD CONSTRAINT `content_ibfk_1` FOREIGN KEY (`MemberID`) REFERENCES `member` (`MemberID`);
 
 --
--- Constraints for table `date`
---
-ALTER TABLE `date`
-  ADD CONSTRAINT `date_ibfk_1` FOREIGN KEY (`ContentID`) REFERENCES `content` (`ContentID`);
-
---
 -- Constraints for table `email`
 --
 ALTER TABLE `email`
@@ -520,6 +495,12 @@ ALTER TABLE `email`
 --
 ALTER TABLE `event_poll`
   ADD CONSTRAINT `event_poll_ibfk_1` FOREIGN KEY (`ContentID`) REFERENCES `content` (`ContentID`);
+
+--
+-- Constraints for table `event_poll_option`
+--
+ALTER TABLE `event_poll_option`
+  ADD CONSTRAINT `ContentID` FOREIGN KEY (`ContentID`) REFERENCES `content` (`ContentID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `group`
@@ -548,13 +529,6 @@ ALTER TABLE `manage_user`
   ADD CONSTRAINT `manage_user_ibfk_2` FOREIGN KEY (`MemberID`) REFERENCES `member` (`MemberID`);
 
 --
--- Constraints for table `membervote`
---
-ALTER TABLE `membervote`
-  ADD CONSTRAINT `membervote_ibfk_1` FOREIGN KEY (`ContentID`) REFERENCES `content` (`ContentID`),
-  ADD CONSTRAINT `membervote_ibfk_2` FOREIGN KEY (`MemberID`) REFERENCES `member` (`MemberID`);
-
---
 -- Constraints for table `part_entourage`
 --
 ALTER TABLE `part_entourage`
@@ -576,20 +550,491 @@ ALTER TABLE `permission`
   ADD CONSTRAINT `permission_ibfk_2` FOREIGN KEY (`MemberID`) REFERENCES `member` (`MemberID`);
 
 --
--- Constraints for table `place`
---
-ALTER TABLE `place`
-  ADD CONSTRAINT `place_ibfk_1` FOREIGN KEY (`ContentID`) REFERENCES `content` (`ContentID`);
-
---
 -- Constraints for table `send_to`
 --
 ALTER TABLE `send_to`
   ADD CONSTRAINT `send_to_ibfk_1` FOREIGN KEY (`EmailID`) REFERENCES `email` (`EmailID`),
-  ADD CONSTRAINT `send_to_ibfk_2` FOREIGN KEY (`GroupID`) REFERENCES `group` (`GroupID`);
+  ADD CONSTRAINT `send_to_ibfk_2` FOREIGN KEY (`MemberID`) REFERENCES `member` (`MemberID`);
 
 --
--- Constraints for table `time`
+-- Constraints for table `vote`
 --
-ALTER TABLE `time`
-  ADD CONSTRAINT `time_ibfk_1` FOREIGN KEY (`ContentID`) REFERENCES `content` (`ContentID`);
+ALTER TABLE `vote`
+  ADD CONSTRAINT `ContentID_fk` FOREIGN KEY (`ContentID`) REFERENCES `content` (`ContentID`),
+  ADD CONSTRAINT `MemberID_fk` FOREIGN KEY (`MemberID`) REFERENCES `member` (`MemberID`),
+  ADD CONSTRAINT `event_option_fk` FOREIGN KEY (`event_poll_optionID`) REFERENCES `event_poll_option` (`event_poll_optionID`) ON DELETE CASCADE ON UPDATE CASCADE;
+--
+-- Database: `phpmyadmin`
+--
+CREATE DATABASE IF NOT EXISTS `phpmyadmin` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+USE `phpmyadmin`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__bookmark`
+--
+
+CREATE TABLE `pma__bookmark` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `dbase` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `user` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `label` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '',
+  `query` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Bookmarks';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__central_columns`
+--
+
+CREATE TABLE `pma__central_columns` (
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `col_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `col_type` varchar(64) COLLATE utf8_bin NOT NULL,
+  `col_length` text COLLATE utf8_bin DEFAULT NULL,
+  `col_collation` varchar(64) COLLATE utf8_bin NOT NULL,
+  `col_isNull` tinyint(1) NOT NULL,
+  `col_extra` varchar(255) COLLATE utf8_bin DEFAULT '',
+  `col_default` text COLLATE utf8_bin DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Central list of columns';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__column_info`
+--
+
+CREATE TABLE `pma__column_info` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `table_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `column_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `comment` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '',
+  `mimetype` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '',
+  `transformation` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `transformation_options` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `input_transformation` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `input_transformation_options` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Column information for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__designer_settings`
+--
+
+CREATE TABLE `pma__designer_settings` (
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `settings_data` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Settings related to Designer';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__export_templates`
+--
+
+CREATE TABLE `pma__export_templates` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `export_type` varchar(10) COLLATE utf8_bin NOT NULL,
+  `template_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `template_data` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Saved export templates';
+
+--
+-- Dumping data for table `pma__export_templates`
+--
+
+INSERT INTO `pma__export_templates` (`id`, `username`, `export_type`, `template_name`, `template_data`) VALUES
+(1, 'root', 'server', 'Consys', '{\"quick_or_custom\":\"quick\",\"what\":\"sql\",\"db_select[]\":[\"consys\",\"phpmyadmin\",\"test\"],\"aliases_new\":\"\",\"output_format\":\"sendit\",\"filename_template\":\"@SERVER@\",\"remember_template\":\"on\",\"charset\":\"utf-8\",\"compression\":\"none\",\"maxsize\":\"\",\"codegen_structure_or_data\":\"data\",\"codegen_format\":\"0\",\"csv_separator\":\",\",\"csv_enclosed\":\"\\\"\",\"csv_escaped\":\"\\\"\",\"csv_terminated\":\"AUTO\",\"csv_null\":\"NULL\",\"csv_structure_or_data\":\"data\",\"excel_null\":\"NULL\",\"excel_columns\":\"something\",\"excel_edition\":\"win\",\"excel_structure_or_data\":\"data\",\"json_structure_or_data\":\"data\",\"json_unicode\":\"something\",\"latex_caption\":\"something\",\"latex_structure_or_data\":\"structure_and_data\",\"latex_structure_caption\":\"Structure of table @TABLE@\",\"latex_structure_continued_caption\":\"Structure of table @TABLE@ (continued)\",\"latex_structure_label\":\"tab:@TABLE@-structure\",\"latex_relation\":\"something\",\"latex_comments\":\"something\",\"latex_mime\":\"something\",\"latex_columns\":\"something\",\"latex_data_caption\":\"Content of table @TABLE@\",\"latex_data_continued_caption\":\"Content of table @TABLE@ (continued)\",\"latex_data_label\":\"tab:@TABLE@-data\",\"latex_null\":\"\\\\textit{NULL}\",\"mediawiki_structure_or_data\":\"data\",\"mediawiki_caption\":\"something\",\"mediawiki_headers\":\"something\",\"htmlword_structure_or_data\":\"structure_and_data\",\"htmlword_null\":\"NULL\",\"ods_null\":\"NULL\",\"ods_structure_or_data\":\"data\",\"odt_structure_or_data\":\"structure_and_data\",\"odt_relation\":\"something\",\"odt_comments\":\"something\",\"odt_mime\":\"something\",\"odt_columns\":\"something\",\"odt_null\":\"NULL\",\"phparray_structure_or_data\":\"data\",\"sql_include_comments\":\"something\",\"sql_header_comment\":\"\",\"sql_use_transaction\":\"something\",\"sql_compatibility\":\"NONE\",\"sql_structure_or_data\":\"structure_and_data\",\"sql_create_table\":\"something\",\"sql_auto_increment\":\"something\",\"sql_create_view\":\"something\",\"sql_create_trigger\":\"something\",\"sql_backquotes\":\"something\",\"sql_type\":\"INSERT\",\"sql_insert_syntax\":\"both\",\"sql_max_query_size\":\"50000\",\"sql_hex_for_binary\":\"something\",\"sql_utc_time\":\"something\",\"texytext_structure_or_data\":\"structure_and_data\",\"texytext_null\":\"NULL\",\"yaml_structure_or_data\":\"data\",\"\":null,\"as_separate_files\":null,\"csv_removeCRLF\":null,\"csv_columns\":null,\"excel_removeCRLF\":null,\"json_pretty_print\":null,\"htmlword_columns\":null,\"ods_columns\":null,\"sql_dates\":null,\"sql_relation\":null,\"sql_mime\":null,\"sql_disable_fk\":null,\"sql_views_as_tables\":null,\"sql_metadata\":null,\"sql_drop_database\":null,\"sql_drop_table\":null,\"sql_if_not_exists\":null,\"sql_view_current_user\":null,\"sql_or_replace_view\":null,\"sql_procedure_function\":null,\"sql_truncate\":null,\"sql_delayed\":null,\"sql_ignore\":null,\"texytext_columns\":null}');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__favorite`
+--
+
+CREATE TABLE `pma__favorite` (
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `tables` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Favorite tables';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__history`
+--
+
+CREATE TABLE `pma__history` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `username` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `db` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `table` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `timevalue` timestamp NOT NULL DEFAULT current_timestamp(),
+  `sqlquery` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='SQL history for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__navigationhiding`
+--
+
+CREATE TABLE `pma__navigationhiding` (
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `item_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `item_type` varchar(64) COLLATE utf8_bin NOT NULL,
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `table_name` varchar(64) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Hidden items of navigation tree';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__pdf_pages`
+--
+
+CREATE TABLE `pma__pdf_pages` (
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `page_nr` int(10) UNSIGNED NOT NULL,
+  `page_descr` varchar(50) CHARACTER SET utf8 NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='PDF relation pages for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__recent`
+--
+
+CREATE TABLE `pma__recent` (
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `tables` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Recently accessed tables';
+
+--
+-- Dumping data for table `pma__recent`
+--
+
+INSERT INTO `pma__recent` (`username`, `tables`) VALUES
+('root', '[{\"db\":\"consys\",\"table\":\"member\"},{\"db\":\"consys\",\"table\":\"vote\"},{\"db\":\"consys\",\"table\":\"event_poll\"},{\"db\":\"consys\",\"table\":\"event_poll_option\"},{\"db\":\"consys\",\"table\":\"content\"},{\"db\":\"consys\",\"table\":\"group\"},{\"db\":\"consys\",\"table\":\"membervote\"},{\"db\":\"consys\",\"table\":\"part_of\"},{\"db\":\"consys\",\"table\":\"time\"},{\"db\":\"consys\",\"table\":\"send_to\"}]');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__relation`
+--
+
+CREATE TABLE `pma__relation` (
+  `master_db` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `master_table` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `master_field` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `foreign_db` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `foreign_table` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `foreign_field` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Relation table';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__savedsearches`
+--
+
+CREATE TABLE `pma__savedsearches` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `username` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `search_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `search_data` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Saved searches';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__table_coords`
+--
+
+CREATE TABLE `pma__table_coords` (
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `table_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `pdf_page_number` int(11) NOT NULL DEFAULT 0,
+  `x` float UNSIGNED NOT NULL DEFAULT 0,
+  `y` float UNSIGNED NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Table coordinates for phpMyAdmin PDF output';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__table_info`
+--
+
+CREATE TABLE `pma__table_info` (
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `table_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `display_field` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Table information for phpMyAdmin';
+
+--
+-- Dumping data for table `pma__table_info`
+--
+
+INSERT INTO `pma__table_info` (`db_name`, `table_name`, `display_field`) VALUES
+('consys', 'event_poll_option', 'Place');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__table_uiprefs`
+--
+
+CREATE TABLE `pma__table_uiprefs` (
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `table_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `prefs` text COLLATE utf8_bin NOT NULL,
+  `last_update` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Tables'' UI preferences';
+
+--
+-- Dumping data for table `pma__table_uiprefs`
+--
+
+INSERT INTO `pma__table_uiprefs` (`username`, `db_name`, `table_name`, `prefs`, `last_update`) VALUES
+('root', 'consys', 'vote', '[]', '2020-12-01 05:13:18');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__tracking`
+--
+
+CREATE TABLE `pma__tracking` (
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `table_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `version` int(10) UNSIGNED NOT NULL,
+  `date_created` datetime NOT NULL,
+  `date_updated` datetime NOT NULL,
+  `schema_snapshot` text COLLATE utf8_bin NOT NULL,
+  `schema_sql` text COLLATE utf8_bin DEFAULT NULL,
+  `data_sql` longtext COLLATE utf8_bin DEFAULT NULL,
+  `tracking` set('UPDATE','REPLACE','INSERT','DELETE','TRUNCATE','CREATE DATABASE','ALTER DATABASE','DROP DATABASE','CREATE TABLE','ALTER TABLE','RENAME TABLE','DROP TABLE','CREATE INDEX','DROP INDEX','CREATE VIEW','ALTER VIEW','DROP VIEW') COLLATE utf8_bin DEFAULT NULL,
+  `tracking_active` int(1) UNSIGNED NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Database changes tracking for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__userconfig`
+--
+
+CREATE TABLE `pma__userconfig` (
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `timevalue` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `config_data` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='User preferences storage for phpMyAdmin';
+
+--
+-- Dumping data for table `pma__userconfig`
+--
+
+INSERT INTO `pma__userconfig` (`username`, `timevalue`, `config_data`) VALUES
+('root', '2020-12-01 19:58:28', '{\"Console\\/Mode\":\"collapse\"}');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__usergroups`
+--
+
+CREATE TABLE `pma__usergroups` (
+  `usergroup` varchar(64) COLLATE utf8_bin NOT NULL,
+  `tab` varchar(64) COLLATE utf8_bin NOT NULL,
+  `allowed` enum('Y','N') COLLATE utf8_bin NOT NULL DEFAULT 'N'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='User groups with configured menu items';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__users`
+--
+
+CREATE TABLE `pma__users` (
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `usergroup` varchar(64) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Users and their assignments to user groups';
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `pma__bookmark`
+--
+ALTER TABLE `pma__bookmark`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `pma__central_columns`
+--
+ALTER TABLE `pma__central_columns`
+  ADD PRIMARY KEY (`db_name`,`col_name`);
+
+--
+-- Indexes for table `pma__column_info`
+--
+ALTER TABLE `pma__column_info`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `db_name` (`db_name`,`table_name`,`column_name`);
+
+--
+-- Indexes for table `pma__designer_settings`
+--
+ALTER TABLE `pma__designer_settings`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Indexes for table `pma__export_templates`
+--
+ALTER TABLE `pma__export_templates`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `u_user_type_template` (`username`,`export_type`,`template_name`);
+
+--
+-- Indexes for table `pma__favorite`
+--
+ALTER TABLE `pma__favorite`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Indexes for table `pma__history`
+--
+ALTER TABLE `pma__history`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `username` (`username`,`db`,`table`,`timevalue`);
+
+--
+-- Indexes for table `pma__navigationhiding`
+--
+ALTER TABLE `pma__navigationhiding`
+  ADD PRIMARY KEY (`username`,`item_name`,`item_type`,`db_name`,`table_name`);
+
+--
+-- Indexes for table `pma__pdf_pages`
+--
+ALTER TABLE `pma__pdf_pages`
+  ADD PRIMARY KEY (`page_nr`),
+  ADD KEY `db_name` (`db_name`);
+
+--
+-- Indexes for table `pma__recent`
+--
+ALTER TABLE `pma__recent`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Indexes for table `pma__relation`
+--
+ALTER TABLE `pma__relation`
+  ADD PRIMARY KEY (`master_db`,`master_table`,`master_field`),
+  ADD KEY `foreign_field` (`foreign_db`,`foreign_table`);
+
+--
+-- Indexes for table `pma__savedsearches`
+--
+ALTER TABLE `pma__savedsearches`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `u_savedsearches_username_dbname` (`username`,`db_name`,`search_name`);
+
+--
+-- Indexes for table `pma__table_coords`
+--
+ALTER TABLE `pma__table_coords`
+  ADD PRIMARY KEY (`db_name`,`table_name`,`pdf_page_number`);
+
+--
+-- Indexes for table `pma__table_info`
+--
+ALTER TABLE `pma__table_info`
+  ADD PRIMARY KEY (`db_name`,`table_name`);
+
+--
+-- Indexes for table `pma__table_uiprefs`
+--
+ALTER TABLE `pma__table_uiprefs`
+  ADD PRIMARY KEY (`username`,`db_name`,`table_name`);
+
+--
+-- Indexes for table `pma__tracking`
+--
+ALTER TABLE `pma__tracking`
+  ADD PRIMARY KEY (`db_name`,`table_name`,`version`);
+
+--
+-- Indexes for table `pma__userconfig`
+--
+ALTER TABLE `pma__userconfig`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Indexes for table `pma__usergroups`
+--
+ALTER TABLE `pma__usergroups`
+  ADD PRIMARY KEY (`usergroup`,`tab`,`allowed`);
+
+--
+-- Indexes for table `pma__users`
+--
+ALTER TABLE `pma__users`
+  ADD PRIMARY KEY (`username`,`usergroup`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `pma__bookmark`
+--
+ALTER TABLE `pma__bookmark`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `pma__column_info`
+--
+ALTER TABLE `pma__column_info`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `pma__export_templates`
+--
+ALTER TABLE `pma__export_templates`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `pma__history`
+--
+ALTER TABLE `pma__history`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `pma__pdf_pages`
+--
+ALTER TABLE `pma__pdf_pages`
+  MODIFY `page_nr` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `pma__savedsearches`
+--
+ALTER TABLE `pma__savedsearches`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- Database: `test`
+--
+CREATE DATABASE IF NOT EXISTS `test` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `test`;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -1,19 +1,26 @@
-<!DOCTYPE html>
-<html>
-   <head>
-      <title>Member Dashboard</title>
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-      <link rel="stylesheet" href="Style.css">
-   </head>
-   <body style="background-color:#DDDFEB">
-	<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-	  <a class="navbar-brand">Dashboard</a>
-	  	<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<form class="form-inline my-2 my-lg-0" action="NewPost.html">
-			  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Create Post</button>
-			</form>
-		</div>
-	</nav>
+<?php include 'header.php'; ?>
+<?php
+    
+        require "dbh.inc.php";
+        $contentID = 1;
+        $sql = "SELECT `event_poll_optionID`, `ContentID`, `Place`, `Date`, `Time` FROM `event_poll_option` WHERE `ContentID`=?";
+        $stmt = mysqli_stmt_init($conn);
+
+        if(!mysqli_stmt_prepare($stmt,$sql)){
+            header("Location: ./GroupPage.php?error=sqlerror1");
+            exit();
+            }
+
+        mysqli_stmt_bind_param($stmt, "i",$contentID);
+        mysqli_stmt_execute($stmt);
+        $options = mysqli_stmt_get_result($stmt);
+        mysqli_stmt_close($stmt);
+        mysqli_close($conn);        
+ 
+
+?>
+
+      <a href="NewPost.html" class="btn btn-outline-success my-2 my-sm-0">Create Post</a>
       <div class="container" style="width: 50em;">
          <div id="divID">
             <p id="pID">
@@ -91,16 +98,26 @@
 			
 			<br><br>
 			
-			<div id="poll">
+			<div id=<?php echo $contentID?>>
 				<h3>
 					general meetings, agenda or resolution to be voted
 				</h3>
-				<form>
-					yes <input type="radio" name="vote" value="0" onclick="getVote(this.value)"><br>
-					no <input type="radio" name="vote" value="1" onclick="getVote(this.value)"><br>
+				<form >
+               <?php while($option = mysqli_fetch_assoc($options)){ ?>
+                  <div>
+                     <input type="radio" name="vote" onclick="setVote(<?php echo $option['event_poll_optionID']?>,<?php echo $contentID?>)">
+                     <label>
+                           <?php echo $option['Date'];?>
+                           <br>
+                           <?php echo $option['Time'];?>
+                           <br>
+                           <?php echo $option['Place'];?>
+                           <br>
+                     </label>
+                  </div>
+               <?php }?>
 				</form>
 			</div>
-			
 			
          </div>
       </div>
@@ -117,20 +134,37 @@
 		  element.style.height = "1px"; 
 		  element.style.height = (25+element.scrollHeight)+"px"; 
 	  }
+
 	  
-	  function getVote(int) 
+	  function setVote(optionID, contentID) 
 	  {
 		  var xmlhttp=new XMLHttpRequest();
 		  xmlhttp.onreadystatechange=function() 
 		  {
 			if (this.readyState==4 && this.status==200) 
 			{
-			  document.getElementById("poll").innerHTML=this.responseText;
+			  if(this.responseText){
+              displayPollResults(contentID);
+           }
 			}
 		  }
-		  xmlhttp.open("GET","poll_vote.php?vote="+int,true);
+		  xmlhttp.open("get","poll_vote.php?oid="+optionID,true);
 		  xmlhttp.send();
 	   }
-	  </script>
-   </body>
-</html>
+
+      function displayPollResults(contentID) 
+	  {
+		  var xmlhttp=new XMLHttpRequest();
+		  xmlhttp.onreadystatechange=function() 
+		  {
+			if (this.readyState==4 && this.status==200) 
+			{
+			  document.getElementById(contentID).innerHTML=this.responseText;
+			}
+		  }
+		  xmlhttp.open("get","display_poll_results.php?cid="+contentID,true);
+		  xmlhttp.send();
+	   }
+     </script>
+     
+<?php include 'footer.php'; ?>
