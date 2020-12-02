@@ -1,6 +1,7 @@
 <?php include 'header.php'; ?>
 <?php include 'functions.inc.php'; ?>
 <?php
+    // Written By: Leslie Poso (40057877)
     if(isset($_SESSION['MemberID']) && !empty($_GET['EmailID'])){
         require "dbh.inc.php";
 
@@ -25,6 +26,27 @@
 ?>
 
 <!-- Html to display the information of the group  -->
+<head>
+    <!-- example css -->
+    <style type="text/css">
+        table {
+            margin: 8px;
+            border: 5px solid #000;
+        }
+        td {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 1em;
+            border: 5px solid #000;
+        }
+        p{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 1em;
+            border: 5px solid #000;
+            text-align: center;
+        }
+    </style>
+</head>
+
 <div class="container">
     <div class="d-flex justify-content-between">
     <table class="table">

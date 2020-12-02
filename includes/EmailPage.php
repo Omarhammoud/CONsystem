@@ -1,13 +1,9 @@
 <?php include 'header.php'; ?>
 
 <?php
+    // Written By: Leslie Poso (40057877)
     if(isset($_SESSION['MemberID'])){
         require "dbh.inc.php";
-        
-        /*  TODO: Find what groups a user is in by using the part_of table
-            Use that information in the send_to table to get all the email ids
-            Once that's done, use the email IDs to fetch the list of emails a user has.
-        */
         $memberID = $_SESSION['MemberID'];
         $sql = $sql = "SELECT email.EmailID, email.Date, email.MemberID, email.Subject, email.EmailBody 
         from email, part_of, send_to 
