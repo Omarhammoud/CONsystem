@@ -31,10 +31,9 @@
             <img id="imageID" src="image1.jpg">
             <br>
             <br>
-
+            <!--Format for a comment -->
             <form class='comment-form'>
                <textarea placeholder="Write a comment..." class="commentTextArea" name="commentBody" onkeyup="textAreaAdjust(this)"></textarea>
-               <br>
                <br>
                <input type="hidden" name="contentID" value=<?php echo $contentID; ?>>
                <input type="submit">
@@ -47,32 +46,18 @@
             </div>
             
 
-            <div class="commentDiv">
-               <h6 class="commentOwner">
-                  <span class="commentImg" style="margin-left: 10px;background-color: #8c7878;border-radius: 79px;">👤</span>
-                  name of comment owner
-               </h6>
-               <h4 class="comment">this the first comment Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h4>
-            </div>
-            <div class="commentDiv">
-               <h6 class="commentOwner">
-                  <span class="commentImg" style="margin-left: 10px;background-color: #8c7878;border-radius: 79px;">👤</span>
-                  name of comment owner 2
-               </h6>
-               <h4 class="comment">this the second comment Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h4>
-            </div>
-         </div>
          
 		
          <!--Format for a poll -->
 			<div id=<?php echo 'event_poll_'.$contentID?>>
 				<h3>
 					general meetings, agenda or resolution to be voted
-				</h3>
-				<form >
+            </h3>
+            <!--Format for a poll form-->
+				<form class="event_poll_form">
                <?php while($option = mysqli_fetch_assoc($options)){ ?>
                   <div>
-                     <input type="radio" name="vote" onclick="setVote(<?php echo $option['event_poll_optionID']?>,<?php echo $contentID?>)">
+                     <input type="radio" name="vote" value = <?php echo $option['event_poll_optionID']?>>
                      <label>
                            <?php echo $option['Date'];?>
                            <br>
@@ -83,6 +68,8 @@
                      </label>
                   </div>
                <?php }?>
+               <input type="hidden" name="contentID" value="<?php echo $contentID; ?>">
+               <input type="submit" class="btn btn-primary btn-sm" value="Submit">
 				</form>
 			</div>
 			
@@ -104,61 +91,52 @@
 		  element.style.height = (25+element.scrollHeight)+"px"; 
 	  }
 
+     
      $(document).ready(function(){
            
-            $(".comment-form").submit(function(event){
-               event.preventDefault(); //prevent default action
-               var form_data = $(this).serialize(); //Encode form elements for submission
-               $(this).find('textarea').val("");
+         $(".comment-form").submit(function(event){
+            event.preventDefault(); //prevent default action
+            var form_data = $(this).serialize(); //Encode form elements for submission
+            $(this).find('textarea').val("");
 
-               $.post( './postComment.inc.php', form_data, function( response ) {
-                  var data = JSON.parse(response)
+            $.post( './postComment.inc.php', form_data, function( response ) {
+                 var data = JSON.parse(response)
                   
-                  if('err' in data){
-                     alert(data.err);
-                  }else{
-                     displayAllComments(data['contentID']); 
-                  }
-               });
+                if('err' in data){
+                    alert(data.err);
+                 }else{
+                    displayAllComments(data['contentID']); 
+                 }
+              });
+           });
+
+         function displayAllComments(contentID){
+ 
+            $.get('./displayComments.inc.php?cid='+contentID,function(response){
+              $("#comments_list_"+contentID).html(response);
+           })
+         }
+
+         $(".event_poll_form").submit(function(event){
+            event.preventDefault(); //prevent default action
+            var form_data = $(this).serialize(); //Encode form elements for submission
+
+            $.post( './poll_vote.php', form_data, function( response ) {
+               var data = JSON.parse(response)                  
+               if('err' in data){
+                   alert(data.err);
+                }else{
+                  displayPollResults(data['contentID']); 
+                }
+              });
             });
 
-            function displayAllComments(contentID){
- 
-               $.get('./displayComments.inc.php?cid='+contentID,function(data){
-                  $("#comments_list_"+contentID).html(data);
-               })
-            }
+         function displayPollResults(contentID){
+
+            $.get('./display_poll_results.php?cid='+contentID,function(response){
+              $("#event_poll_"+contentID).html(response);
+            })
+         }
       });
-
-	  function setVote(optionID, contentID) 
-	  {
-		  var xmlhttp=new XMLHttpRequest();
-		  xmlhttp.onreadystatechange=function() 
-		  {
-			if (this.readyState==4 && this.status==200) 
-			{
-			  if(this.responseText){
-              displayPollResults(contentID);
-           }
-			}
-		  }
-		  xmlhttp.open("get","poll_vote.php?oid="+optionID,true);
-		  xmlhttp.send();
-	   }
-
-
-      function displayPollResults(contentID) 
-	  {
-		  var xmlhttp=new XMLHttpRequest();
-		  xmlhttp.onreadystatechange=function() 
-		  {
-			if (this.readyState==4 && this.status==200) 
-			{
-			  document.getElementById("event_poll_"+contentID).innerHTML=this.responseText;
-			}
-		  }
-		  xmlhttp.open("get","display_poll_results.php?cid="+contentID,true);
-		  xmlhttp.send();
-	   }
      </script>
      

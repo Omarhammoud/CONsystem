@@ -1,43 +1,34 @@
 <?php
   session_start();
-  
-  if(isset($_SESSION['MemberID']) && isset($_GET['oid'])){
-        require "dbh.inc.php";
+  $data = array();
 
-        $userid = $_SESSION['MemberID'];
-        $oid = $_GET['oid'];
-        
-        $sql = "SELECT `ContentID` FROM `event_poll_option` WHERE `event_poll_optionID`=?";
-        $stmt =  mysqli_stmt_init($conn);
+  if(isset($_SESSION['MemberID'])){
+    if(isset($_POST['contentID']) && isset($_POST['vote'])){
+      require "dbh.inc.php";
 
-        if(!mysqli_stmt_prepare($stmt,$sql)){
-            header("Location: ./GroupPage.php?error=sqlerror1");
-            exit();
-        }
+      $userid = $_SESSION['MemberID'];
+      $contentid = $_POST['contentID'];
+      $oid = $_POST['vote'];
+       
+      $stmt = mysqli_stmt_init($conn);
+      $sql = "INSERT INTO `vote`(`event_poll_optionID`, `ContentID`, `MemberID`) VALUES (?,?,?)";
+      
+      if (!mysqli_stmt_prepare($stmt,$sql)) {
 
-        mysqli_stmt_bind_param($stmt, "i",$oid);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
-        $optionInfo = mysqli_fetch_assoc($result);
-        mysqli_stmt_close($stmt);
-        $contentid = $optionInfo['ContentID'];
-        
-        
-        $stmt = mysqli_stmt_init($conn);
-        $sql = "INSERT INTO `vote`(`event_poll_optionID`, `ContentID`, `MemberID`) VALUES (?,?,?)";
-        
-        if (!mysqli_stmt_prepare($stmt,$sql)) {
+        $data['err'] = "Error: Could not vote.";
+        echo json_encode($data);
+        exit();
+      }
+      mysqli_stmt_bind_param($stmt, "iii",$oid,$contentid,$userid); 
+      mysqli_stmt_execute($stmt);
+      mysqli_stmt_close($stmt);
+      mysqli_close($conn);
 
-          header("Location: ./GroupPage.php?error=sql2");
-          exit();
-        }
-        mysqli_stmt_bind_param($stmt, "iii",$oid,$contentid,$userid); 
-        mysqli_stmt_execute($stmt);
-        mysqli_stmt_close($stmt);
-        mysqli_close($conn);
-
-        echo true;
+      $data['contentID']=$contentid;
+      echo json_encode($data);
+    }
   }else{
-    echo 'Error';
+      $data['err'] = "You must be logged in to vote.";
+      echo json_encode($data);
   }
 ?>
