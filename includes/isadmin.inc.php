@@ -1,13 +1,13 @@
 <?php
 session_start();
 require "dbh.inc.php";
-$memberid = $_SESSION['memberid'];
+$memberid = $_SESSION['MemberID'];
 
 
     $sql = "SELECT MemberID FROM condoadmin WHERE MemberID =? ";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("Location: ./index.php?error=sqlerror1");
+        header("Location: ./index.php?error=sqlerror");
         exit();
     } else {
         mysqli_stmt_bind_param($stmt, "i", $memberid);
