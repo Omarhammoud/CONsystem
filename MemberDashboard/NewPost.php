@@ -20,15 +20,52 @@
 		
 			<div id="privacyOption">
 			  <p>Select Post Privacy:</p>
-			  <input type="radio" id="publicPost" name="postPrivacy" value="public">
+			  <input type="radio" id="publicPost"  name="postPrivacy" value="public" onclick="ShowHidePrivateMembers()" checked>
 			  <label for="public">public</label><br>
-			  <input type="radio" id="privatePost" name="postPrivacy" value="private">
+			  <input type="radio" id="privatePost" name="postPrivacy" value="private" onclick="ShowHidePrivateMembers()">
 			  <label for="private">private</label><br>
+			
+			
+				<div id="dvtext" style="display: none">
+				
+				
+				<?php
+					include('dbconnection.php');
+					$memberID = 2;
+					$sql = "SELECT GroupID FROM part_of WHERE MemberID=$memberID";
+					$result = $conn->query($sql);
+					$row = $result->fetch_assoc();
+					if ($groupID = $row['GroupID']) {
+						$sql = "SELECT MemberID FROM part_of WHERE GroupID=$groupID";
+						$res = $conn->query($sql);
+						
+						if ($res->num_rows > 0) {
+							$i = 1;
+							while ($members = $res->fetch_assoc()) {
+								$member_ID = $members['MemberID'];
+								if ($member_ID != $memberID) {
+									$sql = "SELECT Name FROM member WHERE MemberID=$member_ID";
+									$final_result = $conn->query($sql);
+									if ($final_result->num_rows > 0) {
+										$val = $final_result->fetch_assoc();
+										$name = $val['Name'];
+										echo '<input type="radio" id="member'.$i.'" name="privateMember" value="'.$member_ID.'">';
+										echo '<label for="'.$member_ID.'">'.$name.'</label><br>';
+									}									
+								}
+								$i++;
+							}
+						}
+					}
+					
+				?>
+					
+				</div>
 			</div>
 
 			<div class="center">
 				<textarea placeholder="Insert text content here..." type="text" id="textPost" name="content" onkeyup="textAreaAdjust(this)"></textarea>
-				<input name="hasPoll" class="hasPoll" id="has_poll" style="visibility: hidden;"  value="false">
+				<input type="hidden" name="hasPoll" id="has_poll" value="false">
 				<br/><br/>
 				<input type="file" id="files" class="newPostImg"  name="img" accept="image/x-png,image/gif,image/jpeg" />
 				<br/><br/>
@@ -44,8 +81,6 @@
 						<input type="time" id="1 time" class="PollOptionTime" name="pollOptTime[1]">
 						<input type="time" id="2 time" class="PollOptionTime" name="pollOptTime[2]">
 					</div>
-				</div>
-				<div>
 				</div>
 				<input type="submit" id="postBtn" value="Post">
 			</div>
@@ -153,6 +188,12 @@
 	{
     element && element.parentNode && element.parentNode.removeChild(element);
 	}
+	function ShowHidePrivateMembers() 
+	{
+        var privatePost = document.getElementById("privatePost");
+        var dvtext = document.getElementById("dvtext");
+        dvtext.style.display = privatePost.checked ? "block" : "none";
+    }
 
 	  </script>
 	</body>

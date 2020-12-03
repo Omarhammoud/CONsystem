@@ -13,9 +13,10 @@ $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
     $content = $_POST["content"];
     $img = $_FILES['img']['name'];
 	$hasPoll = $_POST["hasPoll"];
-	
+	$privateMember = $_POST["privateMember"];
+	//var_dump($privateMember);
     $sql = "INSERT INTO content (MemberID, ContentBody, Type, Image)  
-			VALUES (3, '$content', '$postPrivacy', '$img')";
+			VALUES (2, '$content', '$postPrivacy', '$img')";
 			
 	if ($conn->query($sql) === TRUE) 
 	{
@@ -25,7 +26,8 @@ $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
 	{
 	  echo "Error: " . $sql . "<br>" . $conn->error;
 	}
-	
+	$sql = "INSERT INTO private_content (ContentID, MemberID) VALUES ('$ContentID', '$privateMember')";
+	mysqli_query($conn, $sql);
 	if($hasPoll == "true")
 	{
 		$pollTitle = $_POST["pollTitle"];
@@ -33,8 +35,7 @@ $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
 		$pollOptDate = $_POST["pollOptDate"];
 		$pollOptTime = $_POST["pollOptTime"];  
 		
-		$sql = "INSERT INTO event_poll (ContentID, title) 
-						VALUES ('$ContentID', '$pollTitle');";
+		$sql = "INSERT INTO event_poll (ContentID, title) VALUES ('$ContentID', '$pollTitle');";
 		
 		foreach ($pollOptPlace as $key => $res)
 		{
