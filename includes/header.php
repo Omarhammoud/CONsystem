@@ -26,7 +26,7 @@ session_start();
                             <?php } ?>
                             <a class="nav-link h6" href="./NewPost.html">Post</a>
                             <a class="nav-link h6" href="./GroupPage.php">Group</a>
-                            <a class="nav-link h6" href="./Email.php">Email</a>
+                            <a class="nav-link h6" href="./EmailPage.php">Email</a>
                         <?php } ?>    
                     </div>
 
