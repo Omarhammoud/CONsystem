@@ -7,33 +7,38 @@ session_start();
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>CONsystem</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 </head>
 <body>
 
     <header>
-        <nav>
-        <a href="./index.php"> ConSystem</a>
-            <div>
-                <?php
-                if(isset($_SESSION['Email'])){
-                   echo "  <a href=\"./isadmin.inc.php\">Create User</a>
-                        <form action=\"./logout.inc.php\" method=\"post\">
-                    <button type=\"submit\" name=\"logout-submit\">Logout</button>
-                </form>";
-                }
-                else{
-                   echo "<form action=\"./login.inc.php\" method=\"post\">
-                    <input type=\"text\" name=\"email\" placeholder=\"Email\">
-                    <input type=\"password\" name=\"pwd\" placeholder=\"Password\">
-                    <button type=\"submit\" name=\"login-submit\">Login</button>
-                </form>";
-                }
-                ?>
-            <a href="./GroupPage.php"> Groups</a>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #e3f2fd;">
+            <div class="container-fluid">
+                <a class="navbar-brand h6" href="./MemberDashboard.php">Dashboard</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <?php if(isset($_SESSION['MemberID'])&&isset($_SESSION['isAdmin'])){ ?>
+                            <?php if($_SESSION['isAdmin']){?>
+                            <a class="nav-link h6" href="./signup.php">Sign Up</a>
+                            <?php } ?>
+                            <a class="nav-link h6" href="./NewPost.html">Post</a>
+                            <a class="nav-link h6" href="./GroupPage.php">Group</a>
+                            <a class="nav-link h6" href="./Email.php">Email</a>
+                        <?php } ?>    
+                    </div>
 
-
+                    <div class="navbar-nav ml-auto">
+                        <?php if(isset($_SESSION['MemberID'])&&isset($_SESSION['isAdmin'])){ ?>
+                            <a class="nav-link h6" href="#">Signed In As <?php echo $_SESSION['Name'] ;?></a>
+                            <a class="btn btn-outline-danger d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3" href="./logout.inc.php">Logout</a>
+                        <?php }else{ ?>
+                            <a class="nav-link h6" href="./LoginPage.php">Login</a>
+                        <?php }?>
+                    </div>
+                </div>
             </div>
-
         </nav>
     </header>

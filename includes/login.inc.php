@@ -6,7 +6,7 @@ if(isset($_POST['login-submit'])) {
     $password = $_POST['pwd'];
 
     if(empty($username) || empty($password)){
-        header("Location: ./index.php?error=emptyfields");
+        header("Location: ./LoginPage.php?error=emptyfields");
         exit();
     }
     else {
@@ -14,7 +14,7 @@ if(isset($_POST['login-submit'])) {
 
         $stmt = mysqli_stmt_init($conn);
         if(!mysqli_stmt_prepare($stmt,$sql)){
-            header("Location: ./index.php?error=sqlerror1");
+            header("Location: ./LoginPage.php?error=sqlerror1");
             exit();
          }
         else{
@@ -24,7 +24,7 @@ if(isset($_POST['login-submit'])) {
             if($row = mysqli_fetch_assoc($resultcheck)){
             $pwdcheck = password_verify($password,$row['Password']);
             if($pwdcheck = false){
-                header("Location: ./index.php?error=WrongPassword");
+                header("Location: ./LoginPage.php?error=WrongPassword");
                 exit();
             }
             else if($pwdcheck = true){
@@ -32,18 +32,18 @@ if(isset($_POST['login-submit'])) {
                 $_SESSION['MemberID'] = $row['MemberID'];
                 $_SESSION['Email'] = $row['Email'];
                 $_SESSION['Name'] = $row['Name'];
-                header("Location: ./index.php?success=LoggedIn".$_SESSION['MemberID']);
+                header("Location: ./isadmin.inc.php");
                 exit();
 
             }
             else{
-                header("Location: ./index.php?error=WrongPassword");
+                header("Location: ./LoginPage.php?error=WrongPassword");
                 exit();
             }
 
             }
             else{
-                header("Location: ./index.php?error=MemberDoesNotExist");
+                header("Location: ./LoginPage.?error=UserDoesNotExist");
                 exit();
             }
 

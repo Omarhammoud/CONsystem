@@ -16,11 +16,12 @@ $memberid = $_SESSION['MemberID'];
         $result = mysqli_stmt_num_rows($stmt);
 
         if ($result == 0) {
-            header("Location: ./index.php?error=notAnAdmin".$memberid);
-            echo "<p> Only Admins can add users</p>";
+            $_SESSION['isAdmin'] = false;
+            header("Location: ./index.php?Success=LoddedinAsMember");
             exit();
         } else if ($result == 1) {
-            header("Location: ./signup.php?Success=userisAnAdmin");
+            $_SESSION['isAdmin'] = true;
+            header("Location: ./index.php?Success=LoddedinAsAdmin");
             exit();
         }
     }
