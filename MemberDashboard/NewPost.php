@@ -31,7 +31,9 @@
 				
 				<?php
 					include('dbconnection.php');
+					// TO REPLACE WITH A SESSION VARIABLE FOR THE MEMBERID
 					$memberID = 2;
+					
 					$sql = "SELECT GroupID FROM part_of WHERE MemberID=$memberID";
 					$result = $conn->query($sql);
 					$row = $result->fetch_assoc();
@@ -49,8 +51,8 @@
 									if ($final_result->num_rows > 0) {
 										$val = $final_result->fetch_assoc();
 										$name = $val['Name'];
-										echo '<input type="radio" id="member'.$i.'" name="privateMember" value="'.$member_ID.'">';
-										echo '<label for="'.$member_ID.'">'.$name.'</label><br>';
+										echo '<input type="checkbox" id="member'.$i.'" name="privateMember" value="'.$member_ID.'">';
+										echo '<label for="'.$member_ID.'">&nbsp'.$name.'</label><br>';
 									}									
 								}
 								$i++;

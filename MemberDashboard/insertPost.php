@@ -14,7 +14,7 @@ $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
     $img = $_FILES['img']['name'];
 	$hasPoll = $_POST["hasPoll"];
 	$privateMember = $_POST["privateMember"];
-	//var_dump($privateMember);
+	var_dump($privateMember); exit;
     $sql = "INSERT INTO content (MemberID, ContentBody, Type, Image)  
 			VALUES (2, '$content', '$postPrivacy', '$img')";
 			
@@ -52,7 +52,7 @@ $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
 	mysqli_close($conn);
 	
 	
-    header("Location: ./NewPost.html");
+    header("Location: ./NewPost.php");
 
 
 ?>
