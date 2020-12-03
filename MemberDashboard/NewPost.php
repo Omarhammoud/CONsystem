@@ -51,7 +51,7 @@
 									if ($final_result->num_rows > 0) {
 										$val = $final_result->fetch_assoc();
 										$name = $val['Name'];
-										echo '<input type="checkbox" id="member'.$i.'" name="privateMember" value="'.$member_ID.'">';
+										echo '<input type="checkbox" id="member'.$i.'" name="privateMember['.$i.']" value="'.$member_ID.'">';
 										echo '<label for="'.$member_ID.'">&nbsp'.$name.'</label><br>';
 									}									
 								}
