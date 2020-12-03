@@ -9,7 +9,7 @@
 	<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
 	  <a class="navbar-brand">Dashboard</a>
 	  	<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<form class="form-inline my-2 my-lg-0" action="NewPost.html">
+			<form class="form-inline my-2 my-lg-0" action="NewPost.php">
 			  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Create Post</button>
 			</form>
 		</div>
