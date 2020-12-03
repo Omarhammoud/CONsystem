@@ -17,7 +17,10 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> feature4-5
 --
 
 --
@@ -236,8 +239,8 @@ CREATE TABLE `part_entourage` (
 CREATE TABLE `part_of` (
   `MemberID` int(11) NOT NULL,
   `GroupID` int(11) NOT NULL,
-  `Status` varchar(15) NOT NULL DEFAULT 'In progress',
-  `RequestDate` date NOT NULL
+  `Status` varchar(15) NOT NULL DEFAULT 'In Progress',
+  `RequestDate` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -400,8 +403,8 @@ ALTER TABLE `part_entourage`
 -- Indexes for table `part_of`
 --
 ALTER TABLE `part_of`
-  ADD PRIMARY KEY (`MemberID`),
-  ADD KEY `GroupID` (`GroupID`);
+  ADD PRIMARY KEY (`MemberID`,`GroupID`),
+  ADD KEY `Groupid` (`GroupID`);
 
 --
 -- Indexes for table `permission`
@@ -562,8 +565,8 @@ ALTER TABLE `part_entourage`
 -- Constraints for table `part_of`
 --
 ALTER TABLE `part_of`
-  ADD CONSTRAINT `part_of_ibfk_1` FOREIGN KEY (`MemberID`) REFERENCES `member` (`MemberID`),
-  ADD CONSTRAINT `part_of_ibfk_2` FOREIGN KEY (`GroupID`) REFERENCES `group` (`GroupID`);
+  ADD CONSTRAINT `part_of_ibfk_1` FOREIGN KEY (`MemberID`) REFERENCES `member` (`MemberID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `part_of_ibfk_2` FOREIGN KEY (`GroupID`) REFERENCES `group` (`GroupID`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `permission`
@@ -590,5 +593,3 @@ ALTER TABLE `send_to`
 --
 ALTER TABLE `time`
   ADD CONSTRAINT `time_ibfk_1` FOREIGN KEY (`ContentID`) REFERENCES `content` (`ContentID`);
-
-
