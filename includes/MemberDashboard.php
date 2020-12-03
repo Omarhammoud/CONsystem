@@ -7,7 +7,7 @@
         $stmt = mysqli_stmt_init($conn);
 
         if(!mysqli_stmt_prepare($stmt,$sql)){
-            header("Location: ./GroupPage.php?error=sqlerror1");
+            header("Location: ./index.php?error=sqlerror1");
             exit();
             }
 
@@ -19,9 +19,8 @@
  
 
 ?>
-
-      <a href="NewPost.html" class="btn btn-outline-success my-2 my-sm-0">Create Post</a>
       <div class="container" style="width: 50em;">
+      
          <div id="divID">
             <p id="pID">
                <span style="font-size:50px;">👤</span>
@@ -32,6 +31,22 @@
             <img id="imageID" src="image1.jpg">
             <br>
             <br>
+
+            <form class='comment-form'>
+               <textarea placeholder="Write a comment..." class="commentTextArea" name="commentBody" onkeyup="textAreaAdjust(this)"></textarea>
+               <br>
+               <br>
+               <input type="hidden" name="contentID" value=<?php echo $contentID; ?>>
+               <input type="submit">
+            </form>
+            
+            
+            <!--Display comments after fetch data -->
+            <div id=<?php echo 'comments_list_'.$contentID; ?>>
+            
+            </div>
+            
+
             <div class="commentDiv">
                <h6 class="commentOwner">
                   <span class="commentImg" style="margin-left: 10px;background-color: #8c7878;border-radius: 79px;">👤</span>
@@ -46,59 +61,11 @@
                </h6>
                <h4 class="comment">this the second comment Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h4>
             </div>
-            <form action="" name="commentNameForm" method="post">
-               <textarea placeholder="Write a comment..." class="commentTextArea" name="commentTextArea" onkeyup="textAreaAdjust(this)"></textarea>
-               <br>
-               <br>
-               <button class="commentName" type="submit" onclick="VisibilityMethod()">Comment
-               <i class="far fa-comment" aria-hidden="true"/>
-               </button>
-            </form>
          </div>
-         <div id="divID">
-            <p id="pID">
-               <span style="font-size:50px;">👤</span>
-               name of post owner
-            </p>
-            <br>
-            <h5 id="h1ID">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at nunc vitae arcu dapibus ultrices et eu sem. Ut suscipit, tortor vel facilisis vestibulum, tellus tortor convallis purus, vel aliquet nibh sem at ligula. Etiam id massa ipsum. Mauris pharetra est eget malesuada hendrerit. Vivamus dapibus facilisis justo id faucibus. Fusce iaculis consequat viverra. Nullam aliquet maximus eros at maximus. Curabitur nec sem eget massa auctor dapibus. Sed luctus dignissim dictum. Maecenas varius sapien at odio lobortis finibus.</h5>
-            <br>
-            <br>
-            <div class="commentDiv">
-               <h6 class="commentOwner">
-                  <span class="commentImg" style="margin-left: 10px;background-color: #8c7878;border-radius: 79px;">👤</span>
-                  name of comment owner 4
-               </h6>
-               <h4 class="comment">this the first comment of this post Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h4>
-            </div>
-            <form action="" name="commentNameForm" method="post">
-               <textarea placeholder="Write a comment..." class="commentTextArea" name="commentTextArea" onkeyup="textAreaAdjust(this)"></textarea>
-               <br>
-               <br>
-               <button class="commentName" type="submit" onclick="VisibilityMethod()">Comment
-               <i class="far fa-comment" aria-hidden="true"/>
-               </button>
-            </form>
-         </div>
-         <div id="divID">
-            <p id="pID">
-               <span style="font-size:50px;">👤</span>
-               name of post owner
-            </p>
-            <br>
-            <img id="imageID" src="image2.jpg">
-            <br>
-            <br>
-            <button class="commentName" type="submit" onclick="VisibilityMethod()">Comment
-            <i class="far fa-comment" aria-hidden="true"/>
-            </button>
-            <form action="" name="commentNameForm" method="post">
-               <textarea placeholder="Write a comment..." class="commentTextArea" name="commentTextArea" onkeyup="textAreaAdjust(this)"></textarea>
-            </form>
-			
-			<br><br>
-			
-			<div id=<?php echo $contentID?>>
+         
+		
+         <!--Format for a poll -->
+			<div id=<?php echo 'event_poll_'.$contentID?>>
 				<h3>
 					general meetings, agenda or resolution to be voted
 				</h3>
@@ -119,8 +86,10 @@
 				</form>
 			</div>
 			
-         </div>
       </div>
+
+<?php include 'footer.php'; ?>
+
 	  <script>
 	  function VisibilityMethod() 
 	  { 
@@ -135,7 +104,32 @@
 		  element.style.height = (25+element.scrollHeight)+"px"; 
 	  }
 
-	  
+     $(document).ready(function(){
+           
+            $(".comment-form").submit(function(event){
+               event.preventDefault(); //prevent default action
+               var form_data = $(this).serialize(); //Encode form elements for submission
+               $(this).find('textarea').val("");
+
+               $.post( './postComment.inc.php', form_data, function( response ) {
+                  var data = JSON.parse(response)
+                  
+                  if('err' in data){
+                     alert(data.err);
+                  }else{
+                     displayAllComments(data['contentID']); 
+                  }
+               });
+            });
+
+            function displayAllComments(contentID){
+ 
+               $.get('./displayComments.inc.php?cid='+contentID,function(data){
+                  $("#comments_list_"+contentID).html(data);
+               })
+            }
+      });
+
 	  function setVote(optionID, contentID) 
 	  {
 		  var xmlhttp=new XMLHttpRequest();
@@ -152,6 +146,7 @@
 		  xmlhttp.send();
 	   }
 
+
       function displayPollResults(contentID) 
 	  {
 		  var xmlhttp=new XMLHttpRequest();
@@ -159,7 +154,7 @@
 		  {
 			if (this.readyState==4 && this.status==200) 
 			{
-			  document.getElementById(contentID).innerHTML=this.responseText;
+			  document.getElementById("event_poll_"+contentID).innerHTML=this.responseText;
 			}
 		  }
 		  xmlhttp.open("get","display_poll_results.php?cid="+contentID,true);
@@ -167,4 +162,3 @@
 	   }
      </script>
      
-<?php include 'footer.php'; ?>
