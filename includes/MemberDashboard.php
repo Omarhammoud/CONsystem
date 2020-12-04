@@ -47,7 +47,7 @@
             
             
             <!--Display comments after fetch data -->
-            <div id=<?php echo 'comments_list_'.$contentID; ?>>
+            <div id=<?php echo 'comments_list_'.$contentID; ?> onload="displayAllComments(<?php echo $contentID; ?>)">
             
             </div>
             
@@ -99,7 +99,9 @@
 
      
      $(document).ready(function(){
-           
+
+         displayAllComments(<?php echo $contentID?>)
+
          $(".comment-form").submit(function(event){
             event.preventDefault(); //prevent default action
             var form_data = $(this).serialize(); //Encode form elements for submission
