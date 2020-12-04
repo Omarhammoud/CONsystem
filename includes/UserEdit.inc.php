@@ -32,7 +32,7 @@ if(isset($_GET['MemberID1'])) {
       <input type="text" name="address" placeholder="Address" value="' . $address . '">
       <input type="text" name="status" placeholder="Status" value="' . $status . '">
       <input type="text" name="privilege" placeholder="Privilege" value="' . $privilege . '">
-      <input type="text" name="password" placeholder="Password" value="' . $password . '">
+      <input type="password" name="password" placeholder="Password" value="' . $password . '">
  <button type="submit" name="editInfo-submit">Edit Information</button>
 </form>';
 
