@@ -1,3 +1,6 @@
+<!--
+   Written By: Omar Hammoud (40002184)
+-->
 <?php
 session_start();
 if (isset($_POST['editInfo-submit'])) {

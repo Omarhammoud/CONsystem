@@ -1,3 +1,6 @@
+<!--
+   Written By: Omar Hammoud (40002184)
+-->
 <?php
 //Database Handler
 $servername = "localhost";

@@ -1,4 +1,5 @@
 <?php
+//Written By:  Omar Hammoud (40002184)
 session_start();
 include "header.php";
 if(isset($_GET['MemberID1'])) {

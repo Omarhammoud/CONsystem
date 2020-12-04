@@ -1,4 +1,6 @@
 <?php
+
+//Written By:  Omar Hammoud (40002184)
 if(isset($_POST['login-submit'])) {
     require "dbh.inc.php";
 

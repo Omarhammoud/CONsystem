@@ -1,3 +1,6 @@
+<!--
+   Written By: Israt Noor Kazi (40029299)
+-->
 <?php 
 
 //Function check of the user is part of the group

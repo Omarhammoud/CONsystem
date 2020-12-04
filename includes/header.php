@@ -1,3 +1,8 @@
+<!--
+   Written By: Israt Noor Kazi (40029299),
+                Omar Hammoud (40002184)
+    
+-->
 <?php
 session_start();
 ?>
@@ -34,7 +39,7 @@ session_start();
                     <div class="navbar-nav ml-auto">
                         <?php if(isset($_SESSION['MemberID'])&&isset($_SESSION['isAdmin'])){ ?>
                             <a class="nav-link h6" href="#">Signed In As <?php echo $_SESSION['Name'] ;?></a>
-                            <a class="btn btn-outline-danger d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3" href="./logout.inc.php">Logout</a>
+                            <a class="btn btn-outline-danger  mb-3 mb-md-0 ml-md-3" href="./logout.inc.php">Logout</a>
                         <?php }else{ ?>
                             <a class="nav-link h6" href="./LoginPage.php">Login</a>
                         <?php }?>

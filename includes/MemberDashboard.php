@@ -1,3 +1,8 @@
+<!--
+   Written By: Israt Noor Kazi (40029299),
+               Miled Chalal-Henri (26685900),
+               Omar Hammoud (40002184)
+-->
 <?php include 'header.php'; ?>
 <?php
     
@@ -100,7 +105,7 @@
             $(this).find('textarea').val("");
 
             $.post( './postComment.inc.php', form_data, function( response ) {
-                 var data = JSON.parse(response)
+                 var data = JSON.parse(response);
                   
                 if('err' in data){
                     alert(data.err);

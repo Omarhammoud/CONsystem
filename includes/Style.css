@@ -1,3 +1,4 @@
+/* Written By: Miled Chalal-Henri (26685900) */
 #divID
 {
 	border: solid;
@@ -21,9 +22,6 @@
 	max-width: -webkit-fill-available;
 }
 
-#post_form
-{
-}
 
 #textPost
 {
@@ -136,5 +134,8 @@ margin-bottom: 9px;
 margin-bottom: 9px;
 }
 
+body{
+	background-color: #DDDFEB;
+}
 
 

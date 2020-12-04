@@ -1,4 +1,6 @@
+
 <?php
+//Written By:  Omar Hammoud (40002184)
 if(isset($_GET['MemberID2'])) {
     require "dbh.inc.php";
     $memberID = $_GET['MemberID2'];

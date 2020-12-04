@@ -1,5 +1,5 @@
 <?php
-    // Written By: Leslie Poso (40057877)
+    //Written By: Leslie Poso (40057877)
     if(isset($_POST['SendEmail']) && !empty($_POST['MemberID']) && !empty($_POST['Subject']) && !empty($_POST['Group']) && !empty($_POST['EmailBody'])){   
         
         require "dbh.inc.php";

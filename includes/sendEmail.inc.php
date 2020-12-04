@@ -1,4 +1,5 @@
 <?php
+    //Written By: Leslie Poso (40057877)
     if(isset($_POST['SendEmail']) && !empty($_POST['Subject']) && !empty($_POST['Recipient']) && !empty($_POST['EmailBody'])){   
         
         require "dbh.inc.php";
