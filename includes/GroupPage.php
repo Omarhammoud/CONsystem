@@ -32,7 +32,7 @@
         <?php while($group = mysqli_fetch_assoc($groups)){ ?>
         <tr>
             <td><?php echo $group['GroupName'] ;?></td>
-            <td> <a class="btn btn-outline-info" href="./showGroup.php?id=<?php echo $group['GroupID']; ?>">Read More</a></td>			
+            <td> <a class="btn btn-outline-info" href="./showGroup.php?id=<?php echo $group['GroupID']; ?>">More Info</a></td>			
         </tr>
         <?php }?>
     </table>

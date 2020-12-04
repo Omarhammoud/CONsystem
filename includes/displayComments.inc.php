@@ -39,8 +39,12 @@
             <span class="commentImg" style="margin-left: 10px;background-color: #8c7878;border-radius: 79px;">👤</span>
             <?php echo $comment['Name'] ?>
         </h6>
-        <h4 class="comment"><?php echo $comment['CommentBody'] ?></h4>
-        <footer class="blockquote-footer"><?php echo $comment['Date'] ?></footer>
+        <h4 class="comment">
+            <?php echo $comment['CommentBody'] ?>
+            <br>
+            <footer class="blockquote-footer"><?php echo $comment['Date'] ?></footer>
+        </h4>
+        
     </div>
 <?php } ?>
 
