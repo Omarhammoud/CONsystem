@@ -1,45 +1,34 @@
 <?php
-$vote = $_REQUEST['vote'];
+  session_start();
+  $data = array();
 
-//get content of textfile
-$filename = "poll_result.txt";
-$content = file($filename);
+  if(isset($_SESSION['MemberID'])){
+    if(isset($_POST['contentID']) && isset($_POST['vote'])){
+      require "dbh.inc.php";
 
-//put content in array
-$array = explode("||", $content[0]);
-$yes = $array[0];
-$no = $array[1];
+      $userid = $_SESSION['MemberID'];
+      $contentid = $_POST['contentID'];
+      $oid = $_POST['vote'];
+       
+      $stmt = mysqli_stmt_init($conn);
+      $sql = "INSERT INTO `vote`(`event_poll_optionID`, `ContentID`, `MemberID`) VALUES (?,?,?)";
+      
+      if (!mysqli_stmt_prepare($stmt,$sql)) {
 
-if ($vote == 0) {
-  $yes = $yes + 1;
-}
-if ($vote == 1) {
-  $no = $no + 1;
-}
+        $data['err'] = "Error: Could not vote.";
+        echo json_encode($data);
+        exit();
+      }
+      mysqli_stmt_bind_param($stmt, "iii",$oid,$contentid,$userid); 
+      mysqli_stmt_execute($stmt);
+      mysqli_stmt_close($stmt);
+      mysqli_close($conn);
 
-//insert votes to txt file
-$insertvote = $yes."||".$no;
-$fp = fopen($filename,"w");
-fputs($fp,$insertvote);
-fclose($fp);
+      $data['contentID']=$contentid;
+      echo json_encode($data);
+    }
+  }else{
+      $data['err'] = "You must be logged in to vote.";
+      echo json_encode($data);
+  }
 ?>
-
-<h2>Result:</h2>
-<table>
-<tr>
-<td>Yes:</td>
-<td><img src="poll.gif"
-width='<?php echo(100*round($yes/($no+$yes),2)); ?>'
-height='20'>
-<?php echo(100*round($yes/($no+$yes),2)); ?>%
-</td>
-</tr>
-<tr>
-<td>No:</td>
-<td><img src="poll.gif"
-width='<?php echo(100*round($no/($no+$yes),2)); ?>'
-height='20'>
-<?php echo(100*round($no/($no+$yes),2)); ?>%
-</td>
-</tr>
-</table>
