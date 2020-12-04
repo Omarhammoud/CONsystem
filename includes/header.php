@@ -8,6 +8,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>CONsystem</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="Style.css">
 </head>
 <body>
 
@@ -24,7 +25,7 @@ session_start();
                             <?php if($_SESSION['isAdmin']){?>
                             <a class="nav-link h6" href="./signup.php">Sign Up</a>
                             <?php } ?>
-                            <a class="nav-link h6" href="./NewPost.html">Post</a>
+                            <a class="nav-link h6" href="./NewPost.php">Post</a>
                             <a class="nav-link h6" href="./GroupPage.php">Group</a>
                             <a class="nav-link h6" href="./EmailPage.php">Email</a>
                         <?php } ?>    
