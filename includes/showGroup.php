@@ -10,7 +10,11 @@
 
         //Fetch Group Information 
         $groupID = $_GET["id"];
-        $sql = "SELECT * FROM `group` WHERE `GroupID`=?";
+
+        $sql = "SELECT `group`.`GroupName`,`group`.`Date`, `group`.`Owner`,`member`.`Name`,`member`.`Email` 
+                FROM `group` LEFT JOIN `member` ON `member`.`MemberID`=`group`.`Owner` 
+                WHERE `GroupID`=?";
+
         $stmt =  mysqli_stmt_init($conn);
 
         if(!mysqli_stmt_prepare($stmt,$sql)){
@@ -24,62 +28,31 @@
         $groupInfo = mysqli_fetch_assoc($result);
         mysqli_stmt_close($stmt);
         
-        //Fetch Owner Information
-        $sql = "SELECT `Email`, `Name` FROM `member` WHERE `MemberID`=?";
+
+        //Fetch Members Information 
+        $sql = "SELECT `member`.`MemberID`,`member`.`Name`,`member`.`Email`, `part_of`.`Status` 
+                FROM `part_of` LEFT JOIN `member`ON `member`.`MemberID`= `part_of`.`MemberID` 
+                WHERE `GroupID`=?";
+        $stmt =  mysqli_stmt_init($conn);
+
+        $membersAccepted = array();
+        $membersWaiting = array();
         $stmt =  mysqli_stmt_init($conn);
 
         if(!mysqli_stmt_prepare($stmt,$sql)){
             header("Location: ./GroupPage.php?error=sqlerror2");
             exit();
-         }
-         
-        mysqli_stmt_bind_param($stmt, "i",$groupInfo['Owner']);
+        }
+        mysqli_stmt_bind_param($stmt, "i", $groupID);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
-        $ownerInfo = mysqli_fetch_assoc($result);
-        mysqli_stmt_close($stmt);
-
-
-        //Fetch Members Information 
-        $sql = "SELECT `MemberID`, `Status` FROM `part_of` WHERE `GroupID`=?";
-        $stmt =  mysqli_stmt_init($conn);
-
-        if(!mysqli_stmt_prepare($stmt,$sql)){
-            header("Location: ./GroupPage.php?error=sqlerror3");
-            exit();
-        }
-
-        mysqli_stmt_bind_param($stmt, "i",$groupID);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
-        $member_ids = array();
-        while($id = mysqli_fetch_assoc($result)){
-            array_push($member_ids, $id);
-        }
-        mysqli_stmt_close($stmt);
-
-        $membersAccepted = array();
-        $membersWaiting = array();
-        $sql = "SELECT `MemberID`,  `Email`, `Name` FROM `member` WHERE `MemberID`=?";
-        $stmt =  mysqli_stmt_init($conn);
-
-        if(!mysqli_stmt_prepare($stmt,$sql)){
-            header("Location: ./GroupPage.php?error=sqlerror4");
-            exit();
-        }
-
-        foreach($member_ids as $id){           
-            mysqli_stmt_bind_param($stmt, "i", $id['MemberID']);
-            mysqli_stmt_execute($stmt);
-            $result = mysqli_stmt_get_result($stmt);
-            if($id['Status']=="In Progress"){
-                array_push($membersWaiting, mysqli_fetch_assoc($result));
+        while($member = mysqli_fetch_assoc($result)){
+            if($member['Status']=="In Progress"){
+                array_push($membersWaiting,$member);
             }else{
-                array_push($membersAccepted, mysqli_fetch_assoc($result));
+                array_push($membersAccepted,$member);
             }
-        
         }
-
         mysqli_stmt_close($stmt);
         mysqli_close($conn);
 
@@ -94,11 +67,11 @@
     <div class="d-flex justify-content-between">
         <a  class="btn btn-outline-primary m-2" href="./GroupPage.php" >Back</a>
         <?php if($groupInfo['Owner']!=$_SESSION['MemberID']){ ?>
-            <?php if(isPartOfGroup($member_ids,$_SESSION['MemberID']) != 2) {?>
+            <?php if(isPartOfGroup($membersWaiting, $membersAccepted,$_SESSION['MemberID']) != 2) {?>
                 <form method="POST" action="./JoinGroup.inc.php">
                     <input type="hidden" name="group_id" value="<?php echo $groupID; ?>">
                     <input type="hidden" name="member_id" value="<?php echo $_SESSION['MemberID']; ?>">
-                    <input type="submit" name="JoinGroup" class="btn btn-outline-success m-2" <?php echo (isPartOfGroup($member_ids,$_SESSION['MemberID']) == 1)?'value="Request Sent" disabled':'value="Join Group"' ?>>
+                    <input type="submit" name="JoinGroup" class="btn btn-outline-success m-2" <?php echo (isPartOfGroup($membersWaiting, $membersAccepted,$_SESSION['MemberID']) == 1)?'value="Request Sent" disabled':'value="Join Group"' ?>>
                 </form>
             <?php } else{?>
                 <form method="post" action="./LeaveGroup.inc.php">
@@ -115,8 +88,8 @@
             <?php echo $groupInfo['GroupName']?>
         </h1>
         <div class="card-body">
-            <p>Created By: <?php echo $ownerInfo['Name']?></p>
-            <p>Email: <?php echo $ownerInfo['Email']?></p>
+            <p>Created By: <?php echo $groupInfo['Name']?></p>
+            <p>Email: <?php echo $groupInfo['Email']?></p>
             <?php if($groupInfo['Owner']==$_SESSION['MemberID']){ ?>
                 <div class="d-flex justify-content-between">
                     <a class="btn btn-outline-warning" href="./EditGroup.php?id=<?php echo $groupID; ?>">Edit</a>

@@ -27,24 +27,93 @@
 ?>
 
 <div class="container">
-    <h1>Group Page</h1>
-    <table class="table">
-        <tr>
-            <th scope="col">Group Name</th>
-            <th scope="col"></th>
-        </tr>
-        <?php while($group = mysqli_fetch_assoc($groups)){ ?>
-        <tr>
-            <td><?php echo $group['GroupName'] ;?></td>
-            <td> <a class="btn btn-outline-info" href="./showGroup.php?id=<?php echo $group['GroupID']; ?>">More Info</a></td>			
-        </tr>
-        <?php }?>
-    </table>
+    <div class="row">
+        <div class="col-6">
+            <div class="card" style="	height: 400px; width: 100%;" >
+                <div class="card-header">
+                        <h3>My Groups</h2>
+                </div>
+                <div class="overflow-auto" style="	height: 80%; width: 100%;">
+                                
+                    <ul class="list-group list-group-flush" id="groupOwned">
 
-    <form class="form-inline" action="./createGroup.inc.php" method="post">
-        <input type="text"  class="form-control" name="GroupName" require="required" placeholder="Group Name" />
-        <input class="btn btn-outline-primary m-3" type="submit" name="CreateGroup" value="Create Group">
-    </form>
+                    </ul>
+                </div>
+                <div class="card-footer d-flex justify-content-center p-0">
+                    <form id="CreateGroupForm" class="form-inline m-0" action="./createGroup.inc.php" method="post">
+                        <input id="GroupName" type="text"  class="form-control" name="GroupName" require="required" placeholder="Group Name" />
+                        <input class="btn btn-outline-primary m-3" type="submit" name="CreateGroup" value="Create Group">
+                    </form>
+                </div>
+            </div>
+        </div>
 
+        <div class="col-6">
+            <div class="card" style="	height: 400px; width: 100%;" >
+                <div class="card-header" >
+                        <h3>Joined Groups</h2>
+                </div>
+                <div class="overflow-auto" style="	height: 200px; width: 100%;">
+                                
+                    <ul class="list-group list-group-flush" id="joinedGroup">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+        <div class="card mt-3" style="width: 70%;">
+            <div class="card-header">
+                <h3>List of All Group</h2>
+            </div>
+            <table class="table" id="allGroups">
+
+            </table>
+            </div>
+        </div>
+    </div>
 </div>
 <?php include 'footer.php'; ?>
+
+<script>
+
+$(document).ready(function(){
+
+    displayAllGroups(1)
+    displayAllGroups(2)
+    displayAllGroups(3)
+
+$("#CreateGroupForm").submit(function(event){
+   event.preventDefault(); //prevent default action
+   var form_data = $(this).serialize(); //Encode form elements for submission
+   $(this).find('#GroupName').val("");
+   console.log(form_data);
+
+   $.post( './createGroup.inc.php', form_data, function( response ) {
+        var data = JSON.parse(response);
+         
+       if('err' in data){
+           alert(data.err);
+        }else{
+            displayAllGroups(data['request']);
+        }
+     });
+  });
+
+function displayAllGroups(request){
+
+   $.get('./displayAllGroups.inc.php?request='+request,function(response){
+       if(request==1){
+            $("#allGroups").html(response);
+        }else if(request==2){
+            $("#groupOwned").html(response);
+        }else if(request == 3){
+            $("#joinedGroup").html(response);
+        }   
+  })
+}
+
+});
+
+</script>

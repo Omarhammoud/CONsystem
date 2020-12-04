@@ -4,12 +4,17 @@
 <?php
  
 //Function check of the user is part of the group
-function isPartOfGroup($array_ids,$memberID){
-    foreach ($array_ids as $id){
+function isPartOfGroup($membersWaiting,$membersAccepted,$memberID){
+    foreach ($membersAccepted as $id){
         if (isset($id["MemberID"]) && $id["MemberID"] == $memberID ){
-            if( $id['Status']!="In Progress"){
-                return 2; // Member is accepted in the group
-            }
+
+            return 2; // Member is accepted in the group
+        }      
+    }
+    
+    foreach ($membersWaiting as $id){
+        if (isset($id["MemberID"]) && $id["MemberID"] == $memberID ){
+
             return 1; // Member send a request which is in progress 
         }      
     }
