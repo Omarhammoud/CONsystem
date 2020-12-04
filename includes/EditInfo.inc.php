@@ -14,7 +14,7 @@ if (isset($_POST['editInfo-submit'])) {
     $privilege = $_POST['privilege'];
     $password = $_POST['password'];
 
-    $sql ="UPDATE member SET Email = ?, Name = ?, Address = ?, Status = ?, Privilege = ? Password = ? WHERE MemberID = $memberID";
+    $sql ="UPDATE member SET Email = ?, Name = ?, Address = ?, Status = ?, Privilege = ?, Password = ? WHERE MemberID = $memberID";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         header("Location: ../includes/signup.php?error=sqlerror1");
