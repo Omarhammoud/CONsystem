@@ -1,8 +1,8 @@
-<!--
-   Written By: Israt Noor Kazi (40029299)
--->
-<?php 
-
+<?php
+   //Written By: Israt Noor Kazi (40029299)
+?>
+<?php
+ 
 //Function check of the user is part of the group
 function isPartOfGroup($array_ids,$memberID){
     foreach ($array_ids as $id){

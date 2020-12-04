@@ -1,8 +1,9 @@
-<!--
-   Written By: Israt Noor Kazi (40029299),
+<?php
+   /*Written By: Israt Noor Kazi (40029299),
                Miled Chalal-Henri (26685900),
                Omar Hammoud (40002184)
--->
+   */
+?>
 <?php include 'header.php'; ?>
 <?php
     

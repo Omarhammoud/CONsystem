@@ -1,6 +1,7 @@
-<!--
-   Written By:  Omar Hammoud (40002184)
+<?php
+   //Written By: Omar Hammoud (40002184)
     
+?>
 -->
 <?php include './header.php';
 ?>

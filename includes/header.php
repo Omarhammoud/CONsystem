@@ -1,8 +1,8 @@
-<!--
-   Written By: Israt Noor Kazi (40029299),
-                Omar Hammoud (40002184)
+<?php
+   //Written By: Israt Noor Kazi (40029299),
+   //            Omar Hammoud (40002184)
     
--->
+?>
 <?php
 session_start();
 ?>

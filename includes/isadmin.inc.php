@@ -1,7 +1,7 @@
-<!--
-   Written By:  Omar Hammoud (40002184)
+<?php
+   //Written By: Omar Hammoud (40002184)
     
--->
+?>
 <?php
 session_start();
 require "dbh.inc.php";

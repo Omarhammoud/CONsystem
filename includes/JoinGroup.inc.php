@@ -1,6 +1,7 @@
-<!--
-   Written By: Israt Noor Kazi (40029299)
--->
+<?php
+   //Written By: Israt Noor Kazi (40029299)
+    
+?>
 <?php
     if(isset($_POST['JoinGroup'])){
        

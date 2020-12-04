@@ -1,7 +1,7 @@
-<!--
-   Written By:  Omar Hammoud (40002184)
+<?php
+   //Written By: Israt Noor Kazi (40029299)
     
--->
+?>
 <?php include 'header.php'; ?>
 <form action="./login.inc.php" method="post">
     <input type="text" name="email" placeholder="Email">
