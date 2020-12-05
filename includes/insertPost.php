@@ -1,12 +1,9 @@
 <?php
 
  // Written By: Miled Chalal-Henri (26685900)
-$dbServername = "localhost";
-$dbUsername = "root";
-$dbPassword = ""; 
-$dbName = "gzc353_2";
 
-
+ require "dbh.inc.php";
+if(isset($_SESSION['MemberID'])){
 $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
 
 
@@ -59,7 +56,10 @@ $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
 	mysqli_close($conn);
 	
 	
-    header("Location: ./NewPost.php");
+	header("Location: ./MemberDashboard.php");
+}else{
+	header("Location: ./LoginPage.php");
+}
 
 
 ?>
