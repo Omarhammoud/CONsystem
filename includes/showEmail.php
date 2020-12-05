@@ -7,7 +7,10 @@
 
         //Fetch Group Information 
         $emaiID = $_GET["EmailID"];
-        $sql = "SELECT email.EmailID, email.Date, email.MemberID, email.Subject, email.EmailBody, send_to.GroupID FROM email, send_to WHERE send_to.EmailID = email.EmailID
+        $sql = "SELECT email.EmailID, email.Date, member.Email, email.Subject, email.EmailBody, send_to.GroupID 
+        FROM email, send_to, member 
+        WHERE send_to.EmailID = email.EmailID
+        AND member.MemberID = email.MemberID
         AND email.EmailID=?";
         $stmt =  mysqli_stmt_init($conn);
 
@@ -58,8 +61,8 @@
             <td><?php echo $emaiInfo['Subject'] ;?></td>
             <td><strong>From Group:</strong></td>
             <td><?php echo $emaiInfo['GroupID'] ;?></td>
-            <td><strong>Sender ID:</strong></td>
-            <td><?php echo $emaiInfo['MemberID'] ;?></td>	
+            <td><strong>From:</strong></td>
+            <td><?php echo $emaiInfo['Email'] ;?></td>	
         </tr>
     </table>
     </div>

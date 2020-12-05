@@ -6,10 +6,11 @@
         require "dbh.inc.php";
 
         $memberID = $_SESSION['MemberID'];
-        $sql = "SELECT email.EmailID, email.Date, email.MemberID, email.Subject, email.EmailBody, send_to.GroupID 
-        from email, part_of, send_to 
+        $sql = "SELECT email.EmailID, email.Date, member.Email, email.Subject, email.EmailBody, send_to.GroupID 
+        from email, part_of, send_to, member 
         WHERE part_of.GroupID = send_to.GroupID 
         AND email.EmailID = send_to.EmailID 
+        AND member.MemberID = email.MemberID
         AND part_of.MemberID = ?";
         $stmt = mysqli_stmt_init($conn);
         
@@ -90,7 +91,7 @@
         <?php while($email = mysqli_fetch_assoc($result)){ ?>
         <tr>
             <td><?php echo $email['Date'] ;?></td>
-            <td><?php echo $email['MemberID'] ;?></td>
+            <td><?php echo $email['Email'] ;?></td>
             <td><?php echo $email['GroupID'] ;?></td>
             <td><?php echo $email['Subject'] ;?></td>
             <td> <a class="btn btn-outline-info" href="./showEmail.php?EmailID=<?php echo $email['EmailID']; ?>">View Email</a></td>		
