@@ -8,9 +8,9 @@
         if($request == 1){
         $sql = "SELECT `GroupID`, `GroupName`, `Date`, `member`.`Name` 
                 FROM `group`LEFT JOIN `member` ON `group`.`Owner`=`member`.`MemberID` 
-                WHERE `GroupID` NOT IN (SELECT `part_of`.`GroupID` 
-                                        FROM `part_of` 
-                                        WHERE `part_of`.`MemberID`=?)";
+                WHERE `group`.`Owner`<>? AND `GroupID` NOT IN (SELECT `part_of`.`GroupID` 
+                                                                FROM `part_of` 
+                                                                WHERE `part_of`.`MemberID`=? AND `part_of`.`Status`= 'Accepted')";
         
         }elseif($request == 2){
         $sql = "SELECT `GroupID`, `GroupName` 
@@ -37,7 +37,7 @@
             exit();
             }
         
-        if($request==1 || $request==2 ){
+        if($request==2 ){
             mysqli_stmt_bind_param($stmt, "i",$memberID);
         }else{
             mysqli_stmt_bind_param($stmt, "ii",$memberID,$memberID);

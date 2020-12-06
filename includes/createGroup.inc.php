@@ -3,6 +3,7 @@
    */
 ?>
 <?php
+    require "functions.inc.php";
     session_start();
     $data= array();
     if(isset($_SESSION['MemberID'])){
@@ -12,26 +13,33 @@
             date_default_timezone_set("America/Montreal");
 
             $groupName = $_POST['GroupName'];
-            $owner = $_SESSION["MemberID"];
-            $currentDate = date('Y-m-d');
 
-            $stmt = mysqli_stmt_init($conn);
-            $sql = "INSERT INTO `group`(`GroupName`, `Date`, `Owner`) VALUES (?,?,?)";
-            
-            if (!mysqli_stmt_prepare($stmt,$sql)) {
-
-                $data['err']="Cannot fetch groups";
+            if(checkGroupName($groupName)){
+                $data['err']="Group Name already exists.";
                 echo json_encode($data);
                 exit();
-            } 
-                    
-            mysqli_stmt_bind_param($stmt, "ssi",$groupName, $currentDate, $owner);
-            mysqli_stmt_execute($stmt);
-            mysqli_stmt_close($stmt);
-            mysqli_close($conn);
-            $data['request']="2";
-            echo json_encode($data);
-            exit();
+            }else{
+                $owner = $_SESSION["MemberID"];
+                $currentDate = date('Y-m-d');
+    
+                $stmt = mysqli_stmt_init($conn);
+                $sql = "INSERT INTO `group`(`GroupName`, `Date`, `Owner`) VALUES (?,?,?)";
+                
+                if (!mysqli_stmt_prepare($stmt,$sql)) {
+    
+                    $data['err']="Cannot fetch groups";
+                    echo json_encode($data);
+                    exit();
+                } 
+                        
+                mysqli_stmt_bind_param($stmt, "ssi",$groupName, $currentDate, $owner);
+                mysqli_stmt_execute($stmt);
+                mysqli_stmt_close($stmt);
+                mysqli_close($conn);
+                $data['request']="2";
+                echo json_encode($data);
+                exit();
+            }
             
         }else{
             $data['err']="Failed to submit group form";
