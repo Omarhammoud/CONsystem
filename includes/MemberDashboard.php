@@ -11,7 +11,7 @@
     <label>Sort By:</label>
     <form method ="POST">
     <select name="sortby">
-        <option value="latest" >Latest</option>
+        <option value="latest" selected="selected" >Latest</option>
         <option value="oldest" >Oldest</option>
         <option value="popular">Most Popular</option>
     </select>
@@ -26,6 +26,8 @@
                 $sql = "SELECT c.ContentID, c.MemberID, c.ContentBody,c.Date, m.Name,c.Title, m.MemberID, i.ImageContent FROM content c LEFT JOIN member m ON c.MemberID=m.MemberID LEFT JOIN image i ON c.ContentID= i.ContentID ORDER BY Date DESC";
             }else if($_POST['sortby']==="oldest") {
                 $sql = "SELECT c.ContentID, c.MemberID, c.ContentBody,c.Date, m.Name,c.Title, m.MemberID, i.ImageContent FROM content c LEFT JOIN member m ON c.MemberID=m.MemberID LEFT JOIN image i ON c.ContentID= i.ContentID ORDER BY Date ASC";
+            }else if($_POST['sortby']==="popular") {
+                $sql = "SELECT c.ContentID, c.MemberID, c.ContentBody,c.Date, m.Name,c.Title, m.MemberID,i.ImageContent, SUM(o.ContentID) AS totalcomments FROM content c LEFT JOIN member m ON c.MemberID=m.MemberID LEFT JOIN image i ON c.ContentID= i.ContentID LEFT JOIN comment o ON c.ContentID=o.ContentID GROUP BY c.ContentID ORDER BY totalcomments DESC";
             }
           if ($conn -> connect_errno) {
               echo "Failed to connect to MySQL: " . $conn -> connect_error;
