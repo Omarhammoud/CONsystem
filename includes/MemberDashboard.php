@@ -25,16 +25,39 @@
  
 
 ?>
+<div style="position: absolute;
+    right:20px;">
+    <label>Sort By:</label>
+    <select>
+        <option>Latest</option>
+        <?php $_SESSION["sortby"] = "Latest"?>
+        <option>Most Popular</option>
+        <?php $_SESSION["sortby"] = "popular"?>
+    </select>
+</div>
+
       <div class="container" style="width: 50em;">
-      
+          <?php
+          require "dbh.inc.php";
+
+          $sql ="SELECT c.ContentID, c.MemberID, c.ContentBody, m.Name,c.Title, m.MemberID, i.ImageContent FROM content c LEFT JOIN member m ON c.MemberID=m.MemberID LEFT JOIN image i ON c.ContentID= i.ContentID";
+          if ($conn -> connect_errno) {
+              echo "Failed to connect to MySQL: " . $conn -> connect_error;
+              exit();
+          }else {
+              $result = $conn->query($sql);
+
+              if($result -> num_rows > 0){
+                  while ($row = $result -> fetch_assoc()){
+                      $contentID = $row["ContentID"];?>
          <div id="divID">
             <p id="pID">
                <span style="font-size:50px;">👤</span>
-               name of post owner
+               <?php echo($row[Name]) ?>
             </p>
             <br>
-            <h5 id="h1ID">Lorem ipsum dolor sit amet, consectetur v elit. Mauris at nunc vitae arcu dapibus ultrices et eu sem. Ut suscipit, tortor vel facilisis vestibulum, tellus tortor convallis purus, vel aliquet nibh sem at ligula. Etiam id massa ipsum. Mauris pharetra est eget malesuada hendrerit. Vivamus dapibus facilisis justo id faucibus. Fusce iaculis consequat viverra. Nullam aliquet maximus eros at maximus. Curabitur nec sem eget massa auctor dapibus. Sed luctus dignissim dictum. Maecenas varius sapien at odio lobortis finibus.</h5>
-            <img id="imageID" src="image1.jpg">
+            <h5 id="h1ID"><?php echo($row[ContentBody]) ?></h5>
+             <?php echo '<img id="imageID" src="data:image/jpeg;base64,'.base64_encode( $row[ImageContent] ).'"/>';?>
             <br>
             <br>
             <!--Format for a comment -->
@@ -57,7 +80,7 @@
          <!--Format for a poll -->
 			<div id=<?php echo 'event_poll_'.$contentID?>>
 				<h3>
-					general meetings, agenda or resolution to be voted
+                    <?php echo($row[Title])?>
             </h3>
             <!--Format for a poll form-->
 				<form class="event_poll_form">
@@ -80,6 +103,7 @@
 			</div>
 			
       </div>
+        <?php } } }?>
 
 <?php include 'footer.php'; ?>
 
