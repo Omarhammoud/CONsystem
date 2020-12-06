@@ -9,7 +9,7 @@ if(isset($_GET['MemberID1'])) {
     $sql = "SELECT Email, Name, Address, Status, Privilege FROM member WHERE MemberID = ? ";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("Location: ../includes/UserEdit.inc.php?error=sqlerror1");
+        header("Location: ./UserEdit.inc.php?error=sqlerror1");
         exit();
     } else {
         mysqli_stmt_bind_param($stmt, "i", $memberID);
