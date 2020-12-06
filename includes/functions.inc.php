@@ -21,6 +21,7 @@ function isPartOfGroup($membersWaiting,$membersAccepted,$memberID){
     return 0; // Member is not part of group
 }
 
+//Function check of the group name exists
 function checkGroupName($groupName){
     require "dbh.inc.php";
 
