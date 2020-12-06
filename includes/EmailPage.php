@@ -6,10 +6,12 @@
         require "dbh.inc.php";
 
         $memberID = $_SESSION['MemberID'];
-        $sql = "SELECT email.EmailID, email.Date, email.MemberID, email.Subject, email.EmailBody, send_to.GroupID 
-        from email, part_of, send_to 
+        $sql = "SELECT email.EmailID, email.Date, member.Email, email.Subject, email.EmailBody, `group`.GroupName 
+        from email, part_of, send_to, member, `group`
         WHERE part_of.GroupID = send_to.GroupID 
         AND email.EmailID = send_to.EmailID 
+        AND send_to.GroupID = `group`.GroupID
+        AND member.MemberID = email.MemberID
         AND part_of.MemberID = ?";
         $stmt = mysqli_stmt_init($conn);
         
@@ -24,9 +26,10 @@
         $result = mysqli_stmt_get_result($stmt);
         mysqli_stmt_close($stmt);
         
-        $sql = "SELECT email.EmailID, email.Date, email.Subject, send_to.GroupID 
-        FROM email, send_to
+        $sql = "SELECT email.EmailID, email.Date, email.Subject, `group`.GroupName 
+        FROM email, send_to, `group`
         WHERE email.EmailID = send_to.EmailID
+        AND send_to.GroupID = `group`.GroupID
         AND MemberID = ?";
         $stmt = mysqli_stmt_init($conn);
         
@@ -91,8 +94,8 @@
         <?php while($email = mysqli_fetch_assoc($result)){ ?>
         <tr>
             <td><?php echo $email['Date'] ;?></td>
-            <td><?php echo $email['MemberID'] ;?></td>
-            <td><?php echo $email['GroupID'] ;?></td>
+            <td><?php echo $email['Email'] ;?></td>
+            <td><?php echo $email['GroupName'] ;?></td>
             <td><?php echo $email['Subject'] ;?></td>
             <td> <a class="btn btn-outline-info" href="./showEmail.php?EmailID=<?php echo $email['EmailID']; ?>">View Email</a></td>		
         </tr>
@@ -101,7 +104,7 @@
     <h1>Compose an Email</h1>
     <form class="form-inline" action="./sendEmail.php" method="post">
         <input type="text"  class="form-control" name="Subject" require="required" placeholder="Subject" />
-        <input type="text"  class="form-control" name="Group" require="required" placeholder="Group ID" />
+        <input type="text"  class="form-control" name="Group" require="required" placeholder="Group Name" />
         <input type="text"  class="form-control" name="EmailBody" require="required" placeholder="Insert Message" />
         <input type="hidden" name="MemberID" value="<?php echo $_SESSION['MemberID']; ?>">
         <input class="btn btn-outline-primary m-3" type="submit" name="SendEmail" value="Send Email">
@@ -123,7 +126,7 @@
         <?php while($email = mysqli_fetch_assoc($sentResult)){ ?>
         <tr>
             <td><?php echo $email['Date'] ;?></td>
-            <td><?php echo $email['GroupID'] ;?></td>
+            <td><?php echo $email['GroupName'] ;?></td>
             <td><?php echo $email['Subject'] ;?></td>
             <td> <a class="btn btn-outline-info" href="./showEmail.php?EmailID=<?php echo $email['EmailID']; ?>">View Email</a></td>		
         </tr>

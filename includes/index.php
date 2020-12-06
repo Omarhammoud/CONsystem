@@ -5,12 +5,9 @@
 ?>
 <?php include 'header.php'; ?>
 
-<?php include_once '../config/init.php'; ?>
-<main>
-    <?php
-    header("Location: ./MemberDashboard.php")
-    ?>
+<?php include_once './init.php'; ?>
 
-</main>
+
+
 
 <?php include 'footer.php'; ?>
