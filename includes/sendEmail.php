@@ -11,7 +11,7 @@
         $stmt = mysqli_stmt_init($conn);
 
         if(!mysqli_stmt_prepare($stmt,$sql)){
-            header("Location: ./GroupPage.php?error=sqlerror1");
+            header("Location: ./EmailPage.php?error=sqlerror1");
             exit();
             }
 
@@ -24,11 +24,27 @@
             }
         }
         mysqli_stmt_close($stmt);
+
         $memberID = $_POST['MemberID'];
-        $groupID = $_POST['Group'];
+        $groupName = $_POST['Group'];
         $subject = $_POST['Subject'];
         $emailBody = $_POST['EmailBody'];
         $currentDate = date('Y-m-d');
+
+        $sql = "SELECT GroupID FROM `group` WHERE `group`.GroupName = ?";
+        $stmt =  mysqli_stmt_init($conn);
+
+        if(!mysqli_stmt_prepare($stmt,$sql)){
+            header("Location: ./EmailPage.php?error=sqlerror2");
+            exit();
+        }
+        
+        mysqli_stmt_bind_param($stmt, "s", $groupName);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $groupInfo = mysqli_fetch_assoc($result);
+        $groupID = $groupInfo['GroupID'];
+        mysqli_stmt_close($stmt);
 
         $stmt = mysqli_stmt_init($conn);
         $sql = "INSERT INTO `email` (`EmailID`, `MemberID`, `Subject`, `EmailBody`, `Date`) VALUES (?,?,?,?,?)";
@@ -36,8 +52,7 @@
         if (!mysqli_stmt_prepare($stmt,$sql)) {
 
             header("Location: ./EmailPage.php?error=failedtoaddtoemail");
-            exit()
-            ;
+            exit();
         } 
         mysqli_stmt_bind_param($stmt, "iisss", $emailID, $memberID, $subject, $emailBody, $currentDate);
         mysqli_stmt_execute($stmt);
@@ -49,8 +64,7 @@
         if (!mysqli_stmt_prepare($stmt,$sql)) {
 
             header("Location: ./EmailPage.php?error=failedtoaddtosendto");
-            exit()
-            ;
+            exit();
         } 
         mysqli_stmt_bind_param($stmt, "ii", $emailID, $groupID);
         mysqli_stmt_execute($stmt);
