@@ -88,6 +88,7 @@ $("#CreateGroupForm").submit(function(event){
    event.preventDefault(); //prevent default action
    var form_data = $(this).serialize(); //Encode form elements for submission
    $(this).find('#GroupName').val("");
+   console.log(form_data);
 
    $.post( './createGroup.inc.php', form_data, function( response ) {
         var data = JSON.parse(response);

@@ -4,7 +4,7 @@
 ?>
 <?php
     session_start();
-    if(isset($_POST['edit_id']) && isset($_POST['GroupName'])){
+    if(isset($_POST['EditGroup']) && isset($_POST['AcceptRequest'])){
         require "dbh.inc.php";
 
         $groupID = $_POST['edit_id'];
@@ -22,9 +22,10 @@
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
         mysqli_close($conn);
-        echo 'Group name changed to: '.$groupName;
+        header("Location: ./EditGroup.php?id=$groupID");
 
     }else{
-        echo 'Failed to change group name.';
+        header("Location: ./GroupPage.php?error=sqlerror1");
+        exit();
     }
 ?>

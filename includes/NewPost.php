@@ -1,14 +1,23 @@
 <!--
 	Written By: Miled Chalal-Henri (26685900)
 -->
-<?php include "header.php"?>
-
-<?php
-	if(!isset($_SESSION['MemberID'])){
-		header("Location: ./LoginPage.php");
-	}
-?>
-
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="UTF-8">
+		<title>New Post</title>
+		<script src="jquery-3.5.1.min.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link rel="stylesheet" href="Style.css">
+   </head>
+   <body style="background-color:#DDDFEB">
+   	<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+	  	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<form class="form-inline my-2 my-lg-0" action="MemberDashboard.php">
+			  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Dashboard</button>
+			</form>
+		</div>
+	</nav>
 		
 		<form id="post_form" action="./insertPost.php" METHOD="post" onsubmit="return checkIfTitleExists()" enctype="multipart/form-data">
 		
@@ -24,9 +33,9 @@
 				
 				
 				<?php
-					require "dbh.inc.php";
+					include('dbconnection.php');
 					// TO REPLACE WITH A SESSION VARIABLE FOR THE MEMBERID
-					$memberID = $_SESSION['MemberID'];
+					$memberID = 2;
 					
 					$sql = "SELECT GroupID FROM part_of WHERE MemberID=$memberID";
 					$result = $conn->query($sql);
@@ -192,5 +201,6 @@
     }
 
 	  </script>
+	</body>
+</html>
 
-<?php include "footer.php"?>

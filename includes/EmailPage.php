@@ -16,7 +16,6 @@
         
         if(!mysqli_stmt_prepare($stmt,$sql)){
             header("Location: ./EmailPage.php?error=sqlerror1");
-            echo $stmt->error;
             exit();
             }
         
@@ -32,7 +31,7 @@
         $stmt = mysqli_stmt_init($conn);
         
         if(!mysqli_stmt_prepare($stmt,$sql)){
-            header("Location: ./EmailPage.php?error=sqlerror2");
+            header("Location: ./EmailPage.php?error=sqlerror1");
             exit();
             }
         
