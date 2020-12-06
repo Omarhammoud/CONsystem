@@ -6,10 +6,11 @@
         require "dbh.inc.php";
 
         $memberID = $_SESSION['MemberID'];
-        $sql = "SELECT email.EmailID, email.Date, member.Email, email.Subject, email.EmailBody, send_to.GroupID 
-        from email, part_of, send_to, member 
+        $sql = "SELECT email.EmailID, email.Date, member.Email, email.Subject, email.EmailBody, `group`.GroupName 
+        from email, part_of, send_to, member, `group`
         WHERE part_of.GroupID = send_to.GroupID 
         AND email.EmailID = send_to.EmailID 
+        AND sent_to.GroupID = `group`.GroupID
         AND member.MemberID = email.MemberID
         AND part_of.MemberID = ?";
         $stmt = mysqli_stmt_init($conn);

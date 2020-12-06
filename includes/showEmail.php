@@ -7,10 +7,11 @@
 
         //Fetch Group Information 
         $emaiID = $_GET["EmailID"];
-        $sql = "SELECT email.EmailID, email.Date, member.Email, email.Subject, email.EmailBody, send_to.GroupID 
-        FROM email, send_to, member 
+        $sql = "SELECT email.EmailID, email.Date, member.Email, email.Subject, email.EmailBody, `group`.GroupName
+        FROM email, send_to, member, `group`
         WHERE send_to.EmailID = email.EmailID
         AND member.MemberID = email.MemberID
+        AND sent_to.groupID = `group`.GroupID
         AND email.EmailID=?";
         $stmt =  mysqli_stmt_init($conn);
 
