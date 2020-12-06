@@ -1,6 +1,8 @@
 
 <?php
 //Written By:  Omar Hammoud (40002184)
-include "./header.php";
+session_start();
+session_unset();
+session_destroy();
 header("Location: ./index.php")
 ?>
