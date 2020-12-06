@@ -1,15 +1,12 @@
 <?php
 
  // Written By: Miled Chalal-Henri (26685900)
-$dbServername = "localhost";
-$dbUsername = "root";
-$dbPassword = ""; 
-$dbName = "gzc353_2";
 
+ require "dbh.inc.php";
+if(isset($_SESSION['MemberID'])){
+//  $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
 
-$conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
-
-
+	$memberID = $_SESSION['MemberID'];
 	$postPrivacy = $_POST["postPrivacy"];
     $content = $_POST["content"];
     $img = $_FILES['img']['name'];
@@ -17,7 +14,7 @@ $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
 	$privateMember = $_POST["privateMember"];
 	//var_dump($privateMember); exit;
     $sql = "INSERT INTO content (MemberID, ContentBody, Type, Image)  
-			VALUES (2, '$content', '$postPrivacy', '$img')";
+			VALUES ('$memberID', '$content', '$postPrivacy', '$img')";
 			
 	if ($conn->query($sql) === TRUE) 
 	{
@@ -43,11 +40,11 @@ $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
 		$pollOptDate = $_POST["pollOptDate"];
 		$pollOptTime = $_POST["pollOptTime"];  
 		
-		$sql = "INSERT INTO event_poll (ContentID, title) VALUES ('$ContentID', '$pollTitle');";
+		$sql = "INSERT INTO event_poll (ContentID, Title) VALUES ('$ContentID', '$pollTitle');";
 		
 		foreach ($pollOptPlace as $key => $res)
 		{
-			$sql .= "INSERT INTO event_option (ContentID, date, time, place)  
+			$sql .= "INSERT INTO event_poll_option (ContentID, Date, Time, Place)  
 				VALUES ('$ContentID' , '$pollOptDate[$key]', '$pollOptTime[$key]', '$pollOptPlace[$key]');";
 		}
 		mysqli_multi_query($conn, $sql);
@@ -56,10 +53,13 @@ $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
 	
 	
 	
-	mysqli_close($conn);
+//	mysqli_close($conn);
 	
 	
-    header("Location: ./NewPost.php");
+	header("Location: ./MemberDashboard.php");
+}else{
+	header("Location: ./LoginPage.php");
+}
 
 
 ?>
