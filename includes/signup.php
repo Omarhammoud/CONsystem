@@ -1,9 +1,8 @@
 <?php
    //Written By: Omar Hammoud (40002184)
     
-?>
--->
-<?php include './header.php';
+
+ include './header.php';
 ?>
 
 <main>
@@ -33,7 +32,6 @@
                 </tr>
                 <?php
                 require "dbh.inc.php";
-                session_start();
 
                 $sql ="SELECT MemberID, Name, Email, Address, Status, Privilege FROM member";
                 if ($conn -> connect_errno) {
