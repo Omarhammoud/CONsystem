@@ -5,7 +5,7 @@
     $data = array();
     if(isset($_SESSION['MemberID'])){
 
-      if(isset($_POST['contentID']) && !empty($_POST['commentBody']){
+      if(isset($_POST['contentID']) && !empty($_POST['commentBody'])){
         
         require "dbh.inc.php";
         date_default_timezone_set("America/Montreal");
