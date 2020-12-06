@@ -5,42 +5,28 @@
    */
 ?>
 <?php include 'header.php'; ?>
-<?php
-    
-        require "dbh.inc.php";
-        $contentID = 1;
-        $sql = "SELECT `event_poll_optionID`, `ContentID`, `Place`, `Date`, `Time` FROM `event_poll_option` WHERE `ContentID`=?";
-        $stmt = mysqli_stmt_init($conn);
 
-        if(!mysqli_stmt_prepare($stmt,$sql)){
-            header("Location: ./index.php?error=sqlerror1");
-            exit();
-            }
-
-        mysqli_stmt_bind_param($stmt, "i",$contentID);
-        mysqli_stmt_execute($stmt);
-        $options = mysqli_stmt_get_result($stmt);
-        mysqli_stmt_close($stmt);
-        mysqli_close($conn);        
- 
-
-?>
 <div style="position: absolute;
     right:20px;">
     <label>Sort By:</label>
-    <select>
-        <option>Latest</option>
-        <?php $_SESSION["sortby"] = "Latest"?>
-        <option>Most Popular</option>
-        <?php $_SESSION["sortby"] = "popular"?>
+    <form method ="POST">
+    <select name="sortby">
+        <option value="latest" >Latest</option>
+        <option value="oldest" >Oldest</option>
+        <option value="popular">Most Popular</option>
     </select>
+        <button type="submit" placeholder="Sort">Sort</button>
+    </form>
 </div>
 
       <div class="container" style="width: 50em;">
           <?php
           require "dbh.inc.php";
-
-          $sql ="SELECT c.ContentID, c.MemberID, c.ContentBody, m.Name,c.Title, m.MemberID, i.ImageContent FROM content c LEFT JOIN member m ON c.MemberID=m.MemberID LEFT JOIN image i ON c.ContentID= i.ContentID";
+            if($_POST['sortby']==="latest") {
+                $sql = "SELECT c.ContentID, c.MemberID, c.ContentBody,c.Date, m.Name,c.Title, m.MemberID, i.ImageContent FROM content c LEFT JOIN member m ON c.MemberID=m.MemberID LEFT JOIN image i ON c.ContentID= i.ContentID ORDER BY Date DESC";
+            }else if($_POST['sortby']==="oldest") {
+                $sql = "SELECT c.ContentID, c.MemberID, c.ContentBody,c.Date, m.Name,c.Title, m.MemberID, i.ImageContent FROM content c LEFT JOIN member m ON c.MemberID=m.MemberID LEFT JOIN image i ON c.ContentID= i.ContentID ORDER BY Date ASC";
+            }
           if ($conn -> connect_errno) {
               echo "Failed to connect to MySQL: " . $conn -> connect_error;
               exit();
@@ -49,7 +35,8 @@
 
               if($result -> num_rows > 0){
                   while ($row = $result -> fetch_assoc()){
-                      $contentID = $row["ContentID"];?>
+                      $contentID = $row["ContentID"];
+                      $_SESSION["contentID"]=$contentID;?>
          <div id="divID">
             <p id="pID">
                <span style="font-size:50px;">👤</span>
@@ -73,8 +60,27 @@
             <div id=<?php echo 'comments_list_'.$contentID; ?> onload="displayAllComments(<?php echo $contentID; ?>)">
             
             </div>
-            
 
+             <?php
+
+             require "dbh.inc.php";
+             $contentID=$_SESSION["contentID"];
+             $sql = "SELECT `event_poll_optionID`, `ContentID`, `Place`, `Date`, `Time` FROM `event_poll_option` WHERE `ContentID`=?";
+             $stmt = mysqli_stmt_init($conn);
+
+             if(!mysqli_stmt_prepare($stmt,$sql)){
+                 header("Location: ./index.php?error=sqlerror1");
+                 exit();
+             }
+
+             mysqli_stmt_bind_param($stmt, "i",$contentID);
+             mysqli_stmt_execute($stmt);
+             $options = mysqli_stmt_get_result($stmt);
+             mysqli_stmt_close($stmt);
+             mysqli_close($conn);
+
+
+             ?>
          
 		
          <!--Format for a poll -->
