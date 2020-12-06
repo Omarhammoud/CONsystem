@@ -1,5 +1,6 @@
 <?php include "./header.php"?>
 <?php 
+//Written By: Leslie Poso (40057877)
 if(isset($_SESSION['MemberID'])){
 
         $sql = "SELECT * FROM `part_of` GROUP BY 'GroupID' ";
