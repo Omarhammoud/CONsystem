@@ -90,7 +90,7 @@
         <div class="card-body">
             <p>Created By: <?php echo $groupInfo['Name']?></p>
             <p>Email: <?php echo $groupInfo['Email']?></p>
-            <?php if($groupInfo['Owner']==$_SESSION['MemberID']){ ?>
+            <?php if($groupInfo['Owner']==$_SESSION['MemberID'] || $_SESSION['isAdmin']){ ?>
                 <div class="d-flex justify-content-between">
                     <a class="btn btn-outline-warning" href="./EditGroup.php?id=<?php echo $groupID; ?>">Edit</a>
                     <form method="POST" action="./DeleteGroup.inc.php">

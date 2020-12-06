@@ -21,6 +21,7 @@
 
       <div class="container" style="width: 50em;">
           <?php
+          
           require "dbh.inc.php";
             if($_POST['sortby']==="latest") {
                 $sql = "SELECT c.ContentID, c.MemberID, c.ContentBody,c.Date, m.Name,c.Title,  c.Image, c.Type='public' as type, p.ContentID as priv_con, p.Memberid as priv_mem FROM content c LEFT JOIN member m ON c.MemberID=m.MemberID LEFT JOIN private_content p ON c.MemberID=p.MemberID AND c.ContentID=p.ContentID ORDER BY Date DESC";
@@ -39,20 +40,26 @@
               $result = $conn->query($sql);
 
               if($result -> num_rows > 0){
+                  $contentIDList = array();
                   while ($row = $result -> fetch_assoc()){
                       //shows public posts
                       if($row["type"]==1 || ($row["priv_con"]==$row["ContentID"] &&$row["priv_mem"]==$_SESSION["MemberID"]) ){
                       $contentID = $row["ContentID"];
-                      $_SESSION["contentID"]=$contentID;?>
+                      $_SESSION["contentID"]=$contentID;
+                      array_push($contentIDList,$contentID);
+                      ?>
+                      
          <div id="divID">
             <p id="pID">
                <span style="font-size:50px;">👤</span>
-               <?php echo($row["Name"]) ?>
+
+               <?php echo($row['Name']) ?>
             </p>
             <br>
-            <h5 id="h1ID"><?php echo($row["ContentBody"]) ?></h5>
+            <h5 id="h1ID"><?php echo($row['ContentBody']) ?></h5>
 
-             <?php echo '<img id="imageID" src="data:image/jpeg;base64,'.base64_encode( $row["Image"] ).'"/>';?>
+             <?php echo '<img id="imageID" src="data:image/jpeg;base64,'.base64_encode( $row['Image'] ).'"/>';?>
+
             <br>
             <br>
             <!--Format for a comment -->
@@ -94,7 +101,9 @@
          <!--Format for a poll -->
 			<div id=<?php echo 'event_poll_'.$contentID?>>
 				<h3>
-                    <?php echo($row["Title"])?>
+
+                    <?php echo($row['Title'])?>
+
             </h3>
             <!--Format for a poll form-->
 				<form class="event_poll_form">
@@ -138,8 +147,10 @@
 
      
      $(document).ready(function(){
-
-         displayAllComments(<?php echo $contentID?>)
+        
+         <?php foreach($contentIDList as $id){ ?>
+            displayAllComments(<?php echo $id?>)
+         <?php } ?>
 
          $(".comment-form").submit(function(event){
             event.preventDefault(); //prevent default action

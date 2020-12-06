@@ -11,7 +11,7 @@
         FROM email, send_to, member, `group`
         WHERE send_to.EmailID = email.EmailID
         AND member.MemberID = email.MemberID
-        AND sent_to.groupID = `group`.GroupID
+        AND send_to.GroupID = `group`.GroupID
         AND email.EmailID=?";
         $stmt =  mysqli_stmt_init($conn);
 
@@ -60,8 +60,8 @@
             <td><?php echo $emaiInfo['Date'] ;?></td>
             <td><strong>Subject:</strong></td>
             <td><?php echo $emaiInfo['Subject'] ;?></td>
-            <td><strong>From Group:</strong></td>
-            <td><?php echo $emaiInfo['GroupID'] ;?></td>
+            <td><strong>To Group:</strong></td>
+            <td><?php echo $emaiInfo['GroupName'] ;?></td>
             <td><strong>From:</strong></td>
             <td><?php echo $emaiInfo['Email'] ;?></td>	
         </tr>

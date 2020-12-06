@@ -24,14 +24,25 @@
         $row = mysqli_num_rows($result);
         
         if($row>0){
-        
+            
             $groupInfo = mysqli_fetch_assoc($result);
-            mysqli_stmt_close($stmt);
-            mysqli_close($conn);
+            
+            if((!$_SESSION['isAdmin'] && $groupInfo['Owner'] != $_SESSION['MemberID'])){
+                mysqli_stmt_close($stmt);
+                mysqli_close($conn);
+                header("Location: ./GroupPage.php?error=NotTheOwnerOfGroupOrAnAdmin");
+            }
 
         }else{
+
+            mysqli_stmt_close($stmt);
+            mysqli_close($conn);
             header("Location: ./GroupPage.php?error=GroupNotFound");
+            
         }
+
+        mysqli_stmt_close($stmt);
+        mysqli_close($conn);
 
     }else{
         header("Location: ./LoginPage.php");

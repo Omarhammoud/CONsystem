@@ -48,6 +48,6 @@
     <?php } ?>
 <?php }else{ ?>
     
-    <h3>Currently, there are no members in your group.</h3>
+    <h3>Currently, there are no members in this group.</h3>
     
 <?php } ?>

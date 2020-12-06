@@ -5,24 +5,10 @@
 <?php include 'header.php'; ?>
 
 <?php
-    if(isset($_SESSION['MemberID'])){
-        require "dbh.inc.php";
-        
-        $sql = "SELECT * FROM `group`";
-        $stmt = mysqli_stmt_init($conn);
+  
+    if(!isset($_SESSION['MemberID'])){
 
-        if(!mysqli_stmt_prepare($stmt,$sql)){
-            header("Location: ./GroupPage.php?error=sqlerror1");
-            exit();
-            }
-
-        mysqli_stmt_execute($stmt);
-        $groups = mysqli_stmt_get_result($stmt);
-        mysqli_stmt_close($stmt);
-        mysqli_close($conn);        
- 
-    }else{
-        header("Location:./index.php");
+        header("Location:./LoginPage.php");
     }
 ?>
 
