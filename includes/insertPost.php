@@ -1,5 +1,5 @@
 <?php
-
+session_start();
  // Written By: Miled Chalal-Henri (26685900)
 
  require "dbh.inc.php";
@@ -9,13 +9,15 @@ if(isset($_SESSION['MemberID'])){
 	$memberID = $_SESSION['MemberID'];
 	$postPrivacy = $_POST["postPrivacy"];
     $content = $_POST["content"];
-    $img = $_FILES['img']['name'];
+    $img = addslashes(file_get_contents($_FILES['img']['tmp_name']));
 	$hasPoll = $_POST["hasPoll"];
 	$privateMember = $_POST["privateMember"];
 	//var_dump($privateMember); exit;
-    $sql = "INSERT INTO content (MemberID, ContentBody, Type, Image)  
-			VALUES ('$memberID', '$content', '$postPrivacy', '$img')";
-			
+
+
+    $sql = "INSERT INTO content (MemberID, ContentBody, Type, Image, Title, Date)
+			VALUES ('$memberID', '$content', '$postPrivacy', '$img', 'Title', '2020-12-06')";
+
 	if ($conn->query($sql) === TRUE) 
 	{
 	  $ContentID = $conn->insert_id;
@@ -23,6 +25,8 @@ if(isset($_SESSION['MemberID'])){
 	else 
 	{
 	  echo "Error: " . $sql . "<br>" . $conn->error;
+
+
 	}
 	
 	foreach ($privateMember as $key => $res)
