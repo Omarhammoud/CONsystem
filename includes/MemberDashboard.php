@@ -39,11 +39,13 @@
                   while ($row = $result -> fetch_assoc()){
                       $contentID = $row["ContentID"];
                       $_SESSION["contentID"]=$contentID;?>
+         
          <div id="divID">
             <p id="pID">
                <span style="font-size:50px;">👤</span>
                <?php echo($row[Name]) ?>
             </p>
+            <a class="btn btn-outline-info" href="./repostPost.php?ContentID=<?php echo ($contentID); ?>">Repost</a>
             <br>
             <h5 id="h1ID"><?php echo($row[ContentBody]) ?></h5>
              <?php echo '<img id="imageID" src="data:image/jpeg;base64,'.base64_encode( $row[ImageContent] ).'"/>';?>
@@ -108,8 +110,7 @@
                <input type="hidden" name="contentID" value="<?php echo $contentID; ?>">
                <input type="submit" class="btn btn-primary btn-sm" value="Submit">
 				</form>
-			</div>
-			
+			</div>			
       </div>
         <?php } } }?>
 
@@ -170,6 +171,8 @@
                 }
               });
             });
+
+
 
          function displayPollResults(contentID){
 
