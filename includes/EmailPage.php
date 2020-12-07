@@ -12,6 +12,7 @@
         AND email.EmailID = send_to.EmailID 
         AND send_to.GroupID = `group`.GroupID
         AND member.MemberID = email.MemberID
+        AND part_of.Status = 'Accepted'
         AND part_of.MemberID = ?";
         $stmt = mysqli_stmt_init($conn);
         

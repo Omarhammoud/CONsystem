@@ -4,7 +4,7 @@
         require "dbh.inc.php";
         
         $contentID = $_GET['ContentID'];
-        $sql = "SELECT *  FROM content, member WHERE content.MemberID = member.MemberID
+        $sql = "SELECT * FROM content, member WHERE content.MemberID = member.MemberID
         AND ContentID = ?";
         $stmt =  mysqli_stmt_init($conn);
 
@@ -26,7 +26,7 @@
         $currentDate = date('Y-m-d');
 
         $sql = "INSERT INTO content (MemberID, ContentBody, Type, Image, Title, Date)
-        VALUES ('$_SESSION['MemberID']', '$contentBody', '$postPrivacy', '$contentImg', '$contentTitle', '$currentDate ')";
+        VALUES ('$_SESSION['MemberID']', '$contentBody', '$postPrivacy', '$contentImg', '$contentTitle', '$currentDate')";
 
         if ($conn->query($sql) === TRUE) 
             {
