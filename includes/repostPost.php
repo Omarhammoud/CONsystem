@@ -1,9 +1,9 @@
 <?php
     //Written By: Leslie Poso (40057877)
-    if(isset($_SESSION['MemberID']) && !empty($_GET['ContentID'])){
+    if(($_POST['Repost']) && !empty($_POST['ContentID']) && && !empty($_POST['MemberID'])){
         require "dbh.inc.php";
         
-        $contentID = $_GET['ContentID'];
+        $contentID = $_POST['ContentID'];
         $sql = "SELECT * FROM content, member WHERE content.MemberID = member.MemberID
         AND ContentID = ?";
         $stmt =  mysqli_stmt_init($conn);
@@ -19,6 +19,7 @@
         $contentInfo = mysqli_fetch_assoc($result);
         mysqli_stmt_close($stmt);
 
+        $memberID = $_POST['MemberID'];
         $contentPrivacy = $contentInfo["Type"];
         $contentBody = "Originally Posted By: ". $contentInfo["Name"] . ". "$contentInfo["ContentBody"];
         $contentImg = $contentInfo["Image"];
@@ -26,7 +27,7 @@
         $currentDate = date('Y-m-d');
 
         $sql = "INSERT INTO content (MemberID, ContentBody, Type, Image, Title, Date)
-        VALUES ('$_SESSION['MemberID']', '$contentBody', '$postPrivacy', '$contentImg', '$contentTitle', '$currentDate')";
+        VALUES ('$memberID', '$contentBody', '$postPrivacy', '$contentImg', '$contentTitle', '$currentDate')";
 
         if ($conn->query($sql) === TRUE) 
             {
@@ -51,7 +52,7 @@
 
         while($listOfIDs = mysqli_fetch_assoc($result)){
             $sql = "INSERT INTO private_content (ContentID, MemberID) VALUES ('$ContentID', '$listOfIDs['MemberID']')";
-		    mysqli_query($conn, $sql);
+            mysqli_query($conn, $sql);
         }
 
         header("Location: ./MemberDashboard.php?success=RepostSuccesful");    
@@ -59,3 +60,4 @@
         header("Location: ./MemberDashboard.php?error=MissingParameters"); 
     }
 ?>
+

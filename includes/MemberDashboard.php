@@ -55,7 +55,6 @@
 
                             <?php echo($row['Name']) ?>
                         </p>
-                        <a class="btn btn-outline-info" href="./repostPost.php?ContentID=<?php echo ($contentID); ?>">Repost</a>
                         <br>
                         <h5 id="h1ID"><?php echo($row['ContentBody']) ?></h5>
 
