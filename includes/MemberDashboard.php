@@ -55,7 +55,11 @@
 
                             <?php echo($row['Name']) ?>
                         </p>
-                        <a class="btn btn-outline-info" href="./repostPost.php?ContentID=<?php echo ($contentID); ?>">Repost</a>
+                        <form class="form-inline" action="./repostPost.php" method="post">
+                            <input type="hidden" name="MemberID" value="<?php echo $_SESSION['MemberID']; ?>">
+                            <input type="hidden" name="ContentID" value="<?php echo ($contentID); ?>">
+                            <input class="btn btn-outline-primary m-3" type="submit" name="Repost" value="Repost">
+                        </form>
                         <br>
                         <h5 id="h1ID"><?php echo($row['ContentBody']) ?></h5>
 
