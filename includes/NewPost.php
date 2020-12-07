@@ -28,7 +28,7 @@
 					// TO REPLACE WITH A SESSION VARIABLE FOR THE MEMBERID
 					$memberID = $_SESSION['MemberID'];
 					
-					$sql = "SELECT GroupID FROM part_of WHERE MemberID=$memberID";
+					$sql = "SELECT GroupID FROM part_of WHERE MemberID=$memberID AND Status='Accepted'";
 					$result = $conn->query($sql);
 					$row = $result->fetch_assoc();
 					if ($groupID = $row['GroupID']) {
