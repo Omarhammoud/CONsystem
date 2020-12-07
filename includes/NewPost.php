@@ -28,11 +28,11 @@
 					// TO REPLACE WITH A SESSION VARIABLE FOR THE MEMBERID
 					$memberID = $_SESSION['MemberID'];
 					
-					$sql = "SELECT GroupID FROM part_of WHERE MemberID=$memberID AND Status='accepted'";
+					$sql = "SELECT GroupID FROM part_of WHERE MemberID=$memberID";
 					$result = $conn->query($sql);
 					$row = $result->fetch_assoc();
 					if ($groupID = $row['GroupID']) {
-						$sql = "SELECT MemberID FROM part_of WHERE GroupID=$groupID";
+						$sql = "SELECT MemberID FROM part_of WHERE GroupID=$groupID AND Status='Accepted'";
 						$res = $conn->query($sql);
 						
 						if ($res->num_rows > 0) {
