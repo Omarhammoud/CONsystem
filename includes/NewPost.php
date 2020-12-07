@@ -63,7 +63,8 @@
 				<textarea placeholder="Insert text content here..." type="text" id="textPost" name="content" onkeyup="textAreaAdjust(this)"></textarea>
 				<input type="hidden" name="hasPoll" id="has_poll" value="false">
 				<br/><br/>
-				<input type="file" id="files" class="newPostImg"  name="img" accept="image/x-png,image/gif,image/jpeg" />
+<!--				<input type="file" id="files" class="newPostImg"  name="img" accept="image/x-png,image/gif,image/jpeg" />-->
+                <input type="file" id="files" class="newPostImg"  name="img" />
 				<br/><br/>
 				<div id="PollDivID" style = 'display: none'>
 					<input type="text" class="PollTitle"  name="pollTitle" id="pollTitle" placeholder="Enter Poll Title">
