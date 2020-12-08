@@ -26,7 +26,7 @@ function checkGroupName($groupName){
     require "dbh.inc.php";
 
     $nameExist =false;
-    $sql = "SELECT * FROM `group` WHERE `GroupName`= ?";
+    $sql = "SELECT * FROM `group` WHERE `GroupName`= BINARY ?";
     $stmt =  mysqli_stmt_init($conn);
 
 
