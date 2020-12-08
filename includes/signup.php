@@ -12,8 +12,14 @@
                 <input type="text" name="name" placeholder="Name">
                 <input type="text" name="email" placeholder="Email">
                 <input type="text" name="address" placeholder="Address">
-                <input type="text" name="status" placeholder="Status">
-                <input type="text" name="privilege" placeholder="Privilege">
+                <!-- <input type="text" name="status" placeholder="Status"> -->
+                <select name="status" ><option value="active">active</option>
+                <option value="inactive">inactive</option>
+                </select>
+                <!-- <input type="text" name="privilege" placeholder="Privilege"> -->
+                <select name="privilege" ><option value="normal member">normal member</option>
+                <option value="administrator">administrator</option>
+                </select>
                 <input type="password" name="pwd" placeholder="Password">
                 <input type="password" name="pwd-second" placeholder="Type Password Again">
                 <button type="submit" name="signup-submit">Sign Up</button>

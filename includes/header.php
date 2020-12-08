@@ -1,11 +1,13 @@
 <?php
+
+   if (session_status() == PHP_SESSION_NONE) {
+      session_start();
+   }
+
    //Written By: Israt Noor Kazi (40029299),
    //            Omar Hammoud (40002184)
-    
 ?>
-<?php
-session_start();
-?>
+
 <!DOCTYPE html>
 <html>
 <head>

@@ -1,4 +1,6 @@
 <?php
+     /*Written By: Israt Noor Kazi (40029299)
+ */
     if(isset($_GET['gid']) && isset($_GET['owner'])){
         require "dbh.inc.php";
         $groupID = $_GET['gid'];
@@ -38,7 +40,7 @@
                 <td><?php echo $member['Name'];?></td>
                 <td><?php echo $member['Email'];?></td>
                 <td>                    
-                    <form class="deleteMemberForm">
+                    <form action="./LeaveGroup.inc.php" method="Post" class="deleteMemberForm">
                         <input type="hidden" name="group_id" value="<?php echo $groupID ; ?>">
                         <input type="hidden" name="member_id" value="<?php echo $member['MemberID']; ?>">
                         <input type="submit" name="DeleteMember" value="Delete" class="btn btn-outline-danger m-2">
