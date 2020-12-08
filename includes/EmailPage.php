@@ -106,7 +106,7 @@
     <form class="form-inline" action="./sendEmail.php" method="post">
         <input type="text"  class="form-control" name="Subject" require="required" placeholder="Subject" />
         <input type="text"  class="form-control" name="Group" require="required" placeholder="Group Name" />
-        <input type="text"  class="form-control" name="EmailBody" require="required" placeholder="Insert Message" />
+        <textarea type="text"  class="form-control" name="EmailBody" require="required" placeholder="Insert Message"> </textarea> 
         <input type="hidden" name="MemberID" value="<?php echo $_SESSION['MemberID']; ?>">
         <input class="btn btn-outline-primary m-3" type="submit" name="SendEmail" value="Send Email">
     </form>

@@ -15,7 +15,6 @@
             <option value="oldest" >Oldest</option>
             <option value="popular">Most Popular</option>
         </select>
-        <button type="submit" placeholder="Sort">Sort</button>
     </form>
 </div>
 
@@ -24,13 +23,13 @@
 
     require "dbh.inc.php";
     if($_POST['sortby']==="latest") {
-        $sql = "SELECT c.ContentID, c.MemberID, c.ContentBody,c.Date, m.Name,  c.Image, c.Type='public' as type, p.ContentID as priv_con, p.Memberid as priv_mem, t.Title FROM content c LEFT JOIN member m ON c.MemberID=m.MemberID LEFT JOIN private_content p ON c.MemberID=p.MemberID AND c.ContentID=p.ContentID LEFT JOIN event_poll t ON c.ContentID=t.ContentID ORDER BY Date DESC";
+        $sql = "SELECT c.ContentID, c.MemberID, c.ContentBody,c.Date, m.Name,  c.Image, c.Type='public' as type, p.ContentID as priv_con, p.Memberid as priv_mem, t.Title FROM content c LEFT JOIN member m ON c.MemberID=m.MemberID LEFT JOIN private_content p ON c.ContentID=p.ContentID LEFT JOIN event_poll t ON c.ContentID=t.ContentID ORDER BY Date DESC";
     }else if($_POST['sortby']==="oldest") {
-        $sql = "SELECT c.ContentID, c.MemberID, c.ContentBody,c.Date, m.Name, c.Image, c.Type='public' as type, t.Title  FROM content c LEFT JOIN member m ON c.MemberID=m.MemberID LEFT JOIN event_poll t ON c.ContentID=t.ContentID ORDER BY Date ASC";
+        $sql = "SELECT c.ContentID, c.MemberID, c.ContentBody,c.Date, m.Name, c.Image, c.Type='public' as type, p.ContentID as priv_con, p.Memberid as priv_mem, t.Title  FROM content c LEFT JOIN private_content p ON c.ContentID=p.ContentID LEFT JOIN member m ON c.MemberID=m.MemberID LEFT JOIN event_poll t ON c.ContentID=t.ContentID ORDER BY Date ASC";
     }else if($_POST['sortby']==="popular") {
-        $sql = "SELECT c.ContentID, c.MemberID, c.ContentBody,c.Date, m.Name, c.Image,  c.Type='public' as type ,  COUNT(o.ContentID) AS totalcomments , t.Title FROM content c  LEFT JOIN member m ON c.MemberID=m.MemberID  LEFT JOIN comment o ON c.ContentID=o.ContentID LEFT JOIN event_poll t ON c.ContentID=t.ContentID GROUP BY c.ContentID ORDER BY totalcomments DESC";
+        $sql = "SELECT c.ContentID, c.MemberID, c.ContentBody,c.Date, m.Name, c.Image,  c.Type='public' as type ,  COUNT(o.ContentID) AS totalcomments , p.ContentID as priv_con, p.Memberid as priv_mem, t.Title FROM content c  LEFT JOIN private_content p ON c.ContentID=p.ContentID LEFT JOIN member m ON c.MemberID=m.MemberID  LEFT JOIN comment o ON c.ContentID=o.ContentID LEFT JOIN event_poll t ON c.ContentID=t.ContentID GROUP BY c.ContentID ORDER BY totalcomments DESC";
     }else{
-        $sql = "SELECT c.ContentID, c.MemberID, c.ContentBody,c.Date, m.Name,  c.Image, c.Type='public' as type, p.ContentID as priv_con, p.Memberid as priv_mem , t.Title FROM content c LEFT JOIN member m ON c.MemberID=m.MemberID LEFT JOIN private_content p ON c.MemberID=p.MemberID AND c.ContentID=p.ContentID LEFT JOIN event_poll t ON c.ContentID=t.ContentID ORDER BY Date DESC";
+        $sql = "SELECT c.ContentID, c.MemberID, c.ContentBody,c.Date, m.Name,  c.Image, c.Type='public' as type, p.ContentID as priv_con, p.Memberid as priv_mem , t.Title FROM content c LEFT JOIN member m ON c.MemberID=m.MemberID LEFT JOIN private_content p ON c.ContentID=p.ContentID LEFT JOIN event_poll t ON c.ContentID=t.ContentID ORDER BY Date DESC";
 
     }
     if ($conn -> connect_errno) {
@@ -43,7 +42,7 @@
             $contentIDList = array();
             while ($row = $result -> fetch_assoc()){
                 //shows public posts
-                if($row["type"]==1 || ($row["priv_con"]==$row["ContentID"] &&$row["priv_mem"]==$_SESSION["MemberID"]) ){
+                if($row["type"]==1 || ($row["type"]==0 && $row["priv_mem"]==$_SESSION["MemberID"]) ){
                     $contentID = $row["ContentID"];
                     $_SESSION["contentID"]=$contentID;
                     array_push($contentIDList,$contentID);
@@ -58,7 +57,8 @@
                         <br>
                         <h5 id="h1ID"><?php echo($row['ContentBody']) ?></h5>
 
-                        <?php echo '<img id="imageID" src="data:image/jpeg;base64,'.base64_encode( $row['Image'] ).'"/>';?>
+                        <?php if($row['Image']!=NULL){
+                        echo '<img id="imageID" src="data:image/jpeg;base64,'.base64_encode( $row['Image'] ).'"/>';}?>
 
                         <br>
                         <br>
@@ -91,13 +91,14 @@
                         mysqli_stmt_bind_param($stmt, "i",$contentID);
                         mysqli_stmt_execute($stmt);
                         $options = mysqli_stmt_get_result($stmt);
+                        $nbrow = mysqli_num_rows($options);
                         mysqli_stmt_close($stmt);
                         mysqli_close($conn);
 
 
                         ?>
 
-
+                    <?php if($nbrow>0){ ?>
                         <!--Format for a poll -->
                         <div id=<?php echo 'event_poll_'.$contentID?>>
                             <h3>
@@ -124,6 +125,7 @@
                                 <input type="submit" class="btn btn-primary btn-sm" value="Submit">
                             </form>
                         </div>
+                        <?php } ?>
                     </div>
                 <?php }
             }} }?>

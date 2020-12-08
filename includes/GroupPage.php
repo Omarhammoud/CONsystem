@@ -51,7 +51,7 @@
         <div class="col-12 d-flex justify-content-center">
         <div class="card mt-3" style="width: 70%;">
             <div class="card-header">
-                <h3>List of All Group</h2>
+                <h3>List of Other Groups</h2>
             </div>
             <table class="table" id="allGroups">
 

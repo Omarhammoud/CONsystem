@@ -1,16 +1,13 @@
-<!--
-	Written By: Miled Chalal-Henri (26685900)
--->
-<?php include "header.php"?>
-
+<?php include "header.php"
+//Written By: Miled Chalal-Henri (26685900)
+?>
 <?php
 	if(!isset($_SESSION['MemberID'])){
 		header("Location: ./LoginPage.php");
+		exit;
 	}
 ?>
-
-		
-		<form id="post_form" action="./insertPost.php" METHOD="post" onsubmit="return checkIfTitleExists()" enctype="multipart/form-data">
+<form id="post_form" action="./insertPost.php" METHOD="post" onsubmit="return checkIfTitleExists()" enctype="multipart/form-data">
 		
 			<div id="privacyOption">
 			  <p>Select Post Privacy:</p>
@@ -21,8 +18,6 @@
 			
 			
 				<div id="dvtext" style="display: none">
-				
-				
 				<?php
 					require "dbh.inc.php";
 					// TO REPLACE WITH A SESSION VARIABLE FOR THE MEMBERID
@@ -53,12 +48,9 @@
 							}
 						}
 					}
-					
-				?>
-					
+				?>	
 				</div>
 			</div>
-
 			<div class="center">
 				<textarea placeholder="Insert text content here..." type="text" id="textPost" name="content" onkeyup="textAreaAdjust(this)"></textarea>
 				<input type="hidden" name="hasPoll" id="has_poll" value="false">
@@ -191,7 +183,5 @@
         var dvtext = document.getElementById("dvtext");
         dvtext.style.display = privatePost.checked ? "block" : "none";
     }
-
 	  </script>
-
 <?php include "footer.php"?>
