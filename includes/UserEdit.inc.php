@@ -36,7 +36,6 @@ if(isset($_GET['MemberID1'])) {
 <select name="privilege" ><option value="normal member">normal member</option>
                 <option value="administrator">administrator</option>
                 </select>
-      <input type="password" name="password" placeholder="Password" value="' . $password . '">
  <button type="submit" name="editInfo-submit">Edit Information</button>
 </form>';
 
