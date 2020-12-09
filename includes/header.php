@@ -34,7 +34,8 @@
                             <?php } ?>
                             <a class="nav-link h6" href="./NewPost.php">Post</a>
                             <a class="nav-link h6" href="./GroupPage.php">Group</a>
-                            <a class="nav-link h6" href="./EmailPage.php">Email</a>
+                            <a class="nav-link h6" href="./EmailPage.php">Group Email</a>
+                            <a class="nav-link h6" href="./PrivateEmail.php">Private Email</a>
                         <?php } ?>    
                     </div>
 
