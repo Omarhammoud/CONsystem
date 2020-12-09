@@ -5,26 +5,8 @@
 
 
 <main>
-    <div class="wrapper-main">
+    <div class="wrapper-main" >
         <section class="section-default">
-            <h1>Create new member</h1>
-            <form action="signup.inc.php" method="post">
-                <input type="text" name="name" placeholder="Name">
-                <input type="text" name="email" placeholder="Email">
-                <input type="text" name="address" placeholder="Address">
-                <!-- <input type="text" name="status" placeholder="Status"> -->
-                <select name="status" ><option value="active">active</option>
-                <option value="inactive">inactive</option>
-                </select>
-                <!-- <input type="text" name="privilege" placeholder="Privilege"> -->
-                <select name="privilege" ><option value="normal member">normal member</option>
-                <option value="administrator">administrator</option>
-                </select>
-                <input type="password" name="pwd" placeholder="Password">
-                <input type="password" name="pwd-second" placeholder="Type Password Again">
-                <button type="submit" name="signup-submit">Sign Up</button>
-            </form>
-
             <h2>List of Members:</h2>
             <table class = "table">
                 <tr>
@@ -52,11 +34,17 @@
                              <td> <?php echo $row["Name"]; ?></td>
                              <td> <?php echo $row["Email"]; ?></td>
                              <td> <?php echo $row["Address"]; ?></td>
-                             <td> <?php echo $row["Status"]; ?></td>
+                             <td> <?php
+                                 if($row["Status"]== "active"){
+                                     echo $row["Status"];
+                                 }else{
+                                     echo "<p style=\"display: inline-block; border: 2px; border-style:solid; border-color:#FF0000; padding: 1em;\">".$row["Status"]."</p>";
+                                 }
+                                  ?></td>
                              <td> <?php echo $row["Privilege"]; ?></td>
                              <td><a href="UserEdit.inc.php?MemberID1=<?php echo $row["MemberID"];?>">Edit</a></td>
                              <td><a href="UserDelete.inc.php?MemberID2=<?php echo $row["MemberID"];?>">Delete</a></td>
-
+                             <td><a href="resetPassword.php?MemberID2=<?php echo $row["MemberID"];?>">Reset Password</a></td>
 
                          </tr>
                         <?php
