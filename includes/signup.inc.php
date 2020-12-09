@@ -2,7 +2,7 @@
 //Written By:  Omar Hammoud (40002184)
 if(isset($_POST['signup-submit'])){
     require "dbh.inc.php";
-
+    $memberid = $_GET["MemberID2"];
     $name = $_POST['name'];
     $email = $_POST['email'];
     $address = $_POST['address'];
@@ -56,12 +56,9 @@ if(isset($_POST['signup-submit'])){
                     exit();
                 }
                 else {
-                    mysqli_stmt_bind_param($stmt, "ssssss",$password, $email, $name, $address, $status, $privilege);
+                    mysqli_stmt_bind_param($stmt, "ssssss", $password, $email, $name, $address, $status, $privilege);
                     mysqli_stmt_execute($stmt);
                     mysqli_stmt_store_result($stmt);
-                    header("Location: ./LoginPage.php?success=memberadded");
-                    exit();
-
                 }
 
             }

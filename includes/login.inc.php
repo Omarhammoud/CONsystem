@@ -25,7 +25,7 @@ if (isset($_POST['login-submit'])) {
         exit();
     }else{
 
-        $sql = "SELECT Email, MemberID, Name, `Password`, Status FROM member WHERE Email =? ";
+        $sql = "SELECT Email, MemberID, Name, `Password`, Status, Privilege FROM member WHERE Email =? ";
 
         $stmt = mysqli_stmt_init($conn);
         if (!mysqli_stmt_prepare($stmt, $sql)) {
@@ -46,6 +46,7 @@ if (isset($_POST['login-submit'])) {
                     $_SESSION['MemberID'] = $row['MemberID'];
                     $_SESSION['Email'] = $row['Email'];
                     $_SESSION['Name'] = $row['Name'];
+                    $_SESSION['Privilege'] = $row['Privilege'];
                     header("Location: ./isadmin.inc.php");
                     exit();
                 }else if($pwdcheck == true && $row['Status']=="inactive"){
