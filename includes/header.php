@@ -16,6 +16,9 @@
     <title>CONsystem</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="Style.css">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600&display=swap" rel="stylesheet" />
+    <link href="all.min.css" rel="stylesheet" />
+    <link href="tooplate-chilling-cafe.css" rel="stylesheet" />
 </head>
 <body>
 
@@ -34,8 +37,10 @@
                             <?php } ?>
                             <a class="nav-link h6" href="./NewPost.php">Post</a>
                             <a class="nav-link h6" href="./GroupPage.php">Group</a>
+                            <a class="nav-link h6" href="./FinancialStatus.php">Financial Status</a>
                             <a class="nav-link h6" href="./EmailPage.php">Group Email</a>
                             <a class="nav-link h6" href="./PrivateEmail.php">Private Email</a>
+
                         <?php } ?>    
                     </div>
 
