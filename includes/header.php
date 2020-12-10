@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="Style.css">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600&display=swap" rel="stylesheet" />
     <link href="all.min.css" rel="stylesheet" />
-    <link href="tooplate-chilling-cafe.css" rel="stylesheet" />
+    <link href="tooplate-chilling-cafe.css" rel="stylesheet" /> 
 </head>
 <body>
 
@@ -33,13 +33,13 @@
                     <div class="navbar-nav">
                         <?php if(isset($_SESSION['MemberID'])&&isset($_SESSION['isAdmin'])){ ?>
                             <?php if($_SESSION['isAdmin']){?>
-                            <a class="nav-link h6" href="./signup.php">Manage Accounts</a>
+                            <a class="nav-link" href="./signup.php">Manage Accounts</a>
                             <?php } ?>
-                            <a class="nav-link h6" href="./NewPost.php">Post</a>
-                            <a class="nav-link h6" href="./GroupPage.php">Group</a>
-                            <a class="nav-link h6" href="./FinancialStatus.php">Financial Status</a>
-                            <a class="nav-link h6" href="./EmailPage.php">Group Email</a>
-                            <a class="nav-link h6" href="./PrivateEmail.php">Private Email</a>
+                            <a class="nav-link" href="./NewPost.php">Post</a>
+                            <a class="nav-link" href="./GroupPage.php">Group</a>
+                            <a class="nav-link" href="./FinancialStatus.php">Financial Status</a>
+                            <a class="nav-link" href="./EmailPage.php">Group Email</a>
+                            <a class="nav-link" href="./PrivateEmail.php">Private Email</a>
 
                         <?php } ?>    
                     </div>
