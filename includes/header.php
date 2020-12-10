@@ -33,12 +33,14 @@
                     <div class="navbar-nav">
                         <?php if(isset($_SESSION['MemberID'])&&isset($_SESSION['isAdmin'])){ ?>
                             <?php if($_SESSION['isAdmin']){?>
-                            <a class="nav-link h6" href="./signup.php">Sign Up</a>
+                            <a class="nav-link h6" href="./signup.php">Manage Accounts</a>
                             <?php } ?>
                             <a class="nav-link h6" href="./NewPost.php">Post</a>
                             <a class="nav-link h6" href="./GroupPage.php">Group</a>
-                            <a class="nav-link h6" href="./EmailPage.php">Email</a>
                             <a class="nav-link h6" href="./FinancialStatus.php">Financial Status</a>
+                            <a class="nav-link h6" href="./EmailPage.php">Group Email</a>
+                            <a class="nav-link h6" href="./PrivateEmail.php">Private Email</a>
+
                         <?php } ?>    
                     </div>
 
@@ -48,6 +50,7 @@
                             <a class="btn btn-outline-danger  mb-3 mb-md-0 ml-md-3" href="./logout.inc.php">Logout</a>
                         <?php }else{ ?>
                             <a class="nav-link h6" href="./LoginPage.php">Login</a>
+                            <a class="nav-link h6" href="./register.php">Sign up</a>
                         <?php }?>
                     </div>
                 </div>

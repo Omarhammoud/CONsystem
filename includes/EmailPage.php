@@ -2,6 +2,10 @@
 
 <?php
     // Written By: Leslie Poso (40057877)
+    if (isset($_GET['errors'])) {
+        $str_arr = unserialize(urldecode($_GET['errors']));
+    }
+
     if(isset($_SESSION['MemberID'])){
         require "dbh.inc.php";
 
@@ -76,6 +80,21 @@
     </style>
 </head>
 <div class="container">
+
+    <?php if (isset($str_arr) && !empty($str_arr['email'])) { ?>
+        <div class="alert alert-danger">
+            <strong>Error!</strong> <?php echo $str_arr['email'] ?>
+        </div>
+    <?php } ?>
+
+    <?php if (isset($_GET['success'])) { 
+        $success = unserialize(urldecode($_GET['success']));
+        ?>
+        <div class="alert alert-success">
+            <strong>Success!</strong> <?php echo $success['email'] ;?>
+        </div>
+    <?php } ?>
+
     <h1>Emails</h1>
     <table class="table">
         <tr>
@@ -104,10 +123,26 @@
     </table>
     <h1>Compose an Email</h1>
     <form class="form-inline" action="./sendEmail.php" method="post">
-        <input type="text"  class="form-control" name="Subject" require="required" placeholder="Subject" />
-        <input type="text"  class="form-control" name="Group" require="required" placeholder="Group Name" />
-        <textarea type="text"  class="form-control" name="EmailBody" require="required" placeholder="Insert Message"> </textarea> 
-        <input type="hidden" name="MemberID" value="<?php echo $_SESSION['MemberID']; ?>">
+        <div class="form-group col-3">
+            <input type="text"  class="form-control" name="Subject" require="required" placeholder="Subject" />
+            <?php if (isset($str_arr) && !empty($str_arr['Subject'])) { ?>
+                <span class="form-text text-danger"><?php echo $str_arr['Subject'] ?></span>
+            <?php } ?>
+        </div>
+
+        <div class="form-group col-3">
+            <input type="text"  class="form-control" name="Group" require="required" placeholder="Group Name" />
+            <?php if (isset($str_arr) && !empty($str_arr['Group'])) { ?>
+                <span class="form-text text-danger"><?php echo $str_arr['Group'] ?></span>
+            <?php } ?>
+        </div>
+        
+        <div class="form-group col-3">
+            <textarea type="text"  class="form-control" name="EmailBody" require="required" placeholder="Insert Message"> </textarea>
+            <?php if (isset($str_arr) && !empty($str_arr['EmailBody'])) { ?>
+                <span class="form-text text-danger"><?php echo $str_arr['EmailBody'] ?></span>
+            <?php } ?> 
+        </div>
         <input class="btn btn-outline-primary m-3" type="submit" name="SendEmail" value="Send Email">
     </form>
     <h1>Sent Emails</h1>
