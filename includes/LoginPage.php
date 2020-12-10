@@ -11,6 +11,11 @@ if (isset($_GET['errors'])) {
         <div class="col-md-12  d-flex flex-column justify-content-center">
             <div class="row">
                 <div class="col-lg-6 col-md-8 mx-auto">
+                <?php if (isset($str_arr) && !empty($str_arr['login'])) { ?>
+                    <div class="alert alert-danger">
+                        <strong>Error!</strong> <?php echo $str_arr['login'] ?>
+                    </div>
+                <?php } ?>
                     <div class="card rounded shadow shadow-sm">
                         <div class="card-header">
                             <h3 class="mb-0">Login</h3>
