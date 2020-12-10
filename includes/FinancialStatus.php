@@ -43,13 +43,14 @@
         $result = $conn->query($sql);
 		 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 		 $rationales = $row['rationales'];
-		 $dates   = $row['dates'];
+		 $dates   = $row['date'];
 		 $contractor = $row['contractor'];
 		 $cost = $row['cost'];
 		 echo "<tr>";
          echo "<td>".$rationales."</td>";
+        echo "<td style='text-align-last: left;'>".$dates."</td>";
                 echo "<td style='text-align-last: left;'>".$contractor."</td>";
-                echo "<td style='text-align-last: left;'>".$dates."</td>";
+                
                 echo "<td style='text-align-last: left;'>".$cost." $</td>";
          echo "</tr>";
 		}
