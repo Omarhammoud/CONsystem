@@ -18,7 +18,7 @@
             }
 
             if(array_filter($errors)){
-                $errors["form"]="Failed to the form to send email.";
+                $errors["email"]="Failed to submit the form to send email.";
                 header("Location: ./EmailPage.php?errors=".urlencode(serialize($errors)));
                 exit();
             }else{
@@ -109,7 +109,7 @@
 
         }else{
             
-            $errors["form"]="Failed to the form to send email.";
+            $errors["email"]="Failed to submit the form to send email.";
             header("Location: ./EmailPage.php?errors=".urlencode(serialize($errors)));
             exit();
         }
