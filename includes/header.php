@@ -1,13 +1,10 @@
 <?php
-
    if (session_status() == PHP_SESSION_NONE) {
       session_start();
    }
-
    //Written By: Israt Noor Kazi (40029299),
    //            Omar Hammoud (40002184)
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,26 +15,26 @@
     <link rel="stylesheet" href="Style.css">
 </head>
 <body>
-
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3" style="background-color: #e3f2fd;">
             <div class="container-fluid">
-                <a class="navbar-brand h6" href="./MemberDashboard.php">Dashboard</a>
+                <a class="navbar-brand h6" href="./MemberDashboard.php"><span>☴</span> ConSys</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <?php if(isset($_SESSION['MemberID'])&&isset($_SESSION['isAdmin'])){ ?>
+                        <?php if(isset($_SESSION['MemberID'])){ ?>
+                            <a class="nav-link h6" href="./contract.php">Contracts</a>
+                        <?php if(($_SESSION['isMember']) || ($_SESSION['isAdmin'])){ ?>
                             <?php if($_SESSION['isAdmin']){?>
                             <a class="nav-link h6" href="./signup.php">Manage Accounts</a>
                             <?php } ?>
                             <a class="nav-link h6" href="./NewPost.php">Post</a>
                             <a class="nav-link h6" href="./GroupPage.php">Group</a>
                             <a class="nav-link h6" href="./EmailPage.php">Email</a>
-                        <?php } ?>    
+                        <?php }} ?>
                     </div>
-
                     <div class="navbar-nav ml-auto">
                         <?php if(isset($_SESSION['MemberID'])&&isset($_SESSION['isAdmin'])){ ?>
                             <a class="nav-link h6" href="#">Signed In As <?php echo $_SESSION['Name'] ;?></a>
