@@ -23,7 +23,7 @@ include "header.php";
     </header>
 <form action="PostContract.php" method="post">
     <input type="text" name="cost" placeholder="Enter Budget"></br></br>
-    <textarea  name="contractdescription"  rows="8" cols="50" style="top: 10px;">Enter Contract Description</textarea></br></br>
+   <textarea  name="contractdescription"  rows="8" cols="50" style="top: 10px;" placeholder="Insert text contract description here..." type="text" id="textPost" name="content" onkeyup="textAreaAdjust(this)"></textarea></br></br>
     <button class="btn btn-outline-primary m-2" type="submit" name="postcontract-submit">Post Contract</button>
 </form>
 <?php
