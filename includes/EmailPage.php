@@ -106,7 +106,7 @@
         </tr>
         <tr>
             <td scope="col"><strong>Date</strong></td>
-            <td scope="col"><strong>Sender ID</strong></td>
+            <td scope="col"><strong>Sender Email</strong></td>
             <td scope="col"><strong>From Group</strong></td>
             <td scope="col"><strong>Subject</strong></td>
             <td scope="col"><strong>View Button</strong></td>
