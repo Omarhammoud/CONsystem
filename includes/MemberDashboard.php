@@ -6,6 +6,14 @@
 ?>
 <?php include 'header.php'; ?>
 
+<?php if (isset($_GET['success'])) { 
+        $success = unserialize(urldecode($_GET['success']));
+        ?>
+        <div class="alert alert-success">
+            <strong>Success!</strong> <?php echo $success['signup'] ;?>
+        </div>
+<?php } ?>
+
 <div style="position: absolute;
     right:20px;">
     <label>Sort By:</label>

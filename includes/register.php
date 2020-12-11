@@ -3,6 +3,9 @@
                 Israt Noor Kazi(40029299)
 */
                 
+if (isset($_GET['errors'])) {
+    $str_arr = unserialize(urldecode($_GET['errors']));
+}
 
 include "header.php";
 ?>
@@ -104,16 +107,16 @@ include "header.php";
                                 <div class="form-group">
                                     <label for="name">Name</label>
                                     <input type="text" class="form-control" name="name" placeholder="Name">
-                                    <?php if (isset($str_arr) && !empty($str_arr['name'])) { ?>
-                                        <span class="form-text text-danger"><?php echo $str_arr['name'] ?></span>
+                                    <?php if (isset($str_arr) && !empty($str_arr['nameCon'])) { ?>
+                                        <span class="form-text text-danger"><?php echo $str_arr['nameCon'] ?></span>
                                     <?php } ?>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="email">Email</label>
                                     <input type="text" class="form-control" name="email" placeholder="Email">
-                                    <?php if (isset($str_arr) && !empty($str_arr['email'])) { ?>
-                                        <span class="form-text text-danger"><?php echo $str_arr['email'] ?></span>
+                                    <?php if (isset($str_arr) && !empty($str_arr['emailCon'])) { ?>
+                                        <span class="form-text text-danger"><?php echo $str_arr['emailCon'] ?></span>
                                     <?php } ?>
                                 </div>
 
@@ -121,25 +124,25 @@ include "header.php";
                                 <div class="form-group">
                                     <label for="password">Password</label>
                                     <input type="password" class="form-control" name="pwd" placeholder="Password">
-                                    <?php if (isset($str_arr) && !empty($str_arr['password'])) { ?>
-                                        <span class="form-text text-danger"><?php echo $str_arr['password'] ?></span>
+                                    <?php if (isset($str_arr) && !empty($str_arr['passwordCon'])) { ?>
+                                        <span class="form-text text-danger"><?php echo $str_arr['passwordCon'] ?></span>
                                     <?php } ?>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="password">Confirm Password</label>
                                     <input type="password" class="form-control" name="pwd-second" placeholder="Type Password Again">
-                                    <?php if (isset($str_arr) && !empty($str_arr['password2'])) { ?>
-                                        <span class="form-text text-danger"><?php echo $str_arr['password2'] ?></span>
+                                    <?php if (isset($str_arr) && !empty($str_arr['password2Con'])) { ?>
+                                        <span class="form-text text-danger"><?php echo $str_arr['password2Con'] ?></span>
                                     <?php } ?>
                                 </div>
 
                                 <button type="submit" class="btn btn-primary" name="contractorsignup-submit">Sign Up</button>
                             </form>
                         </div>
-                        <?php if (isset($str_arr) && !empty($str_arr['userContractor'])) { ?>
+                        <?php if (isset($str_arr) && !empty($str_arr['userCon'])) { ?>
                             <div class="card-footer">
-                                <span class="form-text text-danger"><?php echo $str_arr['userContractor'] ?></span>
+                                <span class="form-text text-danger"><?php echo $str_arr['userCon'] ?></span>
                             </div>
                          <?php } ?>
                     </div>
