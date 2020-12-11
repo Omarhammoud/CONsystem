@@ -2,31 +2,42 @@
 <?php include 'functions.inc.php'; ?>
 <?php
     // Written By: Leslie Poso (40057877)
-    if(isset($_SESSION['MemberID']) && !empty($_GET['EmailID'])){
-        require "dbh.inc.php";
+    $errors = array();
+    if(isset($_SESSION['MemberID'])){
+        if(!empty($_GET['EmailID'])){
+            require "dbh.inc.php";
 
-        //Fetch Group Information 
-        $emaiID = $_GET["EmailID"];
-        $sql = "SELECT email.EmailID, email.Date, member.Email, email.Subject, email.EmailBody, `group`.GroupName
-        FROM email, send_to, member, `group`
-        WHERE send_to.EmailID = email.EmailID
-        AND member.MemberID = email.MemberID
-        AND send_to.GroupID = `group`.GroupID
-        AND email.EmailID=?";
-        $stmt =  mysqli_stmt_init($conn);
+            //Fetch Group Information 
+            $emaiID = $_GET["EmailID"];
+            $sql = "SELECT email.EmailID, email.Date, member.Email, email.Subject, email.EmailBody, `group`.GroupName
+            FROM email, send_to, member, `group`
+            WHERE send_to.EmailID = email.EmailID
+            AND member.MemberID = email.MemberID
+            AND send_to.GroupID = `group`.GroupID
+            AND email.EmailID=?";
+            $stmt =  mysqli_stmt_init($conn);
 
-        if(!mysqli_stmt_prepare($stmt,$sql)){
-            header("Location: ./EmailPage.php?error=sqlerror1");
+            if(!mysqli_stmt_prepare($stmt,$sql)){
+                $errors["email"]="Cannot fetch the email information due connection problem. (SQL1)";
+                header("Location: ./EmailPage.php?errors=".urlencode(serialize($errors)));
+                exit();
+            }
+            
+            mysqli_stmt_bind_param($stmt, "i",$emaiID);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+            $emaiInfo = mysqli_fetch_assoc($result);
+            mysqli_stmt_close($stmt);
+        }else{
+            $errors["email"]="Email was not found.";
+            header("Location: ./EmailPage.php?errors=".urlencode(serialize($errors)));
             exit();
         }
-        
-        mysqli_stmt_bind_param($stmt, "i",$emaiID);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
-        $emaiInfo = mysqli_fetch_assoc($result);
-        mysqli_stmt_close($stmt);  
+         
     }else{
-        header("Location: ./index.php");
+        $errors["login"]="Your must be logged in to access this page.";
+        header("Location: ./LoginPage.php?errors=".urlencode(serialize($errors)));
+        exit();
     }
 ?>
 

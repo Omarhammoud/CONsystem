@@ -13,7 +13,9 @@ if (isset($_POST['login-submit'])) {
     }else{
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $errors['email'] = "Invalid Email Format";
-        }
+
+          }
+
     }
 
     if(empty($password)){
@@ -25,11 +27,14 @@ if (isset($_POST['login-submit'])) {
         exit();
     }else{
 
+
         $sql = "SELECT Email, MemberID, Name, `Password`, Status, Privilege FROM member WHERE Email =? ";
+
 
         $stmt = mysqli_stmt_init($conn);
         if (!mysqli_stmt_prepare($stmt, $sql)) {
-            header("Location: ./LoginPage.php?error=sqlerror1");
+            $errors["Login"]="Connection Problem (SQL1)";
+            header("Location: ./LoginPage.php?errors=".urlencode(serialize($errors)));
             exit();
         } else {
             mysqli_stmt_bind_param($stmt, "s", $email);
@@ -41,7 +46,9 @@ if (isset($_POST['login-submit'])) {
                     $errors["user"]="Password Is Invalid";
                     header("Location: ./LoginPage.php?errors=".urlencode(serialize($errors)));
                     exit();
+
                 } else if($pwdcheck == true && $row['Status']=="active"){
+
                     session_start();
                     $_SESSION['MemberID'] = $row['MemberID'];
                     $_SESSION['Email'] = $row['Email'];
@@ -54,6 +61,7 @@ if (isset($_POST['login-submit'])) {
                     header("Location: ./LoginPage.php?errors=".urlencode(serialize($errors)));
                     exit();
                 }
+
             } else {
                 $errors["user"]="Member Does Not Exist";
                 header("Location: ./LoginPage.php?errors=".urlencode(serialize($errors)));
@@ -61,4 +69,6 @@ if (isset($_POST['login-submit'])) {
             }
         }
     }
+
 }
+
