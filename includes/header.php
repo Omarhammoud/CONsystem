@@ -39,7 +39,7 @@
                             <a class="nav-link" href="./EmailPage.php">Group Email</a>
                             <a class="nav-link" href="./PrivateEmail.php">Private Email</a>
 
-                        <?php } ?>    
+                        <?php } } ?>    
                    </div>
                     <div class="navbar-nav ml-auto">
                         <?php if(isset($_SESSION['MemberID'])&&isset($_SESSION['isAdmin'])){ ?>
@@ -48,7 +48,7 @@
                         <?php }else{ ?>
                             <a class="nav-link h6" href="./LoginPage.php">Login</a>
                             <a class="nav-link h6" href="./register.php">Sign up</a>
-                        <?php }?>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
