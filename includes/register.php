@@ -1,24 +1,156 @@
 <?php
-// Written by: OmarHammoud(40002184)
+/* Written by: OmarHammoud(40002184),
+                Israt Noor Kazi(40029299)
+*/
+                
+
 include "header.php";
 ?>
-<h1>Sign up as a member</h1>
-<form action="signup.inc.php" method="post">
-    <input type="text" name="name" placeholder="Name">
-    <input type="text" name="email" placeholder="Email">
-    <input type="text" name="address" placeholder="Address">
-    <input type="password" name="pwd" placeholder="Password">
-    <input type="password" name="pwd-second" placeholder="Type Password Again">
-    <button type="submit" name="signup-submit">Sign Up</button>
-</form>
-<h1>Sign up as a contractor</h1>
-<form action="signup.inc.php" method="post">
-    <input type="text" name="name" placeholder="Name">
-    <input type="text" name="email" placeholder="Email">
-    <input type="password" name="pwd" placeholder="Password">
-    <input type="password" name="pwd-second" placeholder="Type Password Again">
-    <button type="submit" name="contractorsignup-submit">Sign Up</button>
-</form>
+<div class="row">
+<div class="col-6">
+<div class="container">
+    <div class="row">
+        <div class="col-md-12  d-flex flex-column justify-content-center">
+            <div class="row">
+                <div class="col-lg-9 col-md-12 mx-auto">
+                <?php if (isset($str_arr) && !empty($str_arr['signupMember'])) { ?>
+                    <div class="alert alert-danger">
+                        <strong>Error!</strong> <?php echo $str_arr['signupMember'] ?>
+                    </div>
+                <?php } ?>
+                    <div class="card rounded shadow shadow-sm">
+                        <div class="card-header">
+                            <h3 class="mb-0">Sign up as a member</h3>
+                        </div>
+                        <div class="card-body">
+                            <form action="signup.inc.php" method="post">
+                                
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" class="form-control" name="name" placeholder="Name">
+                                    <?php if (isset($str_arr) && !empty($str_arr['name'])) { ?>
+                                        <span class="form-text text-danger"><?php echo $str_arr['name'] ?></span>
+                                    <?php } ?>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="text" class="form-control" name="email" placeholder="Email">
+                                    <?php if (isset($str_arr) && !empty($str_arr['email'])) { ?>
+                                        <span class="form-text text-danger"><?php echo $str_arr['email'] ?></span>
+                                    <?php } ?>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="address">Address</label>
+                                    <input type="text" class="form-control" name="address" placeholder="Address">
+                                    <?php if (isset($str_arr) && !empty($str_arr['address'])) { ?>
+                                        <span class="form-text text-danger"><?php echo $str_arr['address'] ?></span>
+                                    <?php } ?>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="form-control" name="pwd" placeholder="Password">
+                                    <?php if (isset($str_arr) && !empty($str_arr['password'])) { ?>
+                                        <span class="form-text text-danger"><?php echo $str_arr['password'] ?></span>
+                                    <?php } ?>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="password">Confirm Password</label>
+                                    <input type="password" class="form-control" name="pwd-second" placeholder="Type Password Again">
+                                    <?php if (isset($str_arr) && !empty($str_arr['password2'])) { ?>
+                                        <span class="form-text text-danger"><?php echo $str_arr['password2'] ?></span>
+                                    <?php } ?>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary" name="signup-submit">Sign Up</button>
+                            </form>
+                        </div>
+                        <?php if (isset($str_arr) && !empty($str_arr['userMember'])) { ?>
+                            <div class="card-footer">
+                                <span class="form-text text-danger"><?php echo $str_arr['userMember'] ?></span>
+                            </div>
+                         <?php } ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<!-- contractor sign up -->
+<div class="col-6">
+
+    <div class="row">
+        <div class="col-md-12  d-flex flex-column justify-content-center">
+            <div class="row">
+                <div class="col-lg-9 col-md-12 mx-auto">
+                <?php if (isset($str_arr) && !empty($str_arr['signupContractor'])) { ?>
+                    <div class="alert alert-danger">
+                        <strong>Error!</strong> <?php echo $str_arr['signupContractor'] ?>
+                    </div>
+                <?php } ?>
+                    <div class="card rounded shadow shadow-sm">
+                        <div class="card-header">
+                            <h3 class="mb-0">Sign up as a contractor</h3>
+                        </div>
+                        <div class="card-body">
+                            <form action="signup.inc.php" method="post">
+                                
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" class="form-control" name="name" placeholder="Name">
+                                    <?php if (isset($str_arr) && !empty($str_arr['name'])) { ?>
+                                        <span class="form-text text-danger"><?php echo $str_arr['name'] ?></span>
+                                    <?php } ?>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="text" class="form-control" name="email" placeholder="Email">
+                                    <?php if (isset($str_arr) && !empty($str_arr['email'])) { ?>
+                                        <span class="form-text text-danger"><?php echo $str_arr['email'] ?></span>
+                                    <?php } ?>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="form-control" name="pwd" placeholder="Password">
+                                    <?php if (isset($str_arr) && !empty($str_arr['password'])) { ?>
+                                        <span class="form-text text-danger"><?php echo $str_arr['password'] ?></span>
+                                    <?php } ?>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="password">Confirm Password</label>
+                                    <input type="password" class="form-control" name="pwd-second" placeholder="Type Password Again">
+                                    <?php if (isset($str_arr) && !empty($str_arr['password2'])) { ?>
+                                        <span class="form-text text-danger"><?php echo $str_arr['password2'] ?></span>
+                                    <?php } ?>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary" name="contractorsignup-submit">Sign Up</button>
+                            </form>
+                        </div>
+                        <?php if (isset($str_arr) && !empty($str_arr['userContractor'])) { ?>
+                            <div class="card-footer">
+                                <span class="form-text text-danger"><?php echo $str_arr['userContractor'] ?></span>
+                            </div>
+                         <?php } ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+
 
 
 
