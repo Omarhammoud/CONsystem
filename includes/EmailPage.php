@@ -94,8 +94,8 @@
             <strong>Success!</strong> <?php echo $success['email'] ;?>
         </div>
     <?php } ?>
-
-    <h1>Emails</h1>
+    <a href="./PrivateEmail.php" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Go to Private Email</a>
+    <h1>Group Emails</h1>
     <table class="table">
         <tr>
             <th scope="col">List of Messages</th>
