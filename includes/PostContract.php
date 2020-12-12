@@ -27,18 +27,19 @@ include "header.php";
     <button class="btn btn-outline-primary m-2" type="submit" name="postcontract-submit">Post Contract</button>
 </form>
 <?php
+if (isset($_POST['postcontract-submit'])) {
 $memberID = $_SESSION["MemberID"];
 $cost = $_POST["cost"];
 $description = $_POST["contractdescription"];
 $status = "Posted";
 $date = date('Y-m-d H:i:s');
-if (isset($_POST['postcontract-submit'])) {
-    require "dbh.inc.php";
+
     if (empty($cost) || empty($description)) {
         header("Location: ./PostContract.php?error=emptyfields");
         exit();
 
-    }  else {
+    }else {
+                require "dbh.inc.php";
                 $sql = "INSERT INTO contract (MemberID, Cost, Status, ContractBody, Date) VALUES (?,?,?,?, ? )";
                 $stmt = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($stmt, $sql)) {
@@ -52,9 +53,10 @@ if (isset($_POST['postcontract-submit'])) {
                     mysqli_close($conn);
                     header("Location: ./contract.php?Contract_Posted");
                 }
-
+                mysqli_stmt_close($stmt);
+                mysqli_close($conn);
             }
-        }
-        mysqli_stmt_close($stmt);
-        mysqli_close($conn);
+      
+
+}
 ?>
