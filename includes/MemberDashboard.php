@@ -30,12 +30,14 @@
     <?php
 
     require "dbh.inc.php";
-    if($_POST['sortby']==="latest") {
-        $sql = "SELECT c.ContentID, c.MemberID, c.ContentBody,c.Date, m.Name,  c.Image, c.Type='public' as type, p.ContentID as priv_con, p.Memberid as priv_mem, t.Title FROM content c LEFT JOIN member m ON c.MemberID=m.MemberID LEFT JOIN private_content p ON c.ContentID=p.ContentID LEFT JOIN event_poll t ON c.ContentID=t.ContentID ORDER BY Date DESC";
-    }else if($_POST['sortby']==="oldest") {
-        $sql = "SELECT c.ContentID, c.MemberID, c.ContentBody,c.Date, m.Name, c.Image, c.Type='public' as type, p.ContentID as priv_con, p.Memberid as priv_mem, t.Title  FROM content c LEFT JOIN private_content p ON c.ContentID=p.ContentID LEFT JOIN member m ON c.MemberID=m.MemberID LEFT JOIN event_poll t ON c.ContentID=t.ContentID ORDER BY Date ASC";
-    }else if($_POST['sortby']==="popular") {
-        $sql = "SELECT c.ContentID, c.MemberID, c.ContentBody,c.Date, m.Name, c.Image,  c.Type='public' as type ,  COUNT(o.ContentID) AS totalcomments , p.ContentID as priv_con, p.Memberid as priv_mem, t.Title FROM content c  LEFT JOIN private_content p ON c.ContentID=p.ContentID LEFT JOIN member m ON c.MemberID=m.MemberID  LEFT JOIN comment o ON c.ContentID=o.ContentID LEFT JOIN event_poll t ON c.ContentID=t.ContentID GROUP BY c.ContentID ORDER BY totalcomments DESC";
+    if(isset($_POST['sortby'])){
+        if($_POST['sortby']==="latest") {
+            $sql = "SELECT c.ContentID, c.MemberID, c.ContentBody,c.Date, m.Name,  c.Image, c.Type='public' as type, p.ContentID as priv_con, p.Memberid as priv_mem, t.Title FROM content c LEFT JOIN member m ON c.MemberID=m.MemberID LEFT JOIN private_content p ON c.ContentID=p.ContentID LEFT JOIN event_poll t ON c.ContentID=t.ContentID ORDER BY Date DESC";
+        }else if($_POST['sortby']==="oldest") {
+            $sql = "SELECT c.ContentID, c.MemberID, c.ContentBody,c.Date, m.Name, c.Image, c.Type='public' as type, p.ContentID as priv_con, p.Memberid as priv_mem, t.Title  FROM content c LEFT JOIN private_content p ON c.ContentID=p.ContentID LEFT JOIN member m ON c.MemberID=m.MemberID LEFT JOIN event_poll t ON c.ContentID=t.ContentID ORDER BY Date ASC";
+        }else if($_POST['sortby']==="popular") {
+            $sql = "SELECT c.ContentID, c.MemberID, c.ContentBody,c.Date, m.Name, c.Image,  c.Type='public' as type ,  COUNT(o.ContentID) AS totalcomments , p.ContentID as priv_con, p.Memberid as priv_mem, t.Title FROM content c  LEFT JOIN private_content p ON c.ContentID=p.ContentID LEFT JOIN member m ON c.MemberID=m.MemberID  LEFT JOIN comment o ON c.ContentID=o.ContentID LEFT JOIN event_poll t ON c.ContentID=t.ContentID GROUP BY c.ContentID ORDER BY totalcomments DESC";
+        }
     }else{
         $sql = "SELECT c.ContentID, c.MemberID, c.ContentBody,c.Date, m.Name,  c.Image, c.Type='public' as type, p.ContentID as priv_con, p.Memberid as priv_mem , t.Title FROM content c LEFT JOIN member m ON c.MemberID=m.MemberID LEFT JOIN private_content p ON c.ContentID=p.ContentID LEFT JOIN event_poll t ON c.ContentID=t.ContentID ORDER BY Date DESC";
 
