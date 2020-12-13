@@ -27,31 +27,35 @@
             <table>
               <tr class="tm-tr-header">
                 <th>&nbsp;</th>
-                <th style="text-align-last: left;">Dates</th>
-                <th style="text-align-last: left;">Contractor</th>
-                <th style="text-align-last: left;">Cost</th>
+                <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th>Contractor</th>
+                <th>&nbsp;&nbsp;&nbsp;Cost&nbsp;&nbsp;&nbsp;</th>
               </tr>
 			  <?php
 
     require "dbh.inc.php";
 	
-	$sql = "SELECT * FROM maintenance_work";
+	$sql = "SELECT * FROM contract WHERE Status='Completed'";
     if ($conn -> connect_errno) {
         echo "Failed to connect to MySQL: " . $conn -> connect_error;
         exit();
     }else {
         $result = $conn->query($sql);
 		 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-		 $rationales = $row['rationales'];
-		 $dates   = $row['date'];
-		 $contractor = $row['contractor'];
-		 $cost = $row['cost'];
+		 $rationales = $row['ContractBody'];
+		 $dates   = $row['Date'];
+		 $contractor = $row['MemberID'];
+		 $cost = $row['Cost'];
+		 
+		 $sql = "SELECT Name FROM member WHERE MemberID=$contractor";
+		 $final_result = $conn->query($sql);
+		 $val = $final_result->fetch_assoc();
+		 $contractor = $val['Name'];
 		 echo "<tr>";
-         echo "<td>".$rationales."</td>";
-        echo "<td style='text-align-last: left;'>".$dates."</td>";
-                echo "<td style='text-align-last: left;'>".$contractor."</td>";
-                
-                echo "<td style='text-align-last: left;'>".$cost." $</td>";
+				echo "<td class='tm-text-left'>".$rationales."</td>";
+				echo "<td>".$dates."</td>";
+                echo "<td>".$contractor."</td>";
+                echo "<td>".$cost." $</td>";
          echo "</tr>";
 		}
 		} 
@@ -61,59 +65,7 @@
           </div>
         </section>
 
-        <!-- Special Contributions -->
-        <section class="tm-section">
-          <h2 class="tm-section-header">Special Contributions</h2>
-          <div class="tm-responsive-table">
-            <table>
-              <tr class="tm-tr-header">
-                <th style="text-align-last: left;">contributorName</th>
-                <th style="text-align-last: left;">contribution</th>
-              </tr>
-			  <?php
-
-    require "dbh.inc.php";
-	
-	$sql = "SELECT * FROM special_contributions";
-    if ($conn -> connect_errno) {
-        echo "Failed to connect to MySQL: " . $conn -> connect_error;
-        exit();
-    }else {
-        $result = $conn->query($sql);
-		 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-		 $contribution = $row['contribution'];
-		 $contributorName   = $row['contributorName'];
-		 echo "<tr>";
-                echo "<td style='text-align-last: left;'>".$contributorName."</td>";
-                echo "<td style='text-align-last: left;'>".$contribution." $</td>";
-         echo "</tr>";
-		}
-		} 
-		?>
-              
-            </table>
-          </div>
-        </section>
-
-        <!-- Financial Status -->
-		<?php
-
-    require "dbh.inc.php";
-	
-	$sql = "SELECT * FROM financial_status";
-    if ($conn -> connect_errno) {
-        echo "Failed to connect to MySQL: " . $conn -> connect_error;
-        exit();
-    }else {
-		$result = $conn->query($sql);
-		$row = $result->fetch_assoc();
-		$Budget = $row['Budget'];
-		$OwnershipPercent = $row['OwnershipPercent'];
-		$CurrentFees = $row['CurrentFees'];
-		$HistoricalRecord = $row['HistoricalRecord'];
-		}	
-		?>
-					
+        <!-- Financial Status -->	
         <section class="tm-section">
           <h2 class="tm-section-header">Financial Status</h2>
           <div class="tm-special-items">
@@ -121,21 +73,21 @@
               <img src="img/chilling-cafe-11.jpg" alt="Image" class="tm-special-item-img" />
               <figcaption>
                 <span class="tm-item-name">Budget</span>
-                <span class="tm-item-price"> <?php echo $Budget ?> $ </span>
+                <span class="tm-item-price"> 35 0000 $ </span>
               </figcaption>
             </figure>
             <figure class="tm-special-item">
               <img src="img/chilling-cafe-12.jpg" alt="Image" class="tm-special-item-img" />
               <figcaption>
                 <span class="tm-item-name">Ownership Percentage</span>
-                <span class="tm-item-price"> <?php echo $OwnershipPercent ?> % </span>
+                <span class="tm-item-price"> 20% </span>
               </figcaption>
             </figure>
             <figure class="tm-special-item">
               <img src="img/chilling-cafe-13.jpg" alt="Image" class="tm-special-item-img" />
               <figcaption>
                 <span class="tm-item-name">CurrentFees</span>
-				<span class="tm-item-price"> <?php echo $CurrentFees ?> $ </span>
+				<span class="tm-item-price"> 12000 $ </span>
               </figcaption>
             </figure>
           </div>
@@ -144,9 +96,13 @@
         <hr />
         <!-- Historical Record -->
         <section class="tm-section tm-section-small">
-          <h2 class="tm-section-header">Historical Record</h2>
+          <h2 class="tm-section-header">
+			Historical Record
+		  </h2>
           <p>
-            <?php echo $HistoricalRecord ?>
+		  INSERT HISTORIAL RECORD HERE Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget tincidunt lectus. 
+		  Ut interdum eleifend mattis. Duis lorem ex, dictum sed malesuada vitae, vestibulum et neque. 
+		  Suspendisse mollis tortor nec dolor blandit, et sagittis mi pretium.
           </p>
         </section>
         <hr />
