@@ -25,7 +25,7 @@ Sign is as a contrator:
 Email = a_hab@consys.com
 Password = Testing123
 
-To set up a local working enviroment:
+To set up a local work environment:
 
 Add Repo folder into htdocs in XAMPP or WAMP if you're a Windows user:
 -https://www.apachefriends.org/index.html
