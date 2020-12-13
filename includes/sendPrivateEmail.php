@@ -69,14 +69,26 @@
                     mysqli_stmt_close($stmt);
 
                     $stmt = mysqli_stmt_init($conn);
-                    $sql = "INSERT INTO `private_email` (`EmailID`, `SenderID`, `RecipientID`, `Subject`, `EmailBody`, `Date`) VALUES (?,?,?,?,?,?)";
+                    $sql = "INSERT INTO `email` (`EmailID`, `MemberID`, `Subject`, `EmailBody`, `Date`) VALUES (?,?,?,?,?)";
 
                     if (!mysqli_stmt_prepare($stmt,$sql)) {
 
                         header("Location: ./PrivateEmail.php?error=failedtoaddtoemail");
                         exit();
                     } 
-                    mysqli_stmt_bind_param($stmt, "iiisss", $emailID, $memberID, $recipientID, $subject, $emailBody, $currentDate);
+                    mysqli_stmt_bind_param($stmt, "iisss", $emailID, $memberID, $subject, $emailBody, $currentDate);
+                    mysqli_stmt_execute($stmt);
+                    mysqli_stmt_close($stmt);
+
+                    $stmt = mysqli_stmt_init($conn);
+                    $sql = "INSERT INTO `private_email` (`EmailID`, `RecipientID`) VALUES (?,?)";
+            
+                    if (!mysqli_stmt_prepare($stmt,$sql)) {
+            
+                        header("Location: ./EmailPage.php?error=failedtoaddtosendto");
+                        exit();
+                    } 
+                    mysqli_stmt_bind_param($stmt, "ii", $emailID, $recipientID);
                     mysqli_stmt_execute($stmt);
                     mysqli_stmt_close($stmt);
 
