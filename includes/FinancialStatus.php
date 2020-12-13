@@ -153,7 +153,7 @@ if (isset($_POST['AddAmount-submit'])) {
             mysqli_stmt_store_result($stmt);
             mysqli_stmt_close($stmt);
             mysqli_close($conn);
-            header("Location: ./FinancialStatus.php?Contract_Posted");
+            header("Location: ./FinancialStatus.php?Contribution_added");
         }
 
     }
