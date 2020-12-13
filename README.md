@@ -27,12 +27,29 @@ Password = Testing123
 
 To set up a local work environment:
 
-Add Repo folder into htdocs in XAMPP or WAMP if you're a Windows user:
--https://www.apachefriends.org/index.html
--https://www.wampserver.com/en/
+Step 1 - install XAMPP
+  1-Go to this link for XAMPP: https://www.apachefriends.org/download.html
+  2-Click download for the version you want to install 
+  3-Transverse the installation and decide which settings you prefer and enter where you would like XAMPP to be installed on your computer .
+	
+Note: For Mac, you can also use MAMP (https://www.mamp.info/en/mamp/windows/)
 
-If you're a Mac use, use MAMP:
--https://www.mamp.info/en/mamp/mac/
+Step 2 - Downloading the project  
+  1-Go to the Github project page: https://github.com/Omarhammoud/CONsystem/
+  2-Click the download icon in a zip file, and extract the contents in the directory of your choice on the computer.
+  3-Move the extracted folder into : xampp\htdocs
 
-Import database Consys.sql into phpmyadmin or whatever other tool you may want to use.
+Step 3 - Start Server
+ 1-Open XAMPP 
+ 2-Click start for Apache and MySQL
+
+Step 4 - Create Database
+  1-Click Admin for MySQL (opens phpMyAdmin)
+  2-Import and run all the scripts inside : CONsystem\Database Scripts
+Note: You can use other tools if you want.
+
+Once you have completed all the steps, you can open your browser (Not Safari) and go to: 
+
+http://localhost/CONsystem/includes/
+
 
