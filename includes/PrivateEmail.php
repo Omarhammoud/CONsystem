@@ -12,9 +12,10 @@
         require "dbh.inc.php";
 
         $memberID = $_SESSION['MemberID'];
-        $sql = "SELECT private_email.EmailID, member.Email, private_email.Subject, private_email.EmailBody, private_email.Date
-        FROM private_email, member
-        WHERE private_email.SenderID = member.MemberID
+        $sql = "SELECT email.EmailID, email.Date, s.Email, email.Subject, email.EmailBody
+        from email, private_email, member s, member r
+        WHERE email.EmailID = private_email.EmailID 
+        AND s.MemberID = email.MemberID
         AND private_email.RecipientID = ?";
         $stmt = mysqli_stmt_init($conn);
         
@@ -35,6 +36,13 @@
         AND private_email.SenderID = ?";
         $stmt = mysqli_stmt_init($conn);
         
+        $sql = "SELECT email.EmailID, email.Date, r.Email, email.Subject, email.EmailBody
+        from email, private_email, member s, member r
+        WHERE email.EmailID = private_email.EmailID 
+        AND r.MemberID = private_email.RecipientID
+        AND email.MemberID = ?";
+        $stmt = mysqli_stmt_init($conn);
+        
         if(!mysqli_stmt_prepare($stmt,$sql)){
             header("Location: ./PrivateEmail.php?error=sqlerror2");
             exit();
@@ -45,8 +53,7 @@
         $sentResult = mysqli_stmt_get_result($stmt);
         mysqli_stmt_close($stmt);
         
-        mysqli_close($conn);        
- 
+        mysqli_close($conn); 
     }else{
 
         $errors["login"]="Your must be logged in to access this page.";
