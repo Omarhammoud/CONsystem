@@ -62,7 +62,7 @@
           <h2 class="tm-section-header">Financial Status</h2>
           <div class="tm-special-items">
             <figure class="tm-special-item">
-              <img src="img/chilling-cafe-11.jpg" alt="Image" class="tm-special-item-img" />
+              <img src="chilling-cafe-11.jpg" alt="Image" class="tm-special-item-img" />
               <figcaption>
                 <span class="tm-item-name">Budget</span>
                 <span class="tm-item-price"> <?php
@@ -78,7 +78,7 @@
               </figcaption>
             </figure>
             <figure class="tm-special-item">
-              <img src="img/chilling-cafe-13.jpg" alt="Image" class="tm-special-item-img" />
+              <img src="chilling-cafe-13.jpg" alt="Image" class="tm-special-item-img" />
               <figcaption>
                 <span class="tm-item-name">Current Fees</span>
 				<span class="tm-item-price"> <?php

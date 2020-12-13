@@ -28,7 +28,7 @@ require "dbh.inc.php";?>
     <div class="wrapper-main" >
     </div>
     <section class="section-default">
-        <table class="table table-hover table-dark" >
+        <table class="table table-hover" >
             <tr>
                 <th>ContractID</th>
                 <th>Name Of Client</th>

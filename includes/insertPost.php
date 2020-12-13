@@ -23,8 +23,8 @@ if (isset($_SESSION['MemberID'])) {
     $hasPoll = $_POST["hasPoll"];
     $privateMember = $_POST["privateMember"];
     //var_dump($privateMember); exit;
-    $sql = "INSERT INTO content (MemberID, ContentBody, Type, Image, Date)
-            VALUES ('$memberID', '$content', '$postPrivacy', '$img', '2020-12-06')";
+    $sql = "INSERT INTO content (MemberID, ContentBody, Type, Image)
+            VALUES ('$memberID', '$content', '$postPrivacy', '$img')";
     if ($conn->query($sql) === TRUE) {
         $ContentID = $conn->insert_id;
     } else {
