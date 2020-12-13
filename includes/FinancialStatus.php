@@ -158,8 +158,6 @@ if (isset($_POST['AddAmount-submit'])) {
 
     }
 }
-mysqli_stmt_close($stmt);
-mysqli_close($conn);
 ?>
 
 
