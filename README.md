@@ -52,4 +52,177 @@ Once you have completed all the steps, you can open your browser (Not Safari) an
 
 http://localhost/CONsystem/includes/
 
+List of All files:
+
+(all file names followed by an "x" have not been modified since the demo)
+
+AcceptContract.inc.php
+
+
+AcceptRequest.inc.php x
+
+
+CompleteContract.inc.php
+
+
+DeleteContract.inc.php
+
+
+DeleteGroup.inc.php x
+
+
+DropContract.inc.php
+
+
+EditContract.inc.php
+
+
+EditGroup.inc.php x
+
+
+EditGroup.php
+
+
+EditInfo.inc.php
+
+
+EmailPage.php
+
+
+FinancialStatus.php
+
+
+GroupPage.php x
+
+
+JoinGroup.inc.php x
+
+
+LeaveGroup.inc.php x
+
+
+LoginPage.php
+
+
+MemberDashboard.php
+
+
+Mycontract.php
+
+
+Myjob.php
+
+
+NewPost.php
+
+
+PostContract.php
+
+
+PrivateEmail.php
+
+
+Style.css
+
+
+UserDelete.inc.php x
+
+
+UserEdit.inc.php
+
+
+all.min.css
+
+
+contract.inc.php
+
+
+contract.php
+
+
+createGroup.inc.php x
+
+
+dbh.inc.php
+
+
+displayAllGroups.inc.php x
+
+
+displayComments.inc.php x
+
+
+displayGroupMembers.php
+
+
+display_poll_results.php x
+
+
+footer.php x
+
+
+functions.inc.php
+
+
+header.php
+
+
+index.php x
+
+
+insertPost.php
+
+
+isadmin.inc.php
+
+
+login.inc.php
+
+
+logout.inc.php x
+
+
+poll_vote.php x
+
+
+postComment.inc.php x
+
+
+register.php
+
+
+resetPassword.inc.php
+
+
+resetPassword.php
+
+
+sendEmail.inc.php x
+
+
+sendEmail.php
+
+
+sendPrivateEmail.php
+
+
+showEmail.php
+
+
+showGroup.php x
+
+
+showPrivateEmail.php
+
+
+signup.inc.php
+
+
+signup.php
+
+
+tooplate-chilling-cafe.css
+
+
+viewGroupMembers.php x
 
