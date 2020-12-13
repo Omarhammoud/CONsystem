@@ -3,10 +3,20 @@
 ?>
 <?php
 	if(!isset($_SESSION['MemberID'])){
-		header("Location: ./LoginPage.php");
-		exit;
+		$errors["login"]="Your must be logged in to access this page.";
+		header("Location: ./LoginPage.php?errors=".urlencode(serialize($errors)));
+		exit();
 	}
+
+	if (isset($_GET['errors'])) {
+        $str_arr = unserialize(urldecode($_GET['errors']));
+    }
 ?>
+    <?php if (isset($str_arr) && !empty($str_arr['post'])) { ?>
+        <div class="alert alert-danger">
+            <strong>Error!</strong> <?php echo $str_arr['post'] ?>
+        </div>
+    <?php } ?>
 <form id="post_form" action="./insertPost.php" METHOD="post" onsubmit="return checkIfTitleExists()" enctype="multipart/form-data">
 		
 			<div id="privacyOption">
@@ -53,6 +63,9 @@
 			</div>
 			<div class="center">
 				<textarea placeholder="Insert text content here..." type="text" id="textPost" name="content" onkeyup="textAreaAdjust(this)"></textarea>
+				<?php if (isset($str_arr) && !empty($str_arr['content'])) { ?>
+                	<span class="form-text text-danger"><?php echo $str_arr['content'] ?></span>
+ 				<?php } ?>
 				<input type="hidden" name="hasPoll" id="has_poll" value="false">
 				<br/><br/>
 <!--				<input type="file" id="files" class="newPostImg"  name="img" accept="image/x-png,image/gif,image/jpeg" />-->

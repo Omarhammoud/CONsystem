@@ -135,6 +135,10 @@ margin-bottom: 9px;
 }
 
 body{
-	background-color: #DDDFEB;
+  background-color: #DDDFEB;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  margin: 0;
 }
 

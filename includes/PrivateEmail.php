@@ -1,7 +1,13 @@
-<?php include 'header.php'; ?>
+
 
 <?php
     // Written By: Leslie Poso (40057877)
+    session_start();
+
+    if (isset($_GET['errors'])) {
+        $str_arr = unserialize(urldecode($_GET['errors']));
+    }
+
     if(isset($_SESSION['MemberID'])){
         require "dbh.inc.php";
 
@@ -42,9 +48,13 @@
         mysqli_close($conn);        
  
     }else{
-        header("Location:./index.php");
+
+        $errors["login"]="Your must be logged in to access this page.";
+        header("Location: ./LoginPage.php?errors=".urlencode(serialize($errors)));
+        exit();
     }
 ?>
+<?php include 'header.php'; ?>
 <head>
     <!-- example css -->
     <style type="text/css">
@@ -71,7 +81,22 @@
     </style>
 </head>
 <div class="container">
-    <h1>Emails</h1>
+
+    <?php if (isset($str_arr) && !empty($str_arr['email'])) { ?>
+        <div class="alert alert-danger">
+            <strong>Error!</strong> <?php echo $str_arr['email'] ?>
+        </div>
+    <?php } ?>
+
+    <?php if (isset($_GET['success'])) { 
+        $success = unserialize(urldecode($_GET['success']));
+        ?>
+        <div class="alert alert-success">
+            <strong>Success!</strong> <?php echo $success['email'] ;?>
+        </div>
+    <?php } ?>
+    <a href="./EmailPage.php" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Go to Group Email</a>
+    <h1>Private Emails</h1>
     <table class="table">
         <tr>
             <th scope="col">List of Received Private Emails </th>
@@ -96,12 +121,29 @@
     </table>
     <h1>Compose an Email</h1>
     <form class="form-inline" action="./sendPrivateEmail.php" method="post">
-        <input type="text"  class="form-control" name="Subject" require="required" placeholder="Subject" />
-        <input type="text"  class="form-control" name="Recipient" require="required" placeholder="Recipient Email" />
-        <textarea type="text"  class="form-control" name="EmailBody" require="required" placeholder="Insert Message"> </textarea> 
-        <input type="hidden" name="MemberID" value="<?php echo $_SESSION['MemberID']; ?>">
+        <div class="form-group col-3">
+            <input type="text"  class="form-control" name="Subject" require="required" placeholder="Subject" />
+            <?php if (isset($str_arr) && !empty($str_arr['Subject'])) { ?>
+                <span class="form-text text-danger"><?php echo $str_arr['Subject'] ?></span>
+            <?php } ?>
+        </div>
+
+        <div class="form-group col-3">
+            <input type="text"  class="form-control" name="Recipient" require="required" placeholder="Recipient Email" />
+            <?php if (isset($str_arr) && !empty($str_arr['Recipient'])) { ?>
+                <span class="form-text text-danger"><?php echo $str_arr['Recipient'] ?></span>
+            <?php } ?>
+        </div>
+        
+        <div class="form-group col-3">
+            <textarea type="text"  class="form-control" name="EmailBody" require="required" placeholder="Insert Message"> </textarea>
+            <?php if (isset($str_arr) && !empty($str_arr['EmailBody'])) { ?>
+                <span class="form-text text-danger"><?php echo $str_arr['EmailBody'] ?></span>
+            <?php } ?> 
+        </div>
         <input class="btn btn-outline-primary m-3" type="submit" name="SendPrivateEmail" value="Send Email">
     </form>
+
     <h1>Sent Emails</h1>
     <table class="table">
         <tr>

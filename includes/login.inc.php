@@ -33,7 +33,8 @@ if (isset($_POST['login-submit'])) {
 
         $stmt = mysqli_stmt_init($conn);
         if (!mysqli_stmt_prepare($stmt, $sql)) {
-            header("Location: ./LoginPage.php?error=sqlerror1");
+            $errors["Login"]="Connection Problem (SQL1)";
+            header("Location: ./LoginPage.php?errors=".urlencode(serialize($errors)));
             exit();
         } else {
             mysqli_stmt_bind_param($stmt, "s", $email);
