@@ -6,9 +6,9 @@
 
 //Database Handler
 
-$servername = "gzc353.encs.concordia.ca";
-$dBUsername = "gzc353_2";
-$dBPassword = "B3NGRy";
+$servername = "localhost";
+$dBUsername = "root";
+$dBPassword = "";
 $dBName = "gzc353_2";
 
 
