@@ -5,13 +5,13 @@
     if(isset($_SESSION['MemberID']) && !empty($_GET['EmailID'])){
         require "dbh.inc.php";
 
-        //Fetch Group Information 
+        //Fetch Member Information 
         $emaiID = $_GET["EmailID"];
-        $sql = "SELECT private_email.Date, s.Email AS Sender, r.Email AS Recipient, private_email.Subject, private_email.EmailBody
-        FROM private_email, member s, member r
-        WHERE private_email.SenderID = s.MemberID
-        AND private_email.RecipientID = r.MemberID
-        AND private_email.EmailID=?";
+        $sql = "SELECT email.Date, s.Email AS Sender, r.Email AS Recipient, email.Subject, email.EmailBody
+        FROM email, private_email, member s, member r
+        WHERE private_email.RecipientID = r.MemberID
+        AND email.MemberID = s.MemberID
+        AND email.EmailID=?";
         $stmt =  mysqli_stmt_init($conn);
 
         if(!mysqli_stmt_prepare($stmt,$sql)){
