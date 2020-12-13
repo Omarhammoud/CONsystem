@@ -67,39 +67,43 @@
           <div class="tm-responsive-table">
             <table>
               <tr class="tm-tr-header">
-                <th style="text-align-last: left;">contributorName</th>
-                <th style="text-align-last: left;">contribution</th>
+                <th style="text-align-last: left;">Contributor Name</th>
+                <th style="text-align-last: left;">Contribution</th>
               </tr>
 			  <?php
 
     require "dbh.inc.php";
 	
-	$sql = "SELECT * FROM special_contributions";
+	$sql = "SELECT c.MemberID, c.Amount, m.Name as name FROM contributions c LEFT JOIN member m ON m.MemberID=c.MemberID";
     if ($conn -> connect_errno) {
         echo "Failed to connect to MySQL: " . $conn -> connect_error;
         exit();
     }else {
         $result = $conn->query($sql);
 		 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-		 $contribution = $row['contribution'];
-		 $contributorName   = $row['contributorName'];
+		 $contribution = $row['Amount'];
+		 $contributorName   = $row['name'];
 		 echo "<tr>";
                 echo "<td style='text-align-last: left;'>".$contributorName."</td>";
                 echo "<td style='text-align-last: left;'>".$contribution." $</td>";
          echo "</tr>";
 		}
-		} 
+		}
 		?>
               
             </table>
           </div>
         </section>
+          <form action="FinancialStatus.php" method="post" style="margin-left: 200px;">
+              <input type ="text" name="amount" placeholder ="Enter Contribution amount"></br>
+              <button class="btn btn-outline-primary m-2" type="submit" name="AddAmount-submit">Submit Contribution</button>
+          </form>
 
         <!-- Financial Status -->
 		<?php
 
     require "dbh.inc.php";
-	
+
 	$sql = "SELECT * FROM financial_status";
     if ($conn -> connect_errno) {
         echo "Failed to connect to MySQL: " . $conn -> connect_error;
@@ -111,7 +115,7 @@
 		$OwnershipPercent = $row['OwnershipPercent'];
 		$CurrentFees = $row['CurrentFees'];
 		$HistoricalRecord = $row['HistoricalRecord'];
-		}	
+		}
 		?>
 					
         <section class="tm-section">
@@ -125,16 +129,9 @@
               </figcaption>
             </figure>
             <figure class="tm-special-item">
-              <img src="img/chilling-cafe-12.jpg" alt="Image" class="tm-special-item-img" />
-              <figcaption>
-                <span class="tm-item-name">Ownership Percentage</span>
-                <span class="tm-item-price"> <?php echo $OwnershipPercent ?> % </span>
-              </figcaption>
-            </figure>
-            <figure class="tm-special-item">
               <img src="img/chilling-cafe-13.jpg" alt="Image" class="tm-special-item-img" />
               <figcaption>
-                <span class="tm-item-name">CurrentFees</span>
+                <span class="tm-item-name">Current Fees</span>
 				<span class="tm-item-price"> <?php echo $CurrentFees ?> $ </span>
               </figcaption>
             </figure>
@@ -175,7 +172,36 @@
     </script>
   </body>
 </html>
+<?php
+$memberID = $_SESSION["MemberID"];
+if (isset($_POST['AddAmount-submit'])) {
+    require "dbh.inc.php";
+    $amount = $_POST["amount"];
 
+    if (empty($amount)) {
+        header("Location: ./FinancialStatus.php?error=emptyfields");
+        exit();
+
+    }  else {
+        $sql = "INSERT INTO contributions (MemberID, Amount) VALUES (?,?)";
+        $stmt = mysqli_stmt_init($conn);
+        if (!mysqli_stmt_prepare($stmt, $sql)) {
+            header("Location: ./FinancialStatus.php?error=sqlerror1");
+            exit();
+        } else {
+            mysqli_stmt_bind_param($stmt, "ii",  $memberID, $amount);
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_store_result($stmt);
+            mysqli_stmt_close($stmt);
+            mysqli_close($conn);
+            header("Location: ./FinancialStatus.php?Contract_Posted");
+        }
+
+    }
+}
+mysqli_stmt_close($stmt);
+mysqli_close($conn);
+?>
 
 
 
