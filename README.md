@@ -7,8 +7,8 @@ Leslie, Poso, 40057877, l_poso@encs.concordia.ca</br>
 Israt Noor, KAZI, 40029299, i_kazi@encs.concordia.ca</br>
 Omar, Hammoud, 40002184, o_hammou@encs.concordia.ca</br>
 
-The User ID  for web access is gzc353_2</br>
-The password for web access is B3NGRy</br>
+The User ID  for web access is (refer to the Installation guide in the final report)</br>
+The password for web access is (refer to the Installation guide in the final report)</br>
 
 The base URL for your web pages is</br>
 https://gzc353.encs.concordia.ca/</br>
