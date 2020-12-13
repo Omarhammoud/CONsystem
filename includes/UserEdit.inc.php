@@ -35,6 +35,7 @@ if(isset($_GET['MemberID1'])) {
                 </select>
 <select name="privilege" ><option value="normal member">normal member</option>
                 <option value="administrator">administrator</option>
+                <option value="contractor">contractor</option>
                 </select>
  <button type="submit" name="editInfo-submit">Edit Information</button>
 </form>';
