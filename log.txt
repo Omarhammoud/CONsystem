@@ -1,0 +1,1051 @@
+commit b92add4a312abc39244d623eb615605cb1c146d5
+Author: Omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Sun Dec 13 13:36:47 2020 -0500
+
+    Update README.md
+
+commit ae58b24271541dd66c6674dae17ae8342a6d3468
+Author: Omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Sun Dec 13 13:35:05 2020 -0500
+
+    Update README.md
+
+commit 7bc65e4684432d1071d032d1addcfc3b7f139920
+Author: Omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Sun Dec 13 13:31:22 2020 -0500
+
+    Update README.md
+
+commit 2367f754a463fe5f38a00f5bf0a9401cb6cd63b0
+Author: omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Sun Dec 13 01:56:20 2020 -0500
+
+    Financial page fixes
+
+commit dd38f9cadc1fdc3fc23dfd4843aed3e5fd395e60
+Author: omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Sun Dec 13 01:55:34 2020 -0500
+
+    Financial page fixes
+
+commit 5c4062b85b264f40c8acc80919c3ae33614990be
+Author: omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Sat Dec 12 23:50:06 2020 -0500
+
+    Financial page fixes
+
+commit b5e9c8fb233572fc4322bef9a8d12b146ac90e45
+Author: omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Sat Dec 12 23:16:29 2020 -0500
+
+    members can now contribute and the list of contributions is available
+
+commit 8fd69ae9da9b4ec99db315886b623daa4426e948
+Author: Omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Sat Dec 12 15:37:46 2020 -0500
+
+    Update EditContract.inc.php
+
+commit 6a8bec3e54b1bcd45f79b1b35e2083b4ff449437
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Fri Dec 11 20:46:45 2020 -0500
+
+    add error messages to private email
+
+commit 660d8a26cb49631b2b4598e195d80dee802af129
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Fri Dec 11 18:27:01 2020 -0500
+
+    add error messages to registration page
+
+commit cc1f0eb9873af2122b6697efe976a75aa8c1fcf6
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Fri Dec 11 17:37:01 2020 -0500
+
+    add css to the registration page
+
+commit 8672b75b14ac16a4aed0176144c079f390c746b8
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Fri Dec 11 16:56:20 2020 -0500
+
+    fix header problem
+
+commit 2a9574bc60ccf0ff4fc8a5b4ddb08c58f8a6b744
+Author: Omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Fri Dec 11 16:50:07 2020 -0500
+
+    Update PostContract.php
+
+commit 37f96c6f8ac7da655f1020e02fd17b4dc1edaf03
+Author: Omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Fri Dec 11 16:45:59 2020 -0500
+
+    Delete register.inc.php
+
+commit f35e2e70ee92f7d28481569ff493aab4b7221815
+Author: Omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Fri Dec 11 16:45:47 2020 -0500
+
+    Delete showAndSortPosts.php
+
+commit bf615c15c17c82eed5630bc31a6628cf2c7df5dd
+Merge: afb1612 1fa189c
+Author: Omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Fri Dec 11 16:40:16 2020 -0500
+
+    Merge pull request #13 from Omarhammoud/omar-branch
+    
+    added contracts
+
+commit 1fa189c193724f9370b1993ffa3a0976ee9959d4
+Merge: 534157e afb1612
+Author: Omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Fri Dec 11 16:39:13 2020 -0500
+
+    Merge branch 'master' into omar-branch
+
+commit 534157e9384f8958c872e762759c86473956585f
+Author: omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Fri Dec 11 16:35:57 2020 -0500
+
+    added contracts
+
+commit afb161243115875139a7265791c0088b374617ff
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Fri Dec 11 15:55:57 2020 -0500
+
+    change "Sender ID" to "Sender Email" in email page
+
+commit 90f4d1132cd81211a7713f2ab87139516af34309
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Thu Dec 10 18:08:47 2020 -0500
+
+    change back navbar design and font color
+
+commit 3c006f46668e829bbc058bd6b958a37f54d56726
+Merge: f3fc0fb 43be55a
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Thu Dec 10 17:35:16 2020 -0500
+
+    Merge branch 'master' of https://github.com/Omarhammoud/CONsystem into master
+
+commit 43be55a809015944b2fb67acc1c16cd4e533a82f
+Merge: e4023d6 54d8a25
+Author: isratnoor <46825988+isratnoor@users.noreply.github.com>
+Date:   Thu Dec 10 15:30:13 2020 -0500
+
+    Merge pull request #11 from Omarhammoud/Posting_CondoAssociationFinancialStatus
+    
+    implementation of financial report page
+
+commit 54d8a250b08fb1323dc9c4c042a267232e98b0eb
+Merge: 7e5695e e4023d6
+Author: isratnoor <46825988+isratnoor@users.noreply.github.com>
+Date:   Thu Dec 10 15:29:53 2020 -0500
+
+    Merge branch 'master' into Posting_CondoAssociationFinancialStatus
+
+commit 7e5695e80415d1cfbed71a8d8d3e32739ce5d363
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Thu Dec 10 15:24:28 2020 -0500
+
+    fix bug
+
+commit e4023d6410fbba22c15627a11e945cc789dd3f19
+Merge: 9db4058 3fe0809
+Author: isratnoor <46825988+isratnoor@users.noreply.github.com>
+Date:   Thu Dec 10 11:27:56 2020 -0500
+
+    Merge pull request #12 from Omarhammoud/PrivateEmail
+    
+    Added private email function.
+
+commit f3fc0fb4c0188e8e7d4f6c0d637a4e6bb7829bca
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Thu Dec 10 10:42:17 2020 -0500
+
+    error messages for post content
+
+commit 9db4058d116c512873a538612b1c24ed19ce93e0
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Wed Dec 9 21:51:50 2020 -0500
+
+    add error messages for email page
+
+commit 3fe08097d3659135567f1df9b8f21e2bc7f5deb1
+Author: lposo <lposo26@users.noreply.github.com>
+Date:   Wed Dec 9 14:18:48 2020 -0500
+
+    Fixed private email function
+
+commit 82ccc8ee71a5f8589b00a535d40a1d2d046ca5d8
+Author: miledch <miledch@gmail.com>
+Date:   Wed Dec 9 12:54:47 2020 -0500
+
+    implementation of financial report page
+
+commit 92bc07a6c379d37d843052aa0b66fd1ac3143449
+Merge: 0275858 9ee0086
+Author: Omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Wed Dec 9 02:51:41 2020 -0500
+
+    Merge pull request #10 from Omarhammoud/omar-branch
+    
+    Omar branch
+
+commit 9ee00863c5b5d6d08061058fd6071e7b1d3fcc95
+Merge: 113609d 0275858
+Author: Omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Wed Dec 9 02:51:02 2020 -0500
+
+    Merge branch 'master' into omar-branch
+
+commit 113609deb0d3a92251f93354eaca8a1500ed2083
+Author: omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Wed Dec 9 02:40:59 2020 -0500
+
+    admin can now set other users as admins
+
+commit d427abf0ea38ca12ca8e0e0245b231eb0b9333a3
+Author: omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Wed Dec 9 00:44:04 2020 -0500
+
+    Users can now sign up on their own, the admin can choose to activate their accounts, admins can change passwords, users cannot sign in until account is activated
+
+commit 02758586177720c0f2b24eb44e30d0ea57ff6ccc
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Tue Dec 8 23:04:02 2020 -0500
+
+    add error messages and fix bug for the login page
+
+commit a79480fe9f541abbdedba4d7793c079a19223252
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Tue Dec 8 15:51:53 2020 -0500
+
+    delete the file and imgs that are not needed
+
+commit a1a2fd4f7df96f64817827d2a9c1b88122286199
+Merge: e96fca5 88278f9
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Tue Dec 8 11:30:13 2020 -0500
+
+    Merge branch 'master' of https://github.com/Omarhammoud/CONsystem into master
+
+commit 88278f9b40e5b83d7575159f001ada07b9a3c9b1
+Author: omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Tue Dec 8 11:22:33 2020 -0500
+
+    changed db values
+
+commit 4e1ab7a13c278d821df66c92701e049e36449f9f
+Author: omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Tue Dec 8 11:19:51 2020 -0500
+
+    updated all files from server
+
+commit e96fca5a80dcd6a4188924ac5cd8855270de35f4
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Mon Dec 7 21:30:14 2020 -0500
+
+    fix bug check group name
+
+commit 036e27fb420fd6a3244adbcccfd0fd4a59c32c44
+Merge: 931c1e3 c2c533c
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Sun Dec 6 21:57:51 2020 -0500
+
+    Merge branch 'master' of https://github.com/Omarhammoud/CONsystem into master
+
+commit 931c1e3f557d0981de194c6f51399493ec450fb7
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Sun Dec 6 21:43:28 2020 -0500
+
+    add new sql file
+
+commit c2c533ccda838b2e6d6c73e3c97770bb3d1e3156
+Merge: 84158e0 286f82d
+Author: lposo <lposo26@users.noreply.github.com>
+Date:   Sun Dec 6 21:09:39 2020 -0500
+
+    Merge branch 'master' of https://github.com/Omarhammoud/CONsystem
+
+commit 84158e0939d70135985a6be9877fe497cfac2320
+Author: lposo <lposo26@users.noreply.github.com>
+Date:   Sun Dec 6 21:08:32 2020 -0500
+
+    Removed repost button
+    
+    Repost doesn't work/
+
+commit 286f82dca40f3b11cabacdaec7005ce013b4beb4
+Author: lposo <lposo26@users.noreply.github.com>
+Date:   Sun Dec 6 20:48:35 2020 -0500
+
+    Attempt to fix repost feature.
+
+commit 10fa5187deed9c4ca50d2060d5243d3ba475ebd5
+Merge: b4ec591 e764137
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Sun Dec 6 20:41:06 2020 -0500
+
+    Merge branch 'master' of https://github.com/Omarhammoud/CONsystem into master
+
+commit b4ec591fad697be14a40f633dbb654feea6786ee
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Sun Dec 6 20:40:41 2020 -0500
+
+    add status to queries
+
+commit e764137cddf2e351a0aaddb72ecc4a0ee51b1e00
+Author: Omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Sun Dec 6 20:31:46 2020 -0500
+
+    Update MemberDashboard.php
+
+commit 1821695ac4f032bba8d1115c408991d50de8ccd3
+Merge: 3acf9dd 85774f3
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Sun Dec 6 20:30:02 2020 -0500
+
+    Merge branch 'master' of https://github.com/Omarhammoud/CONsystem into master
+
+commit 3acf9dd408fbe507348f547d64896d76ba10ecb4
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Sun Dec 6 20:29:44 2020 -0500
+
+    fix private bug
+
+commit 85774f30610a5a83a24cdcf3d4c217d7fa1a551c
+Merge: f8ada34 2427614
+Author: lposo <lposo26@users.noreply.github.com>
+Date:   Sun Dec 6 20:26:17 2020 -0500
+
+    Merge branch 'master' of https://github.com/Omarhammoud/CONsystem
+
+commit f8ada349c1159653132e846d9d796b2d00a6811d
+Author: lposo <lposo26@users.noreply.github.com>
+Date:   Sun Dec 6 20:25:18 2020 -0500
+
+    Removed extra spaces and checked if a member was accepted into a group before showing emails.
+
+commit 2427614eb2e08c1594a4df005fc7843f23a79629
+Author: miledch <miledch@gmail.com>
+Date:   Sun Dec 6 20:19:10 2020 -0500
+
+    only accepted members to be displayed in private post
+
+commit 41fec63fd063d204be1a4a6575795a1b5ee8f486
+Merge: 35ab409 0cf8314
+Author: lposo <lposo26@users.noreply.github.com>
+Date:   Sun Dec 6 20:07:04 2020 -0500
+
+    Merge branch 'master' of https://github.com/Omarhammoud/CONsystem
+
+commit 35ab409dd4b3c6dee1065370c8958117cbe2a6b4
+Author: lposo <lposo26@users.noreply.github.com>
+Date:   Sun Dec 6 20:05:44 2020 -0500
+
+    Added repost to MemberDashboard
+    
+    unsure if it works yet.
+
+commit 0cf8314ef7272df8ac040d21a2e277f54fc27c6a
+Merge: 918ba66 6460e6a
+Author: Omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Sun Dec 6 18:41:40 2020 -0500
+
+    Merge pull request #9 from Omarhammoud/dashboard
+    
+    fixes
+
+commit 6460e6af471578eb0446c00262fb7baba39489eb
+Merge: 489ae52 918ba66
+Author: Omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Sun Dec 6 18:40:47 2020 -0500
+
+    Merge branch 'master' into dashboard
+
+commit 489ae527980488973f71dd7b5b68eaa77fec4e90
+Author: omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Sun Dec 6 18:38:36 2020 -0500
+
+    fixes
+
+commit 918ba666dc5ff198e95123b0b3a28274e1097a73
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Sun Dec 6 18:23:49 2020 -0500
+
+    display all comments
+
+commit 8ccc6ed1d14e27b76ff67f0ab58a4768db4bf20e
+Author: lposo <lposo26@users.noreply.github.com>
+Date:   Sun Dec 6 17:13:48 2020 -0500
+
+    fixed empty comment (added bracket)
+
+commit 9decbfa706b0578771597fd1569db8cbba437846
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Sun Dec 6 16:50:07 2020 -0500
+
+    fix empty comment
+
+commit e3af45ce101c14ce34df15f50c78ea7491ebd1d8
+Merge: 44199fc d2a27f3
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Sun Dec 6 16:27:53 2020 -0500
+
+    Merge branch 'master' of https://github.com/Omarhammoud/CONsystem into master
+
+commit 44199fce98a895b6a68c72ddb3a402dad0cae448
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Sun Dec 6 16:27:10 2020 -0500
+
+    odify beackend group pages
+
+commit d2a27f39552058e61d2dd582da0e1939aa140be6
+Author: lposo <lposo26@users.noreply.github.com>
+Date:   Sun Dec 6 15:39:35 2020 -0500
+
+    Modified EmailPage functions to use GRoupName instead of GroupID
+    
+    Now, emails show what group it was sent to. Additionally, users must use the Group's GroupName instead of its ID when sending a message.
+
+commit e36cd2a6e9db447c67acb80721cf8614c6530a4d
+Merge: e779b0c 7ca0111
+Author: Omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Sun Dec 6 14:40:20 2020 -0500
+
+    Merge pull request #8 from Omarhammoud/sorting
+    
+    Show post and sort
+
+commit 7ca01113cecdfc7d1f8373d3bb7d9df24d8dae48
+Merge: 7b3fe97 e779b0c
+Author: Omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Sun Dec 6 14:39:50 2020 -0500
+
+    Merge branch 'master' into sorting
+
+commit e779b0cbc56badbae76875a92ab02e296bb7fea3
+Author: Omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Sun Dec 6 14:39:14 2020 -0500
+
+    Update Consys.sql
+
+commit 325dafc7d53ba58ccb8ea774516af679d5891cf6
+Author: lposo <lposo26@users.noreply.github.com>
+Date:   Sun Dec 6 14:36:41 2020 -0500
+
+    fixed sql for email to use member email instead of ID.
+
+commit b9bf618565f6a9dfdff1a761057fb3c882c77abc
+Author: lposo <lposo26@users.noreply.github.com>
+Date:   Sun Dec 6 14:32:26 2020 -0500
+
+    Revert "Revert "Merge branch 'master' of https://github.com/Omarhammoud/CONsystem""
+    
+    This reverts commit 5e35b43264d2a9c1152e51fbcb34b73db518d61e.
+
+commit 5e35b43264d2a9c1152e51fbcb34b73db518d61e
+Author: lposo <lposo26@users.noreply.github.com>
+Date:   Sun Dec 6 14:30:52 2020 -0500
+
+    Revert "Merge branch 'master' of https://github.com/Omarhammoud/CONsystem"
+    
+    This reverts commit 3a474def1e072dbbafd5461308f68e25e107cff6, reversing
+    changes made to 473f15b7813e069dde77a6e7237c03e3a50a1d78.
+
+commit 3a474def1e072dbbafd5461308f68e25e107cff6
+Merge: 473f15b 082ddb9
+Author: lposo <lposo26@users.noreply.github.com>
+Date:   Sun Dec 6 14:30:03 2020 -0500
+
+    Merge branch 'master' of https://github.com/Omarhammoud/CONsystem
+
+commit 7b3fe97b0c10b89939bb0e1df65476f040e00e46
+Author: omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Sun Dec 6 12:21:18 2020 -0500
+
+    fixed sort by popularity
+
+commit d7193d21c4b241de571243b3d94a7bc17c8a9527
+Author: omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Sun Dec 6 12:03:47 2020 -0500
+
+    added sort by popularity
+
+commit bfac98f81980082766cf840693756a125dcd49b1
+Author: omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Sun Dec 6 11:49:25 2020 -0500
+
+    changes
+
+commit 771827accf68315f69c0337f0c92a8b8ba31d88b
+Author: omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Sun Dec 6 02:28:58 2020 -0500
+
+    fixed
+
+commit 4301d02c4caa6f3eee205078843b3cdb7023b521
+Author: omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Sun Dec 6 00:31:05 2020 -0500
+
+    fixed warnings and added header
+
+commit 91da88c6f0478111d847428f832888a5c3b2b80d
+Author: omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Sun Dec 6 00:30:36 2020 -0500
+
+    added sort by latest and oldest post, linked polls to each post using contentID
+
+commit 082ddb9cd98445c8e09d0dd5f740b3ff115e84c3
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Sat Dec 5 23:11:30 2020 -0500
+
+    modify edit page
+
+commit 61d09b2b0460ca8caea963eeaa523131125df9f6
+Author: omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Sat Dec 5 22:51:12 2020 -0500
+
+    can now see all content on the dashboard
+
+commit f4acbca6bcca6f7931b33eb156d6e819535e44b3
+Author: omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Sat Dec 5 22:49:55 2020 -0500
+
+    Fixed paths in both sign up files
+
+commit 8daefebaa3d878bad530561cdbcad227e0378cda
+Author: omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Sat Dec 5 22:49:18 2020 -0500
+
+    fixed issues with user edit and delete
+
+commit 473f15b7813e069dde77a6e7237c03e3a50a1d78
+Author: lposo <lposo26@users.noreply.github.com>
+Date:   Sat Dec 5 18:44:40 2020 -0500
+
+    Changed EmailPage to display Email instead of a member's ID.
+
+commit c1f050a464418ee71b5b39986024b5949fe3a215
+Author: miledch <miledch@gmail.com>
+Date:   Sat Dec 5 18:44:19 2020 -0500
+
+    fixing naming on insertPost
+
+commit 63f33ff09d322b29f1b87aaaeb4cc629749eb8ab
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Sat Dec 5 18:20:10 2020 -0500
+
+    check user login when posting content
+
+commit 4ab6039051e6245286fc778f0f67fedabcfad50c
+Author: omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Fri Dec 4 15:11:02 2020 -0500
+
+    changed input type from text to password for password field
+
+commit c004c8d6d7ca722e866b30de30d369c9b19e883f
+Author: omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Fri Dec 4 15:10:22 2020 -0500
+
+    fixed bug
+
+commit 4913db0747f2e4033350bbbe2e044e86873d74f2
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Fri Dec 4 14:36:47 2020 -0500
+
+    change the group page
+
+commit 2200d9a7fb127e604fd0fe683a67a977054a07c1
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Fri Dec 4 01:44:19 2020 -0500
+
+    fix bug
+
+commit 640c6ad19d4a999ea640721e8d0321d4cb01d66b
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Fri Dec 4 01:28:37 2020 -0500
+
+    fix bug caused by comments
+
+commit f7f6bb77f9314c191ab7ebd7156c6c336f45b835
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Thu Dec 3 23:43:46 2020 -0500
+
+    add names of members for each file
+
+commit 0ee774986a9f72cdaf2dd0470c87f207eb63608f
+Merge: 996f8cf 132b8dd
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Thu Dec 3 22:23:16 2020 -0500
+
+    Merge branch 'feature10' into master
+
+commit 996f8cf5a11c7a67938aacdf0762f3344466eb91
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Thu Dec 3 22:02:40 2020 -0500
+
+    move member dashboard
+
+commit 132b8dd22d38b1fe6c54b1503bcb32e21479e4c4
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Thu Dec 3 21:48:58 2020 -0500
+
+    include style css
+
+commit 29c43b0ac137f88c8f5b1f8e4be9de1ab4bf5552
+Merge: aa3d720 eac5c53
+Author: lposo <46732530+lposo@users.noreply.github.com>
+Date:   Thu Dec 3 16:33:57 2020 -0500
+
+    Merge pull request #7 from Omarhammoud/feature3
+    
+    Cleaned up email feature, now includes viewing sent messages.
+
+commit eac5c5394175ccdafebe29c31db738ed5c9387ca
+Merge: 6d3c0ba d270a3b
+Author: lposo <lposo26@users.noreply.github.com>
+Date:   Thu Dec 3 13:05:27 2020 -0500
+
+    Merge branch 'feature3' of https://github.com/Omarhammoud/CONsystem into feature3
+
+commit 6d3c0ba4fe1dcd6e8644b4ad838252ff11fcf56c
+Author: lposo <lposo26@users.noreply.github.com>
+Date:   Thu Dec 3 13:05:04 2020 -0500
+
+    Modified Email page to show sent messages as well.
+
+commit aa3d7209785cf1bd6845c37e89e96a296aa63d4b
+Merge: 69188d5 65420a2
+Author: Omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Thu Dec 3 12:34:34 2020 -0500
+
+    Merge pull request #3 from Omarhammoud/Miled-branch
+    
+    Miled branch
+
+commit 69188d54e46f0b74144063dd3d37387be39d808e
+Merge: 8e53b84 864e603
+Author: Omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Thu Dec 3 12:31:06 2020 -0500
+
+    Merge pull request #6 from Omarhammoud/edit/delete
+    
+    Fixed and finished view/edit/delete/create users
+
+commit 864e603a581373db878b197c1a9211f0d0e3842c
+Merge: ed79a7f 8e53b84
+Author: Omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Thu Dec 3 12:30:46 2020 -0500
+
+    Merge branch 'master' into edit/delete
+
+commit ed79a7f564647a8fb02e02acd040da3f144b418c
+Author: omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Thu Dec 3 12:24:42 2020 -0500
+
+    added edit password feature for admins
+
+commit d270a3bc2cd5db14937597d58309415b90587146
+Author: lposo <lposo26@users.noreply.github.com>
+Date:   Thu Dec 3 12:19:30 2020 -0500
+
+    Fixed header to go to the email page.
+
+commit c100605605479a54a5805a2db63543c0b63e2f24
+Merge: 0b4ee7a 8e53b84
+Author: lposo <lposo26@users.noreply.github.com>
+Date:   Thu Dec 3 12:10:40 2020 -0500
+
+    Merge branch 'master' into feature3
+
+commit 65420a2198941a88e2428c113ee0afcebebb91c7
+Author: miledch <miledch@gmail.com>
+Date:   Thu Dec 3 11:48:16 2020 -0500
+
+    new commit
+
+commit e5c2eb8b609a53578c2bb9adf8119ae7f735efb8
+Author: miledch <miledch@gmail.com>
+Date:   Thu Dec 3 02:45:56 2020 -0500
+
+    new commit
+
+commit d43d5c4d79c3c2704827f6c4d6c0949240937402
+Author: miledch <miledch@gmail.com>
+Date:   Thu Dec 3 02:36:09 2020 -0500
+
+    new commit
+
+commit e398af3bdac0b376f467841b39d89af49c51118f
+Author: miledch <miledch@gmail.com>
+Date:   Thu Dec 3 01:32:06 2020 -0500
+
+    implementation of private post
+
+commit 013d457d88c9254dff42748eb5cbca40cc7f7d44
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Wed Dec 2 22:32:25 2020 -0500
+
+    use jquery for poll and commit
+
+commit 6dc13af817516caf1de03e50315d6ad5412f827d
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Wed Dec 2 21:23:05 2020 -0500
+
+    add commit
+
+commit 0b4ee7a9b3dbeae147799741b7054ffe44a6904d
+Merge: dd71d0c 4543b23
+Author: lposo <lposo26@users.noreply.github.com>
+Date:   Wed Dec 2 14:46:49 2020 -0500
+
+    Merge branch 'feature3' of https://github.com/Omarhammoud/CONsystem into feature3
+
+commit dd71d0cbf3abb153b7e2b490c1a374b418b162fd
+Author: lposo <lposo26@users.noreply.github.com>
+Date:   Wed Dec 2 14:46:29 2020 -0500
+
+    fixed commit issues
+
+commit 4543b23145c9ae5f911ce4e64af5e599963112e0
+Author: lposo <lposo26@users.noreply.github.com>
+Date:   Wed Dec 2 14:44:05 2020 -0500
+
+    Revert "Modified EmailPage css"
+    
+    This reverts commit 98a379cb14a26a9d5ed2e8fa953b2aa59bec0d8d.
+
+commit 3c0dbf0fac31ab485732341053aff26c20effa6b
+Author: lposo <lposo26@users.noreply.github.com>
+Date:   Wed Dec 2 14:44:00 2020 -0500
+
+    Revert "Merge branch 'feature3' of https://github.com/Omarhammoud/CONsystem into feature3"
+    
+    This reverts commit 0c6805af13686778fe6128a4685bf3d6443e0e70, reversing
+    changes made to 98a379cb14a26a9d5ed2e8fa953b2aa59bec0d8d.
+
+commit 0c6805af13686778fe6128a4685bf3d6443e0e70
+Merge: 98a379c 07b0517
+Author: lposo <lposo26@users.noreply.github.com>
+Date:   Wed Dec 2 14:38:13 2020 -0500
+
+    Merge branch 'feature3' of https://github.com/Omarhammoud/CONsystem into feature3
+
+commit 98a379cb14a26a9d5ed2e8fa953b2aa59bec0d8d
+Author: lposo <lposo26@users.noreply.github.com>
+Date:   Wed Dec 2 14:37:52 2020 -0500
+
+    Modified EmailPage css
+
+commit 07b0517508768e760026363494ef4cfbaf789578
+Author: lposo <lposo26@users.noreply.github.com>
+Date:   Wed Dec 2 14:31:51 2020 -0500
+
+    Changed ui for show email page. and added some name tags to files Icreated
+
+commit 44287b35032b899d50c4a3cb171967cd81159243
+Author: miledch <miledch@gmail.com>
+Date:   Wed Dec 2 01:06:09 2020 -0500
+
+    fixing the empty  poll issue
+
+commit 8e53b84937144666dde59e7c7d50574714d053a2
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Tue Dec 1 21:50:41 2020 -0500
+
+    add navbar and Login page
+
+commit a4b91ed68b8a12baf0f715a682d608d36cd41e14
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Tue Dec 1 19:55:48 2020 -0500
+
+    add vote and display poll
+
+commit 54d65173dea6febdc93cd234c1fde0b7a6ed981d
+Author: miledch <miledch@gmail.com>
+Date:   Tue Dec 1 19:50:55 2020 -0500
+
+    new modif
+
+commit 21dd6742706c2ca6748cbca10f5c65f0e6c715b6
+Author: miledch <miledch@gmail.com>
+Date:   Tue Dec 1 16:03:49 2020 -0500
+
+    finished implementing NewPost
+
+commit c163c452057ed2b7c4935099972b7ed18152491a
+Author: miledch <miledch@gmail.com>
+Date:   Tue Dec 1 00:12:59 2020 -0500
+
+    implementing new features on NewPost.html
+
+commit 088542025179e23e1958d109105923b7d9561b29
+Author: omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Mon Nov 30 14:37:31 2020 -0500
+
+    Fixed and finished view/edit/delete/create users
+
+commit 1ead68f4593ae5596dfdcc4bda2675cd6c4eadb4
+Merge: ac9d3a1 4f7998a
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Mon Nov 30 11:35:10 2020 -0500
+
+    Add Miled-branch
+
+commit ef59126b20258436fd981977ed106d6bc7c2ecce
+Author: miledch <miledch@gmail.com>
+Date:   Mon Nov 30 00:27:37 2020 -0500
+
+    changing the insertPost
+
+commit ac9d3a192f0677dd5717a1f9843f8fd7ee2f01c3
+Merge: 7492700 bd77d22
+Author: lposo <46732530+lposo@users.noreply.github.com>
+Date:   Sun Nov 29 16:06:37 2020 -0500
+
+    Merge pull request #5 from Omarhammoud/feature3
+    
+    Email Feature
+
+commit 4f7998afe1fab807b9bee2196ecb7d0f94f16db1
+Author: miledch <miledch@gmail.com>
+Date:   Sun Nov 29 02:37:40 2020 -0500
+
+    Addition of post
+
+commit 7492700d09208a2fdfa2396b75b890085292e831
+Merge: 827f3b6 4fafa77
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Tue Nov 24 10:47:46 2020 -0500
+
+    merge master and User_fixes
+
+commit 4fafa77e042e2a1df72f6f04c27785e00a4b8379
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Tue Nov 24 10:42:16 2020 -0500
+
+    merge fix bug with login
+
+commit 6ee623e5eb3a28446ad231beeca2ef8daad12744
+Merge: 47bbc16 01d19bc
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Tue Nov 24 09:55:58 2020 -0500
+
+    merge User_fix
+
+commit bd77d22f7f4046ec857e8a572eb52efee878c6cb
+Author: lposo <lposo26@users.noreply.github.com>
+Date:   Mon Nov 23 22:55:23 2020 -0500
+
+    Changed Email to use Group instead of MemberID
+    
+    Emails now use the part_of and send_to table to determine who should be receiving what email.
+
+commit b5addef25143bf6ab469ed1ffa9e07bd49da48e6
+Merge: edfebea 827f3b6
+Author: lposo <lposo26@users.noreply.github.com>
+Date:   Mon Nov 23 21:08:40 2020 -0500
+
+    Merge branch 'master' into feature3
+
+commit 827f3b6b1d3634b560543f0dffa2610a295ac172
+Author: Omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Mon Nov 23 20:48:49 2020 -0500
+
+    Update Consys.sql
+
+commit 292ad244272c5e53386476bdf15a0f0570d02d98
+Merge: 51cb999 a0c06bf
+Author: Omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Mon Nov 23 19:02:50 2020 -0500
+
+    Merge pull request #4 from Omarhammoud/Group
+    
+    Group
+
+commit a0c06bff82785298e76f7bd33c7076e8e50d1b57
+Merge: e5b4b9e 51cb999
+Author: Omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Mon Nov 23 19:02:31 2020 -0500
+
+    Merge branch 'master' into Group
+
+commit 2008a66b0cb61c6d9989178f9327f36589149ad6
+Author: miledch <miledch@gmail.com>
+Date:   Sun Nov 22 14:48:20 2020 -0500
+
+    finishing the Poll option
+
+commit 0289a793593deccf1444664193be220668e6b26b
+Author: miledch <miledch@gmail.com>
+Date:   Sun Nov 22 00:28:57 2020 -0500
+
+    Creating the poll V1
+
+commit edfebea9286e3baa7e465bbe615a4e30cb4b68f0
+Author: lposo <lposo26@users.noreply.github.com>
+Date:   Sat Nov 21 21:28:41 2020 -0500
+
+    Added email to CONSystem
+    
+    Users can now send and view emails in the "Emails" tab.
+
+commit acfd894f39da5f6be64df2ac0f289a62861f7c7b
+Author: miledch <miledch@gmail.com>
+Date:   Fri Nov 20 23:56:25 2020 -0500
+
+    post page v.2
+
+commit 8bae039e1a27dd7f4670e6146d8dde2d0cb3b4cb
+Author: miledch <miledch@gmail.com>
+Date:   Fri Nov 20 00:38:38 2020 -0500
+
+    new post button
+
+commit 5c8f7ba32320015757fc95b630dd868a3ac94682
+Author: miledch <miledch@gmail.com>
+Date:   Thu Nov 19 23:25:52 2020 -0500
+
+    navbar added
+
+commit af9ac7272b16a75551bfa86873a926b10286737d
+Author: miledch <miledch@gmail.com>
+Date:   Thu Nov 19 22:49:42 2020 -0500
+
+    member dashboard v.2
+
+commit e8da1286ed032534b399691df676770c8a3ab130
+Merge: 6cb51ba 47bbc16
+Author: lposo <lposo26@users.noreply.github.com>
+Date:   Thu Nov 19 12:23:10 2020 -0500
+
+    Merge branch 'feature4-5' into feature3
+
+commit 5db8b3a19985a10a53a6652bb9590efbd4753e1f
+Author: miledch <miledch@gmail.com>
+Date:   Wed Nov 18 18:25:20 2020 -0500
+
+    MemberDashboard_V1
+    
+    first commit of the member dashboard
+
+commit 6cb51ba02f6e003887f3dc6649b7fe04892629c3
+Merge: 47c17a3 51cb999
+Author: lposo <lposo26@users.noreply.github.com>
+Date:   Wed Nov 18 17:45:20 2020 -0500
+
+    Merge branch 'master' into feature3
+
+commit 01d19bcf0f4a231aba893833e9582a2e9fe41e31
+Author: omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Wed Nov 18 14:53:36 2020 -0500
+
+    user can login in with email instead of member id
+
+commit 51cb999e22e2679b3f918be5ab2c251012d8560d
+Author: omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Wed Nov 18 13:26:03 2020 -0500
+
+    added auto increment
+
+commit e5b4b9e08a5ed15b49077576a63eeabb665de3d2
+Merge: f941d0b 47bbc16
+Author: isratnoor <46825988+isratnoor@users.noreply.github.com>
+Date:   Wed Nov 18 13:01:08 2020 -0500
+
+    Merge pull request #1 from Omarhammoud/feature4-5
+    
+    Feature4 5
+
+commit 47bbc168d3208375b5922eb2096cd028b07b7ab3
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Tue Nov 17 22:01:16 2020 -0500
+
+    Add AcceptRequest and LeaveGroup
+
+commit d7ed5660fc51991ecbc0d411dcd11ea9be5fe996
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Mon Nov 16 22:59:38 2020 -0500
+
+    modify createGroup
+
+commit 8e99d290b07a3c304c178b0a629e5d330059f09a
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Mon Nov 16 22:05:25 2020 -0500
+
+    add join group
+
+commit b0118f171b270cacae2b55f14e7fd215e4981d13
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Mon Nov 16 15:21:56 2020 -0500
+
+    include members in group pages
+
+commit a43321fc699a00a8069c119865593d6f4c537f63
+Author: miledch <miledch@gmail.com>
+Date:   Sun Nov 15 16:47:09 2020 -0500
+
+    first commit
+
+commit 47c17a399452fbf5144aba3922dbc7fab6d8e36d
+Author: lposo <lposo26@users.noreply.github.com>
+Date:   Sun Nov 15 14:52:09 2020 -0500
+
+    Added paget ofetch all groups/members
+
+commit 17c4de5ad1d965d0e56567e8a3b45a0eb9425984
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Sun Nov 15 14:15:28 2020 -0500
+
+    Add Delete Group
+
+commit cc31e097526781a1995cfc3b8e1ab5ed223a9444
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Sat Nov 14 22:05:09 2020 -0500
+
+    add css
+
+commit 5fc389cc4bbf1d1b606575da0e2e4a7eb996f51f
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Sat Nov 14 18:05:13 2020 -0500
+
+    add Group Page and Group Detail
+
+commit a8986bd2b60b33ac2f5388082a3ee26ee68e2279
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Thu Nov 12 22:52:50 2020 -0500
+
+    add connection between group page and database
+
+commit cb2da2fafa75ea4b1018bde279fa4e16e5c33658
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Thu Nov 12 22:30:36 2020 -0500
+
+    Add Create Group Form
+
+commit f941d0b8c35d7fe3e569a982ebe2b5ece95d38fa
+Author: Israt Noor Kazi <kaziisratnoor@hotmail.com>
+Date:   Thu Nov 12 22:22:04 2020 -0500
+
+    Move file to the same folder
+
+commit 4d161b49c0f789033f2b7f7abe7739072bdff7d6
+Author: Omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Tue Nov 10 13:58:20 2020 -0500
+
+    Create README.md
+
+commit 2b6ec9aac26ed098e9aacb9f8f6d0c04a16c6f3e
+Author: Omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Tue Nov 10 13:51:50 2020 -0500
+
+    sql file to import into phpmyadmin
+
+commit 3247e830237fdf5bc814e2c46500c7b7e251edf6
+Author: omarhammoud <omar_hammoud96@hotmail.com>
+Date:   Tue Nov 10 13:41:57 2020 -0500
+
+    First commit
