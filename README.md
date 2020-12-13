@@ -48,6 +48,12 @@ Step 4 - Create Database</br>
   2-Import and run all the scripts inside : CONsystem\Database Scripts</br>
 Note: You can use other tools if you want.</br>
 
+Step 5 - Configure the Database</br>
+  1-Go the “dbh.inc.php” file :  xampp\htdocs\CONsystem\includes\dbh.inc.php</br>
+  2-Enter the information of your database</br>
+  3-Save the file</br>
+
+
 Once you have completed all the steps, you can open your browser (Not Safari) and go to: </br>
 
 http://localhost/CONsystem/includes/
